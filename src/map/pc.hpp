@@ -449,6 +449,7 @@ public:
 		// Bitmask of e_pcblock_action_flag values
 		uint16 block_action;
 		bool refineui_open;
+		bool check_equip_skill;
 		t_itemid inventory_expansion_confirmation;
 		uint16 inventory_expansion_amount;
 		t_itemid laphine_synthesis;
@@ -733,6 +734,7 @@ public:
 	int vender_id;
 	int vend_num;
 	uint16 vend_skill_lv;
+	t_itemid vend_item; ///Extended Vending system [Lilith] update version by ex0ample
 	char message[MESSAGE_SIZE];
 	struct s_vending vending[MAX_VENDING];
 
@@ -922,6 +924,8 @@ public:
 	e_instance_mode instance_mode; ///< Mode of instance player last leaves from (used for instance destruction button)
 
 	short setlook_head_top, setlook_head_mid, setlook_head_bottom, setlook_robe; ///< Stores 'setlook' script command values.
+
+	int ce_gid;
 
 #if PACKETVER_MAIN_NUM >= 20150507 || PACKETVER_RE_NUM >= 20150429 || defined(PACKETVER_ZERO)
 	std::vector<int16> hatEffects;

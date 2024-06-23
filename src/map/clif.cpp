@@ -50,6 +50,7 @@
 #include "party.hpp"
 #include "pc.hpp"
 #include "pc_groups.hpp"
+#include "pc_battle_stats.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
 #include "script.hpp"
@@ -7554,6 +7555,11 @@ void clif_openvendingreq( map_session_data& sd, uint16 num ){
 
 	packet.packetType = HEADER_ZC_OPENSTORE;
 	packet.num = num;
+	// Vending shouldn't open if vend_item is 0 and extended vending is enabled [Easycore]
+	if (battle_config.extended_vending && sd.vend_item == 0) {
+		sd.state.prevend = 0;
+		return;
+	}
 
 	clif_send( &packet, sizeof( packet ), &sd.bl, SELF );
 }
@@ -13339,6 +13345,9 @@ void clif_parse_SelectArrow(int fd,map_session_data *sd) {
 		case NC_MAGICDECOY:
 			skill_magicdecoy(*sd,p->itemId);
 			break;
+		case MC_VENDING:
+			skill_vending(sd, p->itemId, sd->menuskill_val);
+			break;
 	}
 
 	clif_menuskill_clear(sd);
@@ -14030,7 +14039,14 @@ void clif_parse_OpenVending(int fd, map_session_data* sd){
 	short len = (short)RFIFOW(fd,info->pos[0]);
 	const char* message = RFIFOCP(fd,info->pos[1]);
 	const uint8* data = (uint8*)RFIFOP(fd,info->pos[3]);
+	char out_msg[1024] = {0};
 
+	if (battle_config.extended_vending && battle_config.show_item_vending && sd->vend_item) {
+		std::shared_ptr<item_data> item = item_db.find(sd->vend_item);
+		if (item) {
+			sprintf(out_msg, "[%s]%s", item->ename.c_str(), message);
+		}
+	}
 	if(cmd == 0x12f){ // (CZ_REQ_OPENSTORE)
 		len -= 84;
 	}
@@ -14059,7 +14075,10 @@ void clif_parse_OpenVending(int fd, map_session_data* sd){
 	if( message[0] == '\0' ) // invalid input
 		return;
 
-	vending_openvending(*sd, message, data, len/8, nullptr);
+	if (battle_config.extended_vending && battle_config.show_item_vending && sd->vend_item)
+		vending_openvending(*sd, message, data, len / 8, nullptr);
+	else
+		vending_openvending(*sd, message, data, len / 8, nullptr);
 }
 
 
@@ -17437,7 +17456,16 @@ void clif_parse_ViewPlayerEquip(int fd, map_session_data* sd)
 
 	if (sd->bl.m != tsd->bl.m)
 		return;
-	else if( tsd->status.show_equip || pc_has_permission(sd, PC_PERM_VIEW_EQUIPMENT) )
+
+	if (sd->state.workinprogress != WIP_DISABLE_NONE)
+		return;
+
+	sd->ce_gid = tsd->status.account_id;
+	pcb_display_menu(sd);
+
+	return; // Early return intended
+	
+	if( tsd->status.show_equip || pc_has_permission(sd, PC_PERM_VIEW_EQUIPMENT) )
 		clif_viewequip_ack( *sd, *tsd );
 	else
 		clif_msg(sd, MSI_OPEN_EQUIPEDITEM_REFUSED);
@@ -19545,7 +19573,12 @@ void clif_parse_SkillSelectMenu(int fd, map_session_data *sd) {
 	if (sd->menuskill_id == SA_AUTOSPELL) {
 		sd->state.workinprogress = WIP_DISABLE_NONE;
 		skill_autospell(sd, p->selectedSkillId);
+//		skill_autospell(sd, RFIFOW(fd, info->pos[1]));
 	} else if (sd->menuskill_id == SC_AUTOSHADOWSPELL) {
+		if (sd->state.check_equip_skill) {
+			pcb_process_selection(sd, p->selectedSkillId);
+			return;
+		}
 		if (pc_istrading(sd)) {
 			clif_skill_fail( *sd, sd->ud.skill_id );
 			clif_menuskill_clear(sd);
@@ -25115,6 +25148,60 @@ void clif_set_npc_window_pos_percent(map_session_data& sd, int x, int y)
 
 	clif_send( &p, sizeof( p ), &sd.bl, SELF );
 #endif  // PACKETVER_MAIN_NUM >= 20220504
+}
+
+/**
+* Extended Vending system [Lilith] update version by ex0ample
+**/
+int clif_vend(struct map_session_data *sd, int skill_lv) {
+
+	nullpo_ret(sd);
+
+	int fd = sd->fd;
+
+	if (!session_isActive( fd ))
+		return 0;
+
+	WFIFOHEAD( fd, sizeof( struct PACKET_ZC_MAKINGARROW_LIST ) + (itemdb_vending.size()+2) * sizeof( struct PACKET_ZC_MAKINGARROW_LIST_sub ) );
+	struct PACKET_ZC_MAKINGARROW_LIST *p = (struct PACKET_ZC_MAKINGARROW_LIST *)WFIFOP( fd, 0 );
+	p->packetType = HEADER_ZC_MAKINGARROW_LIST;
+
+	int count = 0;
+
+	if (battle_config.item_zeny && item_db.exists(battle_config.item_zeny)) {
+		p->items[count].itemId = client_nameid(battle_config.item_zeny);
+		count++;
+	}
+
+	if (battle_config.item_cash && item_db.exists(battle_config.item_cash) ) {
+		p->items[count].itemId = client_nameid(battle_config.item_cash);
+		count++;
+	}
+
+	for (const auto &it : itemdb_vending) {
+		t_itemid nameid = it.first;
+
+		if (!item_db.exists(nameid))
+			continue;
+
+		if (nameid != battle_config.item_zeny && nameid != battle_config.item_cash) {
+			p->items[count].itemId = client_nameid(nameid);
+			count++;
+		}
+	}
+
+	p->packetLength = sizeof( struct PACKET_ZC_MAKINGARROW_LIST ) + count * sizeof( struct PACKET_ZC_MAKINGARROW_LIST_sub );
+	WFIFOSET( fd, p->packetLength );
+
+	if( count > 0 ){
+		sd->menuskill_id = MC_VENDING;
+		sd->menuskill_val = skill_lv;
+	}
+	else {
+		clif_skill_fail(*sd, MC_VENDING, USESKILL_FAIL_LEVEL, 0);
+		return 0;
+	}
+	return 1;
 }
 
 /*==========================================
