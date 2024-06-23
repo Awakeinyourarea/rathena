@@ -6073,7 +6073,7 @@ BUILDIN_FUNC(percentheal)
 		return SCRIPT_CMD_SUCCESS;
 
 #ifdef RENEWAL
-	if( sd->sc.getSCE(SC_EXTREMITYFIST2) )
+	if( sd->sc.getSCE(SC_EXTREMITYFIST) )
 		sp = 0;
 #endif
 
@@ -10961,13 +10961,13 @@ BUILDIN_FUNC(itemskill)
 BUILDIN_FUNC(produce)
 {
 	int trigger;
-	TBL_PC* sd;
+	map_session_data* sd;
 
 	if( !script_rid2sd(sd) )
 		return SCRIPT_CMD_SUCCESS;
 
 	trigger=script_getnum(st,2);
-	clif_skill_produce_mix_list(sd, -1, trigger);
+	clif_skill_produce_mix_list( *sd, -1, trigger );
 	return SCRIPT_CMD_SUCCESS;
 }
 /*==========================================
@@ -10976,13 +10976,13 @@ BUILDIN_FUNC(produce)
 BUILDIN_FUNC(cooking)
 {
 	int trigger;
-	TBL_PC* sd;
+	map_session_data* sd;
 
 	if( !script_rid2sd(sd) )
 		return SCRIPT_CMD_SUCCESS;
 
 	trigger=script_getnum(st,2);
-	clif_cooking_list(sd, trigger, AM_PHARMACY, 1, 1);
+	clif_cooking_list( *sd, trigger, AM_PHARMACY, 1, 1 );
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -17995,7 +17995,7 @@ BUILDIN_FUNC(callshop)
 		}
 
 		sd->npc_shopid = nd->bl.id;
-		clif_npc_market_open(sd, nd);
+		clif_npc_market_open( *sd, *nd );
 		script_pushint(st,1);
 		return SCRIPT_CMD_SUCCESS;
 	}
@@ -19264,7 +19264,12 @@ BUILDIN_FUNC(setunitdata)
 			case UMOB_X: if (!unit_walktoxy(bl, (short)value, md->bl.y, 2)) unit_movepos(bl, (short)value, md->bl.y, 0, 0); break;
 			case UMOB_Y: if (!unit_walktoxy(bl, md->bl.x, (short)value, 2)) unit_movepos(bl, md->bl.x, (short)value, 0, 0); break;
 			case UMOB_SPEED: md->base_status->speed = (unsigned short)value; status_calc_misc(bl, &md->status, md->level); calc_status = true; break;
-			case UMOB_MODE: md->base_status->mode = (enum e_mode)value; calc_status = true; break;
+			case UMOB_MODE:
+				md->base_status->mode = (enum e_mode)value;
+				// Mob mode must be updated before calling unit_refresh
+				status_calc_bl_(&md->bl, status_db.getSCB_BATTLE());
+				unit_refresh(bl);
+				break;
 			case UMOB_AI: md->special_state.ai = (enum mob_ai)value; break;
 			case UMOB_SCOPTION: md->sc.option = (unsigned short)value; break;
 			case UMOB_SEX: md->vd->sex = (char)value; unit_refresh(bl); break;
@@ -22532,11 +22537,11 @@ BUILDIN_FUNC(showdigit)
  * makerune <% success bonus>{,<char_id>};
  **/
 BUILDIN_FUNC(makerune) {
-	TBL_PC* sd;
+	map_session_data* sd;
 	
 	if (!script_charid2sd(3,sd))
 		return SCRIPT_CMD_FAILURE;
-	clif_skill_produce_mix_list(sd,RK_RUNEMASTERY,24);
+	clif_skill_produce_mix_list( *sd, RK_RUNEMASTERY, 24 );
 	sd->itemid = script_getnum(st,2);
 	return SCRIPT_CMD_SUCCESS;
 }
@@ -27335,6 +27340,56 @@ BUILDIN_FUNC(setdialogpospercent){
 	return SCRIPT_CMD_SUCCESS;
 }
 
+/**
+ * Checks if the character has that permission.
+ * permission_check(<permission>{,<char_id>}) -> <bool>
+ */
+BUILDIN_FUNC(permission_check)
+{
+	map_session_data* sd = nullptr;
+
+	if (!script_charid2sd(3, sd))
+		return SCRIPT_CMD_FAILURE;
+
+	int permission = script_getnum(st, 2);
+
+	if (permission < PC_PERM_TRADE || permission >= PC_PERM_MAX) {
+		ShowError("buildin_permission_check: Invalid permission %d\n", permission);
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint(st, pc_has_permission(sd, static_cast<e_pc_permission>(permission)));
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
+/**
+ * Adds or removes a permission from the character
+ * permission_add(<permission>{,<char_id>})
+ * permission_remove(<permission>{,<char_id>})
+ */
+BUILDIN_FUNC(permission_add)
+{
+	map_session_data* sd = nullptr;
+
+	if (!script_charid2sd(3, sd))
+		return SCRIPT_CMD_FAILURE;
+
+	int permission = script_getnum(st, 2);
+
+	if (permission < PC_PERM_TRADE || permission >= PC_PERM_MAX) {
+		ShowError("buildin_permission_check: Invalid permission %d\n", permission);
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if (strcmp(script_getfuncname(st), "permission_add") == 0)
+		sd->permissions.set(static_cast<e_pc_permission>(permission)); // Adds permission
+	else
+		sd->permissions.reset(static_cast<e_pc_permission>(permission)); // Removes permission
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
 #include <custom/script.inc>
 
 // declarations that were supposed to be exported from npc_chat.cpp
@@ -28099,6 +28154,10 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(setdialogsize, "ii"),
 	BUILDIN_DEF(setdialogpos, "ii"),
 	BUILDIN_DEF(setdialogpospercent, "ii"),
+
+	BUILDIN_DEF(permission_check, "i?"),
+	BUILDIN_DEF(permission_add, "i?"),
+	BUILDIN_DEF2(permission_add, "permission_remove", "i?"),
 
 #include <custom/script_def.inc>
 
