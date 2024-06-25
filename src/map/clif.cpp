@@ -22321,6 +22321,8 @@ void clif_parse_refineui_refine( int fd, map_session_data* sd ){
 		return;
 	}
 
+	std::shared_ptr<item_data> itemid = item_db.find(id->nameid);
+
 	// Try to refine the item
 	if( cost->chance >= ( rnd() % 10000 ) ){
 		log_pick_pc( sd, LOG_TYPE_OTHER, -1, item );
@@ -22335,28 +22337,29 @@ void clif_parse_refineui_refine( int fd, map_session_data* sd ){
 			char message[CHAT_SIZE_MAX];
 			if( id->type == IT_ARMOR ) {
 				if( item->refine >= battle_config.equipment ) {
-						sprintf (message, msg_txt(sd, 1608), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+				
+						sprintf (message, msg_txt(sd, 1608), sd->status.name, item->refine-1, item_db.create_item_link(itemid).c_str(), item->refine);
 						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 				}
 			} else if( id->type == IT_WEAPON ) {
 				if( id->weapon_level == 1 ) {
 					if( item->refine >= battle_config.weapon_level_1 ) {
-						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, item_db.create_item_link(itemid).c_str(), item->refine);
 						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 					}
 				} else if( id->weapon_level == 2 ) {
 					if( item->refine >= battle_config.weapon_level_2 ) {
-						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, item_db.create_item_link(itemid).c_str(), item->refine);
 						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 					}
 				} else if( id->weapon_level == 3 ) {
 					if( item->refine >= battle_config.weapon_level_3 ) {
-						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, item_db.create_item_link(itemid).c_str(), item->refine);
 						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 					}
 				} else if( id->weapon_level == 4 ) {
 					if( item->refine >= battle_config.weapon_level_4 ) {
-						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, item_db.create_item_link(itemid).c_str(), item->refine);
 						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 					}
 				}
@@ -22375,13 +22378,13 @@ void clif_parse_refineui_refine( int fd, map_session_data* sd ){
 			char message[CHAT_SIZE_MAX];
 			if( id->type == IT_ARMOR ) {
 				if( item->refine >= battle_config.equipment ) {
-					sprintf (message, msg_txt(sd, 1610), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+					sprintf (message, msg_txt(sd, 1610), sd->status.name, item->refine-1, item_db.create_item_link(itemid).c_str(), item->refine);
 					intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 				}
 			}else if( id->type == IT_WEAPON ) {
 				if( id->weapon_level == 1 ) {
 					if( item->refine >= battle_config.weapon_level_1 ) {
-						sprintf (message, msg_txt(sd, 1611), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						sprintf (message, msg_txt(sd, 1611), sd->status.name, item->refine-1, item_db.create_item_link(itemid).c_str(), item->refine);
 						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 					}
 				}
