@@ -662,6 +662,29 @@ ACMD_FUNC(where)
 	return 0;
 }
 
+/*=====================================
+ * Hide pet and or homun of others players
+ * Usage: @hideslave 
+ * 0 disable, 1 for pet, 2 for homun, 3 for both
+ *-------------------------------------*/
+ACMD_FUNC(hideslave)
+{
+	int option=0;
+	nullpo_retr(-1, sd);
+
+	if (!message || !*message || (option = atoi(message)) < 0 || option > 7) {
+		clif_displaymessage(fd, "Please choose an option value (usage: @hideslave <0=disable,1=pet,2=homun,4=abr and summon>)");
+		clif_displaymessage(fd, "You can add options to hide several type : @hideslave 3 would hide pet and homun, @hideslave 7 everything");
+		return -1;
+	}
+
+	sd->state.hideslave = option;
+	clif_refresh(sd);
+	clif_displaymessage(fd, "@hideslave option has been modified");
+	return 0;
+}
+
+
 /*==========================================
  *
  *------------------------------------------*/
@@ -11218,6 +11241,7 @@ void atcommand_basecommands(void) {
 		ACMD_DEF(whereis),
 		ACMD_DEF(mapflag),
 		ACMD_DEF(me),
+		ACMD_DEF(hideslave),
 		ACMD_DEF(monsterignore),
 		ACMD_DEF(fakename),
 		ACMD_DEF(size),

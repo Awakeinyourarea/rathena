@@ -403,6 +403,8 @@ static bool clif_session_isValid(map_session_data *sd) {
 static int clif_send_sub(struct block_list *bl, va_list ap)
 {
 	struct block_list *src_bl;
+	struct block_list *tbl;
+	struct block_list *mbl;
 	map_session_data *sd;
 	unsigned char *buf;
 	int len, type, fd;
@@ -419,6 +421,81 @@ static int clif_send_sub(struct block_list *bl, va_list ap)
 	len = va_arg(ap,int);
 	nullpo_ret(src_bl = va_arg(ap,struct block_list*));
 	type = va_arg(ap,int);
+
+	if (src_bl->type == BL_PET){ // target 3 == AREA_WOS
+		switch(RBUFW(buf, 0)) {
+			case spawn_unitType: // clif_spawn_unit
+			case unit_walkingType:
+				tbl = map_id2bl(RBUFL(buf,5));
+				if(sd->state.hideslave&1
+					&&((pet_data*)tbl)->master && ((pet_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+					break;
+			case 0x86: // clif_move
+			case 0x1aa: // pet emotion
+				tbl = map_id2bl(RBUFL(buf,2));
+				if(sd->state.hideslave&1
+					&&((pet_data*)tbl)->master && ((pet_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+					break;
+		}
+	} else if(src_bl->type == BL_HOM){
+		switch(RBUFW(buf, 0)) {
+			case spawn_unitType: // clif_spawn_unit
+			case unit_walkingType:
+				tbl = map_id2bl(RBUFL(buf,5));
+				if(sd->state.hideslave&2
+					&&((homun_data*)tbl)->master && ((homun_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+					break;
+			case 0x86: // clif_move
+				tbl = map_id2bl(RBUFL(buf,2));
+				if(sd->state.hideslave&2
+					&&((homun_data*)tbl)->master && ((homun_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+					break;
+		}
+	} else if(src_bl->type == BL_MOB){
+		switch(RBUFW(buf, 0)) {
+			case spawn_unitType: // clif_spawn_unit
+			case unit_walkingType:
+				tbl = map_id2bl(RBUFL(buf,5));
+				if(((mob_data*)tbl)->master_id > 0){
+					mbl = map_id2bl(((mob_data*)tbl)->master_id);
+					if(sd->state.hideslave&4
+						&&mbl->type == BL_PC && mbl->id != sd->bl.id)
+							return 0;
+				}
+					break;
+			case 0x86: // clif_move
+				tbl = map_id2bl(RBUFL(buf,2));
+				if(((mob_data*)tbl)->master_id > 0){
+					mbl = map_id2bl(((mob_data*)tbl)->master_id);
+					if(sd->state.hideslave&4
+						&&mbl->type == BL_PC && mbl->id != sd->bl.id)
+							return 0;
+				}
+					break;
+		}
+	} else {
+		switch(RBUFW(buf, 0)) {
+			case 0x86: // clif_move
+				tbl = map_id2bl(RBUFL(buf,2));
+				if(tbl->type == BL_PET && sd->state.hideslave&1
+					&&((pet_data*)tbl)->master && ((pet_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+				else if(tbl->type == BL_HOM && sd->state.hideslave&2
+					&&((homun_data*)tbl)->master && ((homun_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+				else if(tbl->type == BL_MOB && ((mob_data*)tbl)->master_id > 0){
+						mbl = map_id2bl(((mob_data*)tbl)->master_id);
+						if (sd->state.hideslave&4
+						&&mbl->type == BL_PC && mbl->id != sd->bl.id)
+							return 0;
+				}
+					break;
+		}
+	}
 
 	switch(type) {
 	case AREA_WOS:
@@ -479,6 +556,8 @@ static int clif_send_sub(struct block_list *bl, va_list ap)
 int clif_send(const void* buf, int len, struct block_list* bl, enum send_target type)
 {
 	int i;
+	struct block_list* tbl;
+	struct block_list* mbl;
 	map_session_data *sd, *tsd;
 	struct party_data *p = nullptr;
 	std::shared_ptr<s_battleground_data> bg;
@@ -622,6 +701,58 @@ int clif_send(const void* buf, int len, struct block_list* bl, enum send_target 
 		break;
 
 	case SELF:
+		if (bl->type== BL_PET){ // target 3 == AREA_WOS
+			switch(RBUFW(buf, 0)) {
+				case unit_walkingType: // clif_spawn_unit
+					tbl = map_id2bl(RBUFL(buf,5));
+					if(sd->state.hideslave&1
+						&&((pet_data*)tbl)->master && ((pet_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+					break;
+			}
+		} else if (bl->type== BL_HOM){
+			switch(RBUFW(buf, 0)) {
+				case unit_walkingType: // clif_spawn_unit
+					tbl = map_id2bl(RBUFL(buf,5));
+					if(sd->state.hideslave&2
+						&&((homun_data*)tbl)->master && ((homun_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+					break;
+			}
+		} else if (bl->type== BL_MOB){
+			switch(RBUFW(buf, 0)) {
+				case unit_walkingType: // clif_spawn_unit
+					tbl = map_id2bl(RBUFL(buf,5));
+					if(((mob_data*)tbl)->master_id > 0){
+						mbl = map_id2bl(((mob_data*)tbl)->master_id);
+						if(sd->state.hideslave&4
+							&&mbl->type == BL_PC && mbl->id != sd->bl.id)
+								return 0;
+					}
+					break;
+			}
+		} else {
+			switch(RBUFW(buf, 0)) {
+				case unit_walkingType: // clif move
+				case idle_unitType:
+					tbl = map_id2bl(RBUFL(buf,5));
+					if(tbl->type== BL_PET && sd->state.hideslave&1
+						&&((pet_data*)tbl)->master && ((pet_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+					else if(tbl->type== BL_HOM && sd->state.hideslave&2
+						&&((homun_data*)tbl)->master && ((homun_data*)tbl)->master->bl.id != sd->bl.id)
+						return 0;
+					else if(tbl->type== BL_MOB){
+						if(((mob_data*)tbl)->master_id > 0){
+							mbl = map_id2bl(((mob_data*)tbl)->master_id);
+							if(sd->state.hideslave&4
+								&&mbl->type == BL_PC && mbl->id != sd->bl.id)
+									return 0;
+						}
+					}
+					break;
+			}
+		}
 		if( clif_session_isValid(sd) ){
 			fd = sd->fd;
 			WFIFOHEAD(fd,len);
