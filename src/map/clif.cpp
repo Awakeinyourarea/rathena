@@ -9880,6 +9880,7 @@ void clif_name( struct block_list* src, struct block_list *bl, send_target targe
 			if( sd->fakename[0] ) {
 				safestrncpy( packet.name, sd->fakename, NAME_LENGTH );
 				clif_send( &packet, sizeof(packet), src, target );
+				packet.title_id = sd->status.reputation_id;
 				return;
 			}
 
@@ -9911,6 +9912,7 @@ void clif_name( struct block_list* src, struct block_list *bl, send_target targe
 #if PACKETVER_MAIN_NUM >= 20150225 || PACKETVER_RE_NUM >= 20141126 || defined( PACKETVER_ZERO )
 			packet.title_id = sd->status.title_id; // Title ID
 #endif
+			packet.title_id = sd->status.reputation_id;
 
 			clif_send(&packet, sizeof(packet), src, target);
 		}
@@ -22327,18 +22329,63 @@ void clif_parse_refineui_refine( int fd, map_session_data* sd ){
 		log_pick_pc( sd, LOG_TYPE_OTHER, 1, item );
 		clif_misceffect( sd->bl, NOTIFYEFFECT_REFINE_SUCCESS );
 		clif_refine( *sd, index, ITEMREFINING_SUCCESS );
+
 		if (info->broadcast_success) {
-			clif_broadcast_refine_result(*sd, item->nameid, item->refine, true);
+			if( battle_config.refine_announce ) {
+			char message[CHAT_SIZE_MAX];
+			if( id->type == IT_ARMOR ) {
+				if( item->refine >= battle_config.equipment ) {
+						sprintf (message, msg_txt(sd, 1608), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
+				}
+			} else if( id->type == IT_WEAPON ) {
+				if( id->weapon_level == 1 ) {
+					if( item->refine >= battle_config.weapon_level_1 ) {
+						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
+					}
+				} else if( id->weapon_level == 2 ) {
+					if( item->refine >= battle_config.weapon_level_2 ) {
+						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
+					}
+				} else if( id->weapon_level == 3 ) {
+					if( item->refine >= battle_config.weapon_level_3 ) {
+						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
+					}
+				} else if( id->weapon_level == 4 ) {
+					if( item->refine >= battle_config.weapon_level_4 ) {
+						sprintf (message, msg_txt(sd, 1609), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
+					}
+				}
+			}
 		}
+	}
 		if( id->type == IT_WEAPON ){
 			achievement_update_objective( sd, AG_ENCHANT_SUCCESS, 2, id->weapon_level, item->refine );
 		}
 		clif_refineui_info( sd, index );
+
+		
 	}else{
 		// Failure
-
 		if (info->broadcast_failure) {
-			clif_broadcast_refine_result(*sd, item->nameid, item->refine, false);
+			char message[CHAT_SIZE_MAX];
+			if( id->type == IT_ARMOR ) {
+				if( item->refine >= battle_config.equipment ) {
+					sprintf (message, msg_txt(sd, 1610), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+					intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
+				}
+			}else if( id->type == IT_WEAPON ) {
+				if( id->weapon_level == 1 ) {
+					if( item->refine >= battle_config.weapon_level_1 ) {
+						sprintf (message, msg_txt(sd, 1611), sd->status.name, item->refine-1, id->ename.c_str(), id->slots, item->refine);
+						intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
+					}
+				}
+			}
 		}
 		// Blacksmith blessings were used to prevent breaking and downgrading
 		if( blacksmith_amount > 0 ){

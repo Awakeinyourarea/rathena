@@ -590,6 +590,7 @@ struct mmo_charstatus {
 	uint8 body_direction;
 
 	char name[NAME_LENGTH];
+	int reputation_id;
 	unsigned int base_level,job_level;
 	unsigned short str,agi,vit,int_,dex,luk;
 	unsigned short pow,sta,wis,spl,con,crt;

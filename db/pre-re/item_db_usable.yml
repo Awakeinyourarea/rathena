@@ -22101,3 +22101,60 @@ Body:
       Third_Upper: true
       Third_Baby: true
     EquipLevelMin: 1
+  - Id: 30242
+    AegisName: Rank_Status
+    Name: Rank Status
+    Type: Usable
+    Flags:
+      NoConsume: true
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      TradePartner: true
+      NoSell: true
+      NoMail: true
+    Script: |
+      callfunc("RankStatus");
+  - Id: 30243
+    AegisName: Rank_Status_1000
+    Name: Rank Status 1000
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("RankStatusPoint",1000);
+  - Id: 30244
+    AegisName: Rank_Status_5000
+    Name: Rank Status 5000
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("RankStatusPoint",5000);
+  - Id: 30245
+    AegisName: Rank_Status_10000
+    Name: Rank Status 10000
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("RankStatusPoint",10000);      
+  - Id: 30246
+    AegisName: Rank_Status_50000
+    Name: Rank Status 50000
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("RankStatusPoint",50000);
+  - Id: 30247
+    AegisName: Rank_Status_100000
+    Name: Rank Status 1000000
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("RankStatusPoint",1000000);
+  - Id: 30248
+    AegisName: Rank_Status_30200000
+    Name: Rank Status God
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("RankStatusPoint",30200000);

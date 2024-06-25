@@ -15536,6 +15536,19 @@ BUILDIN_FUNC(removespecialeffect)
 	return SCRIPT_CMD_SUCCESS;
 }
 
+BUILDIN_FUNC(reputationupdate)
+{
+	TBL_PC* sd;
+	if( !script_rid2sd(sd) )
+		return SCRIPT_CMD_SUCCESS;
+	
+	sd->status.reputation_id = script_getnum(st, 2);
+    clif_name_area(&sd->bl);
+	
+    return SCRIPT_CMD_SUCCESS;
+}
+
+
 /**
  * nude({<char_id>});
  * @author [Valaris]
@@ -27887,6 +27900,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(delwall,"s"),
 	BUILDIN_DEF(checkwall,"s"),
 	BUILDIN_DEF(searchitem,"rs"),
+	BUILDIN_DEF(reputationupdate, "i"),
 	BUILDIN_DEF(mercenary_create,"ii"),
 	BUILDIN_DEF(mercenary_delete,"??"),
 	BUILDIN_DEF(mercenary_heal,"ii"),
