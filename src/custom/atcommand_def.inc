@@ -9,3 +9,5 @@
  **/
 
 //ACMD_DEF(newcommand),
+ACMD_DEF(hideview),
+ACMD_DEF2("showview", hideview),

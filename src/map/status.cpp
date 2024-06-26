@@ -4922,7 +4922,7 @@ int status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		sc_start(&sd->bl, &sd->bl, SC_SOULATTACK, 100, 1, INFINITE_TICK);
 
 	calculating = 0;
-
+	map_foreachinallrange(clif_hideview, &sd->bl, AREA_SIZE, BL_PC, &sd->bl);
 	return 0;
 }
 

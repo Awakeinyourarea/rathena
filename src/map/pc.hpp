@@ -386,6 +386,7 @@ public:
 	//NOTE: When deciding to add a flag to state or special_state, take into consideration that state is preserved in
 	//status_calc_pc, while special_state is recalculated in each call. [Skotlex]
 	struct s_state {
+		unsigned short hideview; //Marks state for hideview [Millornine]
 		unsigned int active : 1; //Marks active player (not active is logging in/out, or changing map servers)
 		unsigned int menu_or_input : 1;// if a script is waiting for feedback from the player
 		unsigned int dead_sit : 2;

@@ -11014,6 +11014,7 @@ void pc_changelook(map_session_data *sd,int type,int val) {
 		break;
 	}
 	clif_changelook(&sd->bl, type, val);
+	map_foreachinallrange(clif_hideview, &sd->bl, AREA_SIZE, BL_PC, &sd->bl);
 }
 
 /*==========================================
@@ -11092,6 +11093,7 @@ void pc_setoption(map_session_data *sd,int type, int subtype)
 	if( sd->vd.body_style )
 		clif_changelook(&sd->bl,LOOK_BODY2,sd->vd.body_style);
 	clif_skillinfoblock(sd); // Skill list needs to be updated after base change.
+	map_foreachinallrange(clif_hideview, &sd->bl, AREA_SIZE, BL_PC, &sd->bl);
 }
 
 /**

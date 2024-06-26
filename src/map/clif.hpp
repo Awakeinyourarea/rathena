@@ -1439,4 +1439,6 @@ void clif_set_npc_window_pos_percent(map_session_data& sd, int x, int y);
 
 void clif_noask_sub( map_session_data& sd, map_session_data& tsd, int type );
 
+int clif_hideview(struct block_list* bl, va_list ap);	// map_forallinmovearea callback
+
 #endif /* CLIF_HPP */
