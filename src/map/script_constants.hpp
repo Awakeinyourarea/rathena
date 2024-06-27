@@ -11073,6 +11073,14 @@
 	export_constant(ELEMINFO_GAMEID);
 	export_constant(ELEMINFO_CLASS);
 
+	/* setdialogalign script command */
+	export_constant(DIALOG_ALIGN_LEFT);
+	export_constant(DIALOG_ALIGN_RIGHT);
+	export_constant(DIALOG_ALIGN_CENTER);
+	export_constant(DIALOG_ALIGN_TOP);
+	export_constant(DIALOG_ALIGN_MIDDLE);
+	export_constant(DIALOG_ALIGN_BOTTOM);
+
 	/* refine types */
 	export_constant(REFINE_TYPE_ARMOR);
 	export_constant(REFINE_TYPE_WEAPON);
@@ -11317,6 +11325,10 @@
 	export_constant(MER_SERA);
 	export_constant(MER_DIETER);
 	export_constant(MER_ELEANOR);
+
+	/* searchstore constants */
+	export_constant(SEARCHSTORE_EFFECT_NORMAL);
+	export_constant(SEARCHSTORE_EFFECT_REMOTE);
 
 	#undef export_constant
 	#undef export_constant2
