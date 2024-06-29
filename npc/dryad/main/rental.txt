@@ -1,0 +1,66 @@
+-	script	Rental	-1,{
+
+mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
+mes "สวัสดีท่าน : ^FF0000 "+strcharinfo(0)+" ^000000"; 
+mes "ต้องการให้ฉันช่วยเหลืออะไร ?";
+next;
+menu 
+"^FF0000•^000000 เช่าเป็ด/นก/รถเข็น",Rental;
+
+Rental:
+	mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
+	mes "เลือกสิ่งที่ต้องการเช่าค่ะ";
+	next;
+	switch (select("^FF0000•^000000 Peco Peco","^FF0000•^000000 Falcon","^FF0000•^000000 Cart")) {
+	case 1:
+		mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
+		if (checkriding()) {
+			mes "คุณมี Peco Peco อยู่แล้ว";
+			close2;
+		} else if ( (Class == 7) || (Class == 14) || (Class == 4008) || (Class == 4015) || (Class == 4030) || (Class == 4037) ) {
+			mes "ทำการเช่าเรียบร้อยแล้วค่ะ";
+			setriding;
+			close2;
+		} else {
+			mes "คุณไม่มีสิทธิ์เช่า Peco Peco ค่ะ";
+			close2;
+		}
+	break;
+	case 2:
+		mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
+		if (checkfalcon()) {
+			mes "คุณมี Falcon อยู่แล้ว";
+			close2;
+		} else if ( (Class == 11) || (Class == 4012) || (Class == 4034) ) {
+			mes "ทำการเช่าเรียบร้อยแล้วค่ะ";
+			setfalcon;
+			close2;
+		} else {
+			mes "คุณไม่มีสิทธิ์เช่า Falcon ค่ะ";
+			close2;
+		}
+	break;
+	case 3:
+		mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
+		if (checkcart()) {
+			mes "คุณมี Cart อยู่แล้ว";
+			close2;
+		} else if ( (Class == 5) || (Class == 10) || (Class == 23) || (Class == 18) 
+		|| (Class == 4006) || (Class == 4011) || (Class == 4019) || (Class == 4028) 
+		|| (Class == 4033) || (Class == 4041) || (Class == 4045) ) {
+			mes "ทำการเช่าเรียบร้อยแล้วค่ะ";
+			setcart;
+			close2;
+		} else {
+			mes "คุณไม่มีสิทธิ์เช่า Cart ค่ะ";
+			close2;
+		}
+	break;
+	}
+end;
+}
+
+//==============================================
+//ที่ตั้งNPC
+//==============================================
+mainlounge,20,186,5	duplicate(Rental)	เช่าเป็ด นก รถเข็น#01	726

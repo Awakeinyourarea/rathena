@@ -1,4 +1,4 @@
-mainlounge,29,201,4	script	อัพเกรดอุปกรณ์	813,{
+mainlounge,52,210,3	script	อัพเกรดอุปกรณ์	813,{
 	if( getbattleflag( "feature.refineui" ) ){
 		mes "[ อัพเกรดอุปกรณ์ ]";
 		mes "มีอะไรให้ข้าช่วยท่านหรือเปล่าล่ะ ?";
