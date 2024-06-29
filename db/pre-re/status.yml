@@ -2659,6 +2659,7 @@ Body:
       NoClearance: true
   - Status: Pneuma
     DurationLookup: AL_PNEUMA
+    Icon: EFST_PNEUMA
     Flags:
       NoClearbuff: true
       NoDispell: true
