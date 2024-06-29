@@ -28,19 +28,19 @@ OnRecvCastle2:
 	if (!getcastledata(strnpcinfo(2),CD_GUILD_ID)) {
 		donpcevent strnpcinfo(0)+"::OnStart";
 		// Monster spawns are identical for all castles.
-		monster strnpcinfo(2),0,0,"Evil Druid",1117,10;
-		monster strnpcinfo(2),0,0,"Khalitzburg",1132,4;
-		monster strnpcinfo(2),0,0,"Abysmal Knight",1219,3;
-		monster strnpcinfo(2),0,0,"Executioner",1205,1;
-		monster strnpcinfo(2),0,0,"Penomena",1216,10;
-		monster strnpcinfo(2),0,0,"Alarm",1193,18;
-		monster strnpcinfo(2),0,0,"Clock",1269,9;
-		monster strnpcinfo(2),0,0,"Raydric Archer",1276,12;
-		monster strnpcinfo(2),0,0,"Wanderer",1208,3;
-		monster strnpcinfo(2),0,0,"Alice",1275,1;
-		monster strnpcinfo(2),0,0,"Bloody Knight",1268,2;
-		monster strnpcinfo(2),0,0,"Dark Lord",1272,2;
-		monster strnpcinfo(2),0,0,"Tower Keeper",1270,4;
+		//monster strnpcinfo(2),0,0,"Evil Druid",1117,10;
+		//monster strnpcinfo(2),0,0,"Khalitzburg",1132,4;
+		//monster strnpcinfo(2),0,0,"Abysmal Knight",1219,3;
+		//monster strnpcinfo(2),0,0,"Executioner",1205,1;
+		//monster strnpcinfo(2),0,0,"Penomena",1216,10;
+		//monster strnpcinfo(2),0,0,"Alarm",1193,18;
+		//monster strnpcinfo(2),0,0,"Clock",1269,9;
+		//monster strnpcinfo(2),0,0,"Raydric Archer",1276,12;
+		//monster strnpcinfo(2),0,0,"Wanderer",1208,3;
+		//monster strnpcinfo(2),0,0,"Alice",1275,1;
+		//monster strnpcinfo(2),0,0,"Bloody Knight",1268,2;
+		//monster strnpcinfo(2),0,0,"Dark Lord",1272,2;
+		//monster strnpcinfo(2),0,0,"Tower Keeper",1270,4;
 	}
 	if (getcastledata(strnpcinfo(2),CD_ENABLED_KAFRA) < 1)
 		disablenpc "Kafra Employee#"+substr(strnpcinfo(2),0,1)+substr(strnpcinfo(2),8,9);
@@ -620,8 +620,10 @@ OnStartArena:
 	// Disable Kafra
 	disablenpc "Kafra Employee#"+strnpcinfo(2);
 
-	announce "The ["+getguildname(.@GID)+"] guild conquered the ["+.@region$+" "+charat(strnpcinfo(2),3)+"] stronghold of "+getcastlename(strnpcinfo(4))+"!",bc_all|bc_woe;
-	mapannounce strnpcinfo(4),"The emperium has been shattered!",bc_map,"0x00FF00",FW_NORMAL,20,0,40;
+	//announce "The ["+getguildname(.@GID)+"] guild conquered the ["+.@region$+" "+charat(strnpcinfo(2),3)+"] stronghold of "+getcastlename(strnpcinfo(4))+"!",bc_all|bc_woe;
+	announce "ปราสาท [" + getcastlename(strnpcinfo(4)) + "] ถูกทำลายโดยกิลด์ [" + getguildName(.@GID) + "] โดยผู้เล่น ["+.@name$+"]",bc_all|bc_woe;
+	//mapannounce strnpcinfo(4),"The emperium has been shattered!",bc_map,"0x00FF00",FW_NORMAL,20,0,40;
+	mapannounce strnpcinfo(4),"Emperium ได้ถูกทำลาย",bc_map,"0x00CCFF",FW_NORMAL,20,0,40;
 	donpcevent "Manager#"+strnpcinfo(4)+"::OnReset";
 	maprespawnguildid strnpcinfo(4),getcastledata(strnpcinfo(4),CD_GUILD_ID),2;
 	donpcevent "Manager#"+strnpcinfo(4)+"::OnRecvCastle2";
