@@ -40,8 +40,8 @@ All5Refine:
 	message strcharinfo(0),"ตีบวกให้เรียบร้อยแล้ว";
 	end;
 
-OnInit:		
-	waitingroom "  อัพเกรดอุปกรณ์",0;
-	end;
+//OnInit:		
+//	waitingroom "  อัพเกรดอุปกรณ์",0;
+//	end;
 	}
 }

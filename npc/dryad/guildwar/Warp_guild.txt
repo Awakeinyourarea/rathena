@@ -83,4 +83,4 @@ end;
 
 //====================================================
 //morocc,152,81,5	duplicate(guild_main)	«“√Ïª°‘≈¥Ï«Õ√Ï#00	461 
-mainlounge,46,187,3	duplicate(guild_main)	«“√Ïª°‘≈¥Ï«Õ√Ï#101	418 
+mainlounge,46,187,3	duplicate(guild_main)	«“√Ïª°‘≈¥Ï«Õ√Ï#101	10304 
