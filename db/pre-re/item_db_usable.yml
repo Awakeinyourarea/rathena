@@ -22101,6 +22101,181 @@ Body:
       Third_Upper: true
       Third_Baby: true
     EquipLevelMin: 1
+  - Id: 30002
+    AegisName: Special_Auto_Potion
+    Name: Special Auto Potion
+    Type: Usable
+    Flags:
+      NoConsume: true
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      TradePartner: true
+      NoSell: true
+      NoMail: true
+    Script: |
+      callfunc("autopot");
+  - Id: 30003
+    AegisName: Battle_PassRO
+    Name: Battle Pass
+    Type: Usable
+    Weight: 1
+    Flags:
+      NoConsume: true
+    Stack:
+      Amount: 1
+      Inventory: true
+    Trade:
+      Override: 100
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 30004
+    AegisName: Battle_Vigor
+    Name: Vigor of Battle
+    Type: Usable
+    Weight: 1
+    Flags:
+      NoConsume: true
+  - Id: 30005
+    AegisName: Battle_Vigor_Rare
+    Name: Rare Vigor of Battle
+    Type: Usable
+    Weight: 1
+    Flags:
+      NoConsume: true
+  - Id: 30006
+    AegisName: Battle_Vigor_Epic
+    Name: Epic Vigor of Battle
+    Type: Usable
+    Weight: 1
+    Flags:
+      NoConsume: true
+  - Id: 30015
+    AegisName: Cash_Coin
+    Name: Cash Coin
+    Type: Usable
+    Script: |
+      .@p = 1;
+      .@i = 30015;
+      dispbottom "[ เนเธเธเธฐเธเนเธเธ ] : เนเธเธเนเธเธเนเธเธเธฑเธ "+ callfunc("F_InsertComma",(countitem(.@i)*(.@p)+(.@p))) +" Cash Points";
+      #CASHPOINTS += (countitem(.@i)*(.@p)+(.@p));
+      delitem .@i,countitem(.@i);
+      dispbottom "[ เนเธเธเธฐเธเนเธเธ ] : เนเธเธเธธเธ“เนเธเธเธตเธ—เนเธเธเนเธเธเนเธเธเนเธเธเนเธเธ "+ callfunc("F_InsertComma",#CASHPOINTS) +" Cash Points";
+  - Id: 30016
+    AegisName: Poring_Coin_Box _1000
+    Name: Poring Coin Box 1000
+    Type: Usable
+    Script: |
+      getitem 7539,1000;
+  - Id: 30017
+    AegisName: 50_Bloody_Branch_Box
+    Name: 50 Bloody Branch Box
+    Type: Usable
+    Script: |
+      getitem 12103,50;
+  - Id: 30018
+    AegisName: Mission_KvM_50_Point
+    Name: Mission KvM 50 Point
+    Type: Usable
+    Script: |
+      .@p = 50;
+      .@i = 30018;
+      dispbottom "[ เนเธเธเธฐเธเนเธเธ ] : เนเธเธเนเธเธเนเธเธเธฑเธ "+ callfunc("F_InsertComma",(countitem(.@i)*(.@p)+(.@p))) +" Mission Points";
+      #Mission_Points += (countitem(.@i)*(.@p)+(.@p));
+      delitem .@i,countitem(.@i);
+      dispbottom "[ เนเธเธเธฐเธเนเธเธ ] : เนเธเธเธธเธ“เนเธเธเธตเธ—เนเธเธเนเธเธเนเธเธเนเธเธเนเธเธ "+ callfunc("F_InsertComma",#Mission_Points) +" Mission Points";
+  - Id: 30019
+    AegisName: Equip_Private_Scroll
+    Name: Equip Private Scroll
+    Type: Usable
+    Script: |
+      if (#PRIVATE_VIEWEQUIP) {
+        dispbottom "[ เนเธเธเธฐเธเนเธเธ ] : เนเธเธเธธเธ“เนเธเธเนเธเธเนเธเธเนเธเธ Equip Private Scroll เนเธเธเนเธเธเนเธเธเนเธเธ.";
+        getitem 30019,1;
+      }
+      else {
+        dispbottom "[ เนเธเธเธฐเธเนเธเธ ] : เนเธเธเธธเธ“เนเธเธเนเธเธ Equip Private Scroll เนเธเธเนเธเธเนเธเธเนเธเธเธฃเธ– เนเธเธเธดเธ”/เนเธเธเธดเธ” เธซเธเนเธเธเธฒเธ•เนเธเธเธฒเธเนเธเธเนเธเธเนเธเธเนเธเธเนเธเธเนเธเธเนเธเธเนเธเธเนเธเธเนเธเธเนเธเธเนเธเธ.";
+        set #PRIVATE_VIEWEQUIP, 1;
+      }
+  - Id: 30020
+    AegisName: Alchemist_Scroll
+    Name: Alchemist Scroll
+    Type: Usable
+    Weight: 10
+    Script: |
+      sc_start SC_CP_WEAPON,180000,10;
+      sc_start SC_CP_SHIELD,180000,10;
+      sc_start SC_CP_ARMOR,180000,10;
+      sc_start SC_CP_HELM,180000,10;
+      atcommand "@displayskill 479 10 3";
+  - Id: 30021
+    AegisName: Soul_Linker_Scroll
+    Name: Soul Linker Scroll
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("BuffsSoulLinker");
+  - Id: 30022
+    AegisName: Pet_Friendly_Scroll
+    Name: Pet Friendly Scroll
+    Type: Usable
+    Weight: 10
+    Script: |
+      atcommand "@petfriendly 1000";
+  - Id: 30023
+    AegisName: Crimson_Fire_Petal_(Stalker)
+    Name: Crimson Fire Petal (Stalker)
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("Crimson_Fire_Petal");
+  - Id: 30024
+    AegisName: Spear_of_Ice_(Stalker)
+    Name: Spear of Ice (Stalker)
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("Spear_of_Ice");
+  - Id: 30025
+    AegisName: First_Wind_(Stalker)
+    Name: First Wind (Stalker)
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("Kamaitachi");
+  - Id: 30026
+    AegisName: Lightning_Jolt_(Stalker)
+    Name: Lightning Jolt (Stalker)
+    Type: Usable
+    Weight: 10
+    Script: |
+      callfunc("Lightning_Strike_of_Destruction");
+  - Id: 30081
+    AegisName: Bonus_Coin
+    Name: Bonus Coin
+    Type: Usable
+  - Id: 30241
+    AegisName: Refine_Option_Reset
+    Name: Refine Option Reset
+    Type: Usable
+    Buy: 2
+    Weight: 10
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      callfunc "shadowenchant";
   - Id: 30242
     AegisName: Rank_Status
     Name: Rank Status
@@ -22136,7 +22311,7 @@ Body:
     Type: Usable
     Weight: 10
     Script: |
-      callfunc("RankStatusPoint",10000);      
+      callfunc("RankStatusPoint",10000);
   - Id: 30246
     AegisName: Rank_Status_50000
     Name: Rank Status 50000
@@ -22157,4 +22332,5 @@ Body:
     Type: Usable
     Weight: 10
     Script: |
+      callfunc("RankStatusPoint",30200000);
       callfunc("RankStatusPoint",30200000);

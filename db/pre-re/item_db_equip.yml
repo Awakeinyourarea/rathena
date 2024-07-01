@@ -41075,3 +41075,3958 @@ Body:
     ArmorLevel: 1
     EquipLevelMin: 1
     View: 654
+  - Id: 30007
+    AegisName: Light_Elf_Ears
+    Name: Light Elf Ears
+    Type: Armor
+    Weight: 1
+    Locations:
+      Costume_Head_Mid: true
+    Flags:
+      NoConsume: true
+    EquipScript: |
+      callfunc "TransformToRaceFantasy",2;
+    UnEquipScript: |
+      callfunc "TransformToHuman";
+  - Id: 30008
+    AegisName: Dark_Elf_Ears
+    Name: Dark Elf Ears
+    Type: Armor
+    Weight: 1
+    Locations:
+      Costume_Head_Mid: true
+    Flags:
+      NoConsume: true
+    EquipScript: |
+      callfunc "TransformToRaceFantasy",1;
+    UnEquipScript: |
+      callfunc "TransformToHuman";
+  - Id: 30009
+    AegisName: Vampire_Ears
+    Name: Vampire Ears
+    Type: Armor
+    Weight: 1
+    Locations:
+      Costume_Head_Mid: true
+    Flags:
+      NoConsume: true
+    EquipScript: |
+      callfunc "TransformToRaceFantasy",5;
+    UnEquipScript: |
+      callfunc "TransformToHuman";
+  - Id: 30010
+    AegisName: Beast_Ears
+    Name: Beast Ears
+    Type: Armor
+    Weight: 1
+    Locations:
+      Costume_Head_Mid: true
+    Flags:
+      NoConsume: true
+    EquipScript: |
+      callfunc "TransformToRaceFantasy",6;
+    UnEquipScript: |
+      callfunc "TransformToHuman";
+  - Id: 30011
+    AegisName: Marines_Ears
+    Name: Marines Ears
+    Type: Armor
+    Weight: 1
+    Locations:
+      Costume_Head_Mid: true
+    Flags:
+      NoConsume: true
+    EquipScript: |
+      callfunc "TransformToRaceFantasy",3;
+    UnEquipScript: |
+      callfunc "TransformToHuman";
+  - Id: 30012
+    AegisName: Orc_Ears
+    Name: Orc Ears
+    Type: Armor
+    Weight: 1
+    Locations:
+      Costume_Head_Mid: true
+    Flags:
+      NoConsume: true
+    EquipScript: |
+      callfunc "TransformToRaceFantasy",4;
+    UnEquipScript: |
+      callfunc "TransformToHuman";
+  - Id: 30013
+    AegisName: Demon_Horns
+    Name: Demon Horns
+    Type: Armor
+    Weight: 1
+    Locations:
+      Costume_Head_Mid: true
+    Flags:
+      NoConsume: true
+    EquipScript: |
+      callfunc "TransformToRaceFantasy",8;
+    UnEquipScript: |
+      callfunc "TransformToHuman";
+  - Id: 30014
+    AegisName: Dragon_Horns
+    Name: Dragon Horns
+    Type: Armor
+    Weight: 1
+    Locations:
+      Costume_Head_Mid: true
+    Flags:
+      NoConsume: true
+    Script: |
+      bonus2 bDropAddRace,rc_all,100;
+      bonus2 bDropAddClass,class_all,50;
+    EquipScript: |
+      callfunc "TransformToRaceFantasy",7;
+    UnEquipScript: |
+      callfunc "TransformToHuman";
+  - Id: 30027
+    AegisName: Break_Heart
+    Name: Break Heart
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus bMaxHPrate,3;
+      bonus bMaxSP,80;
+  - Id: 30028
+    AegisName: Prophet_Crow
+    Name: Prophet Crow
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus bDex,1;
+      bonus bMatkRate,5;
+  - Id: 30029
+    AegisName: God_Shield
+    Name: God Shield
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus bDex,1;
+      bonus bLongAtkRate,3;
+  - Id: 30030
+    AegisName: Angel_Necklace
+    Name: Angel Necklace
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bAddRace,RC_DemiHuman,3;
+      bonus2 bAddRace,RC_Player_Human,3;
+      bonus bBaseAtk,10;
+  - Id: 30031
+    AegisName: Gold_Rocket
+    Name: Gold Rocket
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bAddClass,Class_Boss,5;
+      bonus bMaxSPrate,5;
+      bonus bStr,2;
+  - Id: 30032
+    AegisName: Blood_Ring
+    Name: Blood Ring
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bSkillAtk,"AS_SONICBLOW",5;
+      bonus bStr,2;
+  - Id: 30033
+    AegisName: Old_Coin
+    Name: Old Coin
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bSkillAtk,"MO_EXTREMITYFIST",5;
+      bonus bStr,2;
+  - Id: 30034
+    AegisName: Evil_Eye
+    Name: Evil Eye
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bSkillAtk,"KN_BOWLINGBASH",5;
+      bonus bStr,2;
+  - Id: 30035
+    AegisName: Occult_Incense
+    Name: Occult Incense
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus bCritical,10;
+      bonus bBaseAtk,10;
+  - Id: 30036
+    AegisName: Gold_Sword
+    Name: Gold Sword
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bSkillAtk,"AC_DOUBLE",5;
+      bonus bDex,1;
+  - Id: 30037
+    AegisName: Red_Shield
+    Name: Red Shield
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus bHit,15;
+      bonus bAspdRate,4;
+  - Id: 30038
+    AegisName: Robot_Engine
+    Name: Robot Engine
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bSkillAtk,"MO_FINGEROFFENSIVE",5;
+      bonus bDex,1;
+  - Id: 30039
+    AegisName: Robot_Glove
+    Name: Robot Glove
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bSkillAtk,"AS_GRIMTOOTH",5;
+      bonus bAspdRate,5;
+  - Id: 30040
+    AegisName: Shaman_Ring
+    Name: Shaman Ring
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bSkillAtk,"CG_ARROWVULCAN",5;
+      bonus bDex,1;
+      bonus bInt,1;
+  - Id: 30041
+    AegisName: Academy_Of_Badge
+    Name: Academy Of Badge
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus2 bSkillAtk,"WS_CARTTERMINATION",5;
+      bonus bAspdRate,5;
+  - Id: 30042
+    AegisName: Ancient_Ring
+    Name: Ancient Ring
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus bFlee,15;
+      bonus bHit,10;
+  - Id: 30043
+    AegisName: Navel_Ring
+    Name: Navel Ring
+    Type: Armor
+    Defense: 1
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus bDelayrate,-5;
+      bonus bAllStats,1;
+  - Id: 30044
+    AegisName: Feather_In_Mouth
+    Name: Feather In Mouth
+    Type: Armor
+    View: 2299
+    Buy: 20
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bInt,3;
+      bonus bDex,1;
+      bonus bMatkRate,5;
+  - Id: 30045
+    AegisName: Costume_Love_Dad_Hat
+    Name: "Costume : Love Dad Hat"
+    Type: Armor
+    View: 2300
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30046
+    AegisName: Costume_Cat_Santa_Hat
+    Name: Costume Cat Santa Hat
+    Type: Armor
+    View: 1144
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30048
+    AegisName: Costume_Gram_Peony
+    Name: Costume Gram Peony
+    Type: Armor
+    View: 1453
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30049
+    AegisName: Costume_Crown_of_Strawberry
+    Name: Costume Crown of Strawberry
+    Type: Armor
+    View: 1455
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30051
+    AegisName: Costume_Sky_of_Memory
+    Name: Costume Sky of Memory
+    Type: Armor
+    View: 1454
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30052
+    AegisName: Costume_Classical_Feather_Hat
+    Name: Costume Classical Feather Hat
+    Type: Armor
+    View: 1381
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30053
+    AegisName: Costume_Face_Crusher
+    Name: Costume Face Crusher
+    Type: Armor
+    View: 1341
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30054
+    AegisName: Costume_Summer_Hat
+    Name: Costume Summer Hat
+    Type: Armor
+    View: 1369
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30055
+    AegisName: Costume_RJC_Flower
+    Name: Costume RJC Flower
+    Type: Armor
+    View: 2301
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30056
+    AegisName: Costume_RWC_Indonesia_Hat
+    Name: Costume RWC Indonesia Hat
+    Type: Armor
+    View: 678
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+  - Id: 30057
+    AegisName: Costume_Happy_Lunatic_Ears
+    Name: Costume Happy Lunatic Ears
+    Type: Armor
+    View: 1340
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30058
+    AegisName: Costume_Black_Glasses
+    Name: Costume Black Glasses
+    Type: Armor
+    View: 1255
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30059
+    AegisName: Costume_Red_Glasses
+    Name: Costume Red Glasses
+    Type: Armor
+    View: 1332
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30060
+    AegisName: Costume_Protect_Feather
+    Name: Costume Protect Feather
+    Type: Armor
+    View: 1232
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30061
+    AegisName: Costume_Yellow_Magenta_Ribbon
+    Name: Costume Yellow Magenta Ribbon
+    Type: Armor
+    View: 1474
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30062
+    AegisName: Costume_Madam_Glasses
+    Name: Costume Madam Glasses
+    Type: Armor
+    View: 925
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30063
+    AegisName: Costume_Heart_Pink_Eyebandge
+    Name: Costume Heart Eye Patch
+    Type: Armor
+    View: 697
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30064
+    AegisName: Costume_Fallen_Angel_Wing_Ears
+    Name: Costume Fallen Angel Wing Ears
+    Type: Armor
+    View: 1662
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30066
+    AegisName: Costume_Twin_Margaret
+    Name: Costume Twin Margaret
+    Type: Armor
+    View: 1472
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30067
+    AegisName: Costume_OpenAir_Headset
+    Name: Costume OpenAir Headset
+    Type: Armor
+    View: 1655
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+  - Id: 30068
+    AegisName: Costume_Aqua_Spell
+    Name: Costume Aqua Spell
+    Type: Armor
+    View: 1451
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30069
+    AegisName: Costume_Love_Dad_Balloon
+    Name: Costume Love Dad Balloon
+    Type: Armor
+    View: 1307
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30070
+    AegisName: Costume_I_Love_Game_Hat
+    Name: Costume I Love Game Hat
+    Type: Armor
+    View: 1306
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30071
+    AegisName: Costume_Little_Aquarium
+    Name: Costume Little Aquarium
+    Type: Armor
+    View: 1363
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30072
+    AegisName: Costume_Onion_In_Mouth
+    Name: Costume Onion In Mouth
+    Type: Armor
+    View: 824
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30073
+    AegisName: Costume_Candy_Cane_In_Mouth
+    Name: Costume Candy Cane In Mouth
+    Type: Armor
+    View: 446
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30074
+    AegisName: Costume_Cherry_Twig_In_Mouth
+    Name: Costume Cherry Twig In Mouth
+    Type: Armor
+    View: 823
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30075
+    AegisName: Costume_Pencil_In_Mouth
+    Name: Costume Pencil In Mouth
+    Type: Armor
+    View: 931
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30076
+    AegisName: Costume_Barbecue
+    Name: Costume Barbecue
+    Type: Armor
+    View: 855
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30077
+    AegisName: Costume_Cloth_Mess
+    Name: Costume Cloth Mess
+    Type: Armor
+    View: 818
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+  - Id: 30078
+    AegisName: Various_Manteau
+    Name: Various Manteau
+    Type: Armor
+    Buy: 10
+    Defense: 4
+    Slots: 1
+    Jobs:
+      Alchemist: true
+      Assassin: true
+      Blacksmith: true
+      Crusader: true
+      Knight: true
+      Merchant: true
+      Ninja: true
+      Rogue: true
+      StarGladiator: true
+      Swordman: true
+      Taekwon: true
+      Thief: true
+    Locations:
+      Garment: true
+    ArmorLevel: 1
+    EquipLevelMin: 80
+    Refineable: true
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus2 bSubRace,RC_DemiHuman,3;
+      bonus2 bSubRace,RC_Player_Human,3;
+      bonus2 bAddClass,Class_All,6;
+      bonus bAspdRate,2;
+      bonus bMaxHPrate,3;
+      bonus bMdef,1;
+  - Id: 30079
+    AegisName: Diverse_Manteau
+    Name: Diverse Manteau
+    Type: Armor
+    Buy: 10
+    Defense: 4
+    Slots: 1
+    Jobs:
+      Alchemist: true
+      Assassin: true
+      Blacksmith: true
+      Crusader: true
+      Knight: true
+      Merchant: true
+      Ninja: true
+      Rogue: true
+      StarGladiator: true
+      Swordman: true
+      Taekwon: true
+      Thief: true
+    Locations:
+      Garment: true
+    ArmorLevel: 1
+    EquipLevelMin: 80
+    Refineable: true
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus2 bSubRace,RC_DemiHuman,3;
+      bonus2 bSubRace,RC_Player_Human,3;
+      bonus2 bAddClass,Class_All,6;
+      bonus bAspdRate,2;
+      bonus bMaxHPrate,3;
+      bonus bMdef,1;
+  - Id: 30080
+    AegisName: Drag_Manteau
+    Name: Drag Manteau
+    Type: Armor
+    Buy: 10
+    Defense: 4
+    Slots: 1
+    Jobs:
+      Alchemist: true
+      Assassin: true
+      Blacksmith: true
+      Crusader: true
+      Knight: true
+      Merchant: true
+      Ninja: true
+      Rogue: true
+      StarGladiator: true
+      Swordman: true
+      Taekwon: true
+      Thief: true
+    Locations:
+      Garment: true
+    ArmorLevel: 1
+    EquipLevelMin: 80
+    Refineable: true
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus2 bSubRace,RC_DemiHuman,3;
+      bonus2 bSubRace,RC_Player_Human,3;
+      bonus2 bAddClass,Class_All,6;
+      bonus bAspdRate,2;
+      bonus bMaxHPrate,3;
+      bonus bMdef,1;
+      bonus bMaxSPrate,(BaseLevel/2)+getrefine()*10;
+  - Id: 15051
+    AegisName: Bakonawa_Armor
+    Name: Bakunawa Scale Armor
+    Type: Armor
+    Buy: 20
+    Weight: 500
+    Defense: 5
+    Slots: 1
+    Locations:
+      Armor: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    Script: |
+      bonus2 bAddClass,Class_Boss,getrefine()*2;
+      bonus2 bAddClass,Class_Boss,10;
+      bonus bAllStats,1;
+  - Id: 2491
+    AegisName: Bangungot_Boots
+    Name: Bangungot Boots of Nightmare
+    Type: Armor
+    Buy: 20
+    Weight: 600
+    Defense: 10
+    Locations:
+      Shoes: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    Script: |
+      .@r = getrefine();
+      bonus bMdef,.@r;
+      if (.@r>=10) {
+        bonus bSpeedRate,25;
+      }
+  - Id: 2492
+    AegisName: Bayani_Bangungot_Boots
+    Name: Bayani Bangungot Boots of Nightmare
+    Type: Armor
+    Buy: 20
+    Weight: 600
+    Defense: 10
+    Slots: 1
+    Locations:
+      Shoes: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    Script: |
+      .@r = getrefine();
+      bonus bMdef,.@r;
+      if (.@r>=10) {
+        bonus bSpeedRate,25;
+      }
+  - Id: 18509
+    AegisName: RWC2010_Indonesia
+    Name: RWC2010 Indonesia
+    Type: Armor
+    View: 678
+    Buy: 20
+    Weight: 100
+    Defense: 6
+    Slots: 1
+    Jobs:
+      All: true
+      Novice: false
+      SuperNovice: false
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 15
+    Refineable: true
+    Script: |
+      bonus bLuk,5;
+      bonus2 bSubRace,RC_Player_Human,10;
+      bonus2 bSubRace,RC_DemiHuman,10;
+      bonus2 bAddItemHealRate,501,100;
+      bonus2 bAddItemHealRate,504,100;
+      bonus bCritical,10;
+      bonus bAspd,1;
+      bonus2 bAddClass,Class_All,3;
+      bonus bMatkRate,3;
+      .@r = getrefine();
+      if (.@r>=8) {
+        bonus bAddItemHealRate,5;
+        bonus bAddItemSPHealRate,5;
+      }
+      if (.@r>=9) {
+        bonus bBaseAtk,10;
+        bonus2 bSubEle,Ele_All,2;
+        bonus bMaxHPrate,3;
+        bonus bAddItemHealRate,5;
+        bonus bAddItemSPHealRate,5;
+      }
+      if (.@r>=10) {
+        bonus bBaseAtk,15;
+        bonus2 bAddClass,Class_All,3;
+        bonus bLongAtkDef,2;
+        bonus2 bSubRace,RC_Player_Human,2;
+        bonus2 bSubRace,RC_DemiHuman,2;
+        bonus bAddItemHealRate,5;
+        bonus bAddItemSPHealRate,5;
+      }
+  - Id: 18550
+    AegisName: Asgard_Blessing
+    Name: Asgard Blessing
+    Type: Armor
+    Buy: 20
+    Weight: 300
+    Defense: 3
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 30
+    Refineable: true
+    View: 724
+    Script: |
+      bonus bAllStats,2;
+      bonus2 bSubEle,Ele_All,5;
+      bonus2 bRegenPercentHP,2,10000;
+      bonus2 bRegenPercentSP,1,10000;
+  - Id: 5875
+    AegisName: Diadem_Of_Bruenhild
+    Name: Diadem Of Bruenhild
+    Type: Armor
+    View: 1057
+    Buy: 20
+    Defense: 5
+    Slots: 1
+    Jobs:
+      Alchemist: true
+      Blacksmith: true
+      Crusader: true
+      Knight: true
+      Merchant: true
+      Swordman: true
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 60
+    Refineable: true
+    Script: |
+      bonus bStr,2;
+      bonus bDex,2;
+      bonus2 bSubRace,RC_DemiHuman,10;
+      bonus2 bSubRace,RC_Player_Human,10;
+      bonus bMaxHPrate,getrefine()*2;
+      bonus bMaxSPrate,getrefine()*1;
+      .@r = getrefine();
+      if (.@r>=7) {
+        bonus2 bAddRace,RC_DemiHuman,2;
+        bonus2 bAddRace,RC_Player_Human,2;
+      }
+      if (.@r>=8) {
+        bonus2 bAddRace,RC_DemiHuman,2;
+        bonus2 bAddRace,RC_Player_Human,2;
+      }
+      if (.@r>=9) {
+        bonus2 bAddRace,RC_DemiHuman,2;
+        bonus2 bAddRace,RC_Player_Human,2;
+        bonus bAspdRate,3;
+      }
+      if (.@r>=10) {
+        bonus2 bAddSize,Size_All,3;
+        bonus bMaxHPrate,5;
+      }
+  - Id: 5737
+    AegisName: Muka_Hat
+    Name: Muka Hat
+    Type: Armor
+    View: 615
+    Buy: 20
+    Defense: 5
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    Script: |
+      bonus bInt,2;
+      bonus bVit,2;
+      bonus2 bSubRace,RC_DemiHuman,10;
+      bonus2 bSubRace,RC_Player_Human,10;
+      bonus bMaxHPrate,getrefine()*2;
+      bonus bMaxSPrate,getrefine()*1;
+      .@r = getrefine();
+      if (.@r>=7) {
+        bonus bLongAtkDef,1;
+        bonus bNearAtkDef,1;
+      }
+      if (.@r>=8) {
+        bonus bLongAtkDef,1;
+        bonus bNearAtkDef,1;
+      }
+      if (.@r>=9) {
+        bonus2 bAddRace,RC_DemiHuman,2;
+        bonus2 bAddRace,RC_Player_Human,2;
+        bonus bInt,2;
+      }
+      if (.@r>=10) {
+        bonus2 bAddSize,Size_All,3;
+        bonus bMaxHPrate,3;
+        bonus2 bSubSkill,271,4;
+      }
+  - Id: 5738
+    AegisName: Snowman_Hat
+    Name: Snowman Hat
+    Type: Armor
+    Buy: 20
+    Weight: 300
+    Defense: 4
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    View: 616
+    Trade:
+      NoDrop: true
+    Script: |
+      bonus bStr,1;
+      bonus bInt,1;
+      bonus bMdef,3;
+      bonus2 bSubEle,Ele_Water,7;
+      bonus2 bAddMonsterDropItem,12354,100;
+      bonus2 bAddMonsterDropItem,530,300;
+      bonus5 bAutoSpellWhenHit,"BA_FROSTJOKER",(getrefine()>7?5:1),20,BF_WEAPON|BF_MAGIC,0;
+  - Id: 5776
+    AegisName: Blazing_Sun
+    Name: Blazing Sun
+    Type: Armor
+    View: 654
+    Defense: 5
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    Script: |
+      bonus bVit,2;
+      bonus bDex,2;
+      bonus2 bSubRace,RC_DemiHuman,10;
+      bonus2 bSubRace,RC_Player_Human,10;
+      bonus bMaxHPrate,getrefine()*2;
+      bonus bMaxSPrate,getrefine()*1;
+      .@r = getrefine();
+      if (.@r>=7) {
+        bonus bLongAtkDef,1;
+        bonus bNearAtkDef,1;
+      }
+      if (.@r>=8) {
+        bonus bLongAtkDef,1;
+        bonus bNearAtkDef,1;
+      }
+      if (.@r>=9) {
+        bonus2 bAddRace,RC_DemiHuman,2;
+        bonus2 bAddRace,RC_Player_Human,2;
+        bonus bMaxHPrate,3;
+      }
+      if (.@r>=10) {
+        bonus2 bAddSize,Size_All,3;
+        bonus bMaxHPrate,4;
+      }
+      bonus bUseSPrate,5;
+  - Id: 5611
+    AegisName: Turtle_Hat
+    Name: Turtle Hat
+    Type: Armor
+    View: 585
+    Defense: 3
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 10
+    Refineable: true
+    Script: |
+      bonus2 bResEff,Eff_Stun,3000;
+      bonus bMaxHP,500;
+      bonus bInt,1;
+      bonus3 bAutoSpellWhenHit,"AL_DECAGI",3,5;
+  - Id: 18960
+    AegisName: Gold_Flying_Angel_Wing
+    Name: Gold Flying Angel Wing
+    Type: Armor
+    View: 1104
+    Buy: 10
+    Weight: 10
+    Defense: 5
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    Refineable: true
+    Script: |
+      .@r = getrefine();
+      bonus2 bAddClass,Class_All,getrefine()*4;
+      bonus bMatkRate,getrefine()*4;
+      bonus bAspdRate,5;
+      bonus bCastrate,-5;
+      bonus2 bAddClass,Class_Boss,10;
+      if (.@r>=7) {
+        bonus bShortAtkRate,1;
+      }
+      if (.@r>=8) {
+        bonus bShortAtkRate,1;
+        bonus bBaseAtk,10;
+        bonus2 bDropAddRace,RC_All,5;
+      }
+      if (.@r>=9) {
+        bonus bShortAtkRate,3;
+        bonus bMaxSPrate,5;
+        bonus bAspdRate,3;
+      }
+      if (.@r>=10) {
+        bonus bShortAtkRate,5;
+        bonus bLongAtkRate,5;
+        bonus bAspdRate,5;
+        bonus bBaseAtk,15;
+      }
+      bonus bSpeedRate,50;
+  - Id: 19050
+    AegisName: Nidhoggur_and_Loki_Hat
+    Name: Nidhoggur and Loki Hat
+    Type: Armor
+    View: 1304
+    Weight: 100
+    Defense: 6
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    Script: |
+      bonus2 bAddSize,Size_All,10;
+      bonus bMaxHPrate,5;
+      bonus2 bSubRace,RC_DemiHuman,5;
+      bonus2 bSubRace,RC_Player_Human,5;
+      bonus bMaxHPrate,getrefine()*2;
+      bonus bMaxSPrate,getrefine()*1;
+      .@r = getrefine();
+      if (.@r>=7) {
+        bonus2 bAddSize,Size_All,1;
+      }
+      if (.@r>=8) {
+        bonus2 bAddSize,Size_All,1;
+        bonus2 bSubRace,RC_DemiHuman,2;
+        bonus2 bSubRace,RC_Player_Human,2;
+      }
+      if (.@r>=9) {
+        bonus2 bAddSize,Size_All,3;
+        bonus bMaxHPrate,3;
+      }
+      if (.@r>=10) {
+        bonus2 bAddSize,Size_All,3;
+        bonus bMaxHPrate,5;
+        bonus2 bSkillAtk,CR_DEVOTION,4;
+      }
+  - Id: 19051
+    AegisName: Moon_Cat_Warrior
+    Name: Warrior Moon Cat
+    Type: Armor
+    Buy: 20
+    Weight: 100
+    Defense: 5
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    View: 1308
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      /* skill "ALL_CATCRY",1; */
+      .@r = getrefine();
+      bonus2 bHPDrainRate,40,5+.@r/3;
+      bonus2 bSPDrainRate,10,2+.@r/5;
+      bonus bAllStats,3;
+  - Id: 5766
+    AegisName: Amistr_Cap
+    Name: Amistr Cap
+    Type: Armor
+    View: 643
+    Buy: 20
+    Weight: 500
+    Defense: 5
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    Trade:
+      Override: 100
+      NoDrop: true
+    Script: |
+      bonus2 bAddRace,RC_DemiHuman,10;
+      bonus2 bAddRace,RC_Player_Human,10;
+      bonus bBaseAtk,getrefine()*14;
+      .@r = getrefine();
+      if (.@r>=7) {
+        bonus bShortAtkRate,1;
+      }
+      if (.@r>=8) {
+        bonus bShortAtkRate,1;
+        bonus bBaseAtk,5;
+      }
+      if (.@r>=9) {
+        bonus bShortAtkRate,3;
+        bonus bBaseAtk,7;
+        bonus bMaxSP,7;
+      }
+      if (.@r>=10) {
+        bonus bBaseAtk,10;
+        bonus bShortAtkRate,4;
+        bonus bLongAtkRate,4;
+        bonus bAspdRate,3;
+        bonus bMaxHPrate,3;
+      }
+  - Id: 18618
+    AegisName: Airplane_Hat
+    Name: Airplane Hat
+    Type: Armor
+    View: 775
+    Buy: 20
+    Weight: 500
+    Defense: 5
+    Slots: 1
+    Jobs:
+      All: true
+      Novice: false
+      SuperNovice: false
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 50
+    Refineable: true
+    Script: |
+      bonus bLongAtkRate,5;
+      bonus2 bAddRace,RC_DemiHuman,8;
+      bonus2 bAddRace,RC_Player_Human,8;
+      bonus bBaseAtk,getrefine()*4;
+      .@r = getrefine();
+      if (.@r>=7) {
+        bonus bLongAtkRate,2;
+      }
+      if (.@r>=8) {
+        bonus bLongAtkRate,2;
+        bonus bBaseAtk,10;
+      }
+      if (.@r>=9) {
+        bonus bLongAtkRate,2;
+        bonus2 bAddSize,Size_Medium,3;
+        bonus2 bSubSkill,CR_ACIDDEMONSTRATION,4;
+      }
+      if (.@r>=10) {
+        bonus bLongAtkRate,5;
+        bonus bBaseAtk,10;
+        bonus bAspdRate,3;
+        bonus bMaxHPrate,3;
+      }
+  - Id: 20069
+    AegisName: Flying_Falcon_Eyes
+    Name: Flying Falcon Eyes ( PvP )
+    Type: Armor
+    View: 1233
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Script: |
+      skill "SN_SIGHT",1;
+  - Id: 18894
+    AegisName: Rainbow_Star
+    Name: Rainbow Star
+    Type: Armor
+    View: 1019
+    Weight: 500
+    Slots: 1
+    Locations:
+      Head_Mid: true
+    ArmorLevel: 1
+    EquipLevelMin: 70
+    Script: |
+      bonus bInt,2;
+      bonus bDex,1;
+      bonus2 bSkillAtk,CR_ACIDDEMONSTRATION,2;
+      bonus2 bSubRace,RC_Player_Human,5;
+  - Id: 18599
+    AegisName: Black_Devil_Mask
+    Name: Black Devil Mask
+    Type: Armor
+    View: 760
+    Buy: 20
+    Locations:
+      Head_Mid: true
+    ArmorLevel: 1
+    Trade:
+      Override: 100
+      NoDrop: true
+    Script: |
+      bonus bHit,25;
+      bonus bBaseAtk,20;
+      bonus bAspd,1;
+      bonus bStr,2;
+      bonus bAllStats,2;
+  - Id: 5820
+    AegisName: Black_Elven_Ear
+    Name: Black Elven Ear
+    Type: Armor
+    View: 498
+    Buy: 10
+    Weight: 100
+    Slots: 1
+    Locations:
+      Head_Mid: true
+    ArmorLevel: 1
+    EquipLevelMin: 10
+    Script: |
+      bonus bBaseAtk,15;
+      bonus2 bAddClass,Class_Boss,10;
+      bonus bMaxSP,50;
+  - Id: 18642
+    AegisName: Hand_Scissorhand_Model
+    Name: Hand Scissorhand Model
+    Type: Armor
+    View: 795
+    Buy: 20
+    Weight: 200
+    Jobs:
+      All: true
+      Novice: false
+      SuperNovice: false
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 20
+    Script: |
+      bonus2 bAddClass,Class_All,12;
+      bonus2 bAddRace,RC_DemiHuman,4;
+      bonus2 bAddRace,RC_Player_Human,4;
+      bonus bAspdRate,3;
+      bonus bAgi,1;
+  - Id: 18900
+    AegisName: Weisswurst
+    Name: Weisswurst
+    Type: Armor
+    View: 1022
+    Buy: 20
+    Weight: 100
+    Defense: 1
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 60
+    Script: |
+      bonus bInt,2;
+      bonus bDex,1;
+      bonus2 bSkillAtk,CR_ACIDDEMONSTRATION,2;
+      bonus bMaxHP,50;
+  - Id: 18867
+    AegisName: Vajra
+    Name: Vajra
+    Type: Armor
+    View: 983
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bBaseAtk,8;
+      bonus bHit,8;
+      bonus bLongAtkRate,2;
+  - Id: 18677
+    AegisName: Cherry_Twig_In_Mouth
+    Name: Cherry Twig In Mouth
+    Type: Armor
+    View: 823
+    Buy: 20
+    Weight: 10
+    Jobs:
+      All: true
+      Novice: false
+      SuperNovice: false
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bBaseAtk,8;
+      bonus bFlee,8;
+  - Id: 18648
+    AegisName: Tongue_Charm
+    Name: Tongue Charm
+    Type: Armor
+    View: 801
+    Buy: 20
+    Weight: 100
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Script: |
+      bonus bDex,1;
+      bonus bVit,1;
+      bonus2 bSubRace,RC_DemiHuman,3;
+      bonus2 bSubRace,RC_Player_Human,3;
+      bonus2 bSubRace,RC_Demon,3;
+  - Id: 18602
+    AegisName: Watermelon_Slice
+    Name: Watermelon Bite
+    Type: Armor
+    View: 763
+    Buy: 20
+    Weight: 100
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 30
+    Script: |
+      bonus bInt,2;
+      bonus bDex,1;
+  - Id: 18750
+    AegisName: Poker_Card_In_Mouth
+    Name: Poker Card In Mouth
+    Type: Armor
+    View: 889
+    Buy: 20
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 10
+    Script: |
+      bonus bDelayRate,-5;
+      bonus bAllStats,1;
+      bonus bMatkRate,3;
+      bonus bBaseAtk,5;
+      bonus2 bAddRace,RC_Player_Human,2;
+  - Id: 13088
+    AegisName: Glorious_Kurenai
+    Name: Glorious Kurenai
+    Type: Weapon
+    SubType: Dagger
+    Buy: 10
+    Weight: 500
+    Attack: 110
+    MagicAttack: 50
+    Jobs:
+      KagerouOboro: true
+      Ninja: true
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 4
+    EquipLevelMin: 30
+    Refineable: true
+    Script: |
+      bonus bMatkRate,10;
+      bonus bMatk,50;
+      bonus bAspdRate,10;
+      .@r = getrefine();
+      if (.@r >= 9) {
+        bonus bAllStats,1;
+        bonus bAspdRate,5;
+        bonus2 bIgnoreMdefRaceRate,RC_DemiHuman,15;
+        bonus2 bIgnoreMdefRaceRate,RC_Player_Human,15;
+      }
+      bonus bMatk,50;
+  - Id: 2189
+    AegisName: Mad_Bunny
+    Name: Mad Bunny Shield
+    Type: Armor
+    View: 6
+    Buy: 10
+    Weight: 100
+    Defense: 40
+    Slots: 1
+    Locations:
+      Left_Hand: true
+    ArmorLevel: 1
+    EquipLevelMin: 30
+    Refineable: true
+    Script: |
+      bonus2 bSubEle,Ele_Water,20;
+      bonus2 bSubEle,Ele_Fire,20;
+      bonus2 bSubEle,Ele_Dark,20;
+      bonus2 bSubEle,Ele_Undead,20;
+      bonus bMaxHPrate,2;
+      bonus bMaxSPrate,2;
+      .@r = getrefine();
+      if (.@r>=7) {
+        bonus bMaxHPrate,1;
+        bonus bMaxSPrate,1;
+      }
+      if (.@r>=8) {
+        bonus bLongAtkDef,1;
+        bonus bNearAtkDef,1;
+      }
+      if (.@r>=9) {
+        bonus2 bSubRace,RC_DemiHuman,2;
+        bonus2 bSubRace,RC_Player_Human,2;
+      }
+      bonus bDex,1;
+  - Id: 2193
+    AegisName: Fallen_Used_Shield
+    Name: Fallen Used Shield
+    Type: Armor
+    View: 4
+    Weight: 500
+    Defense: 100
+    Slots: 1
+    Locations:
+      Left_Hand: true
+    ArmorLevel: 1
+    EquipLevelMin: 60
+    Refineable: true
+    Script: |
+      bonus bShortWeaponDamageReturn,2;
+      bonus bMagicDamageReturn,5;
+      bonus bMaxHPrate,3;
+      bonus bMaxSPrate,3;
+      @r = getrefine();
+      if (.@r >=9){
+        bonus2 bSubEle,Ele_All,2;
+        bonus bShortWeaponDamageReturn,2;
+        bonus bMaxHPrate,3;
+        bonus bAllStats,1;
+      }
+  - Id: 2194
+    AegisName: Louvain_Shield
+    Name: Louvain Shield
+    Type: Armor
+    View: 1
+    Buy: 20
+    Weight: 500
+    Defense: 1
+    Slots: 1
+    Locations:
+      Left_Hand: true
+    ArmorLevel: 1
+    EquipLevelMin: 99
+    Refineable: true
+    Script: |
+      bonus2 bAddClass,Class_All,5;
+      bonus bMatkRate,5;
+      bonus bAspdRate,getrefine();
+      bonus2 bIgnoreDefRaceRate,RC_ALL,-3;
+      bonus2 bIgnoreMdefRaceRate,RC_ALL,-3;
+      @r = getrefine();
+      if (.@r >=9){
+        bonus2 bAddClass,Class_All,2;
+        bonus bMatkRate,2;
+        bonus bMaxHPrate,3;
+        bonus bAllStats,1;
+      }
+  - Id: 13093
+    AegisName: Thanos_Dagger
+    Name: Thanos Dagger
+    Type: Weapon
+    SubType: Dagger
+    Buy: 10
+    Weight: 400
+    Attack: 80
+    MagicAttack: 130
+    Range: 1
+    Jobs:
+      Alchemist: true
+      Archer: true
+      Assassin: true
+      BardDancer: true
+      Blacksmith: true
+      Crusader: true
+      Hunter: true
+      Knight: true
+      Mage: true
+      Merchant: true
+      Rogue: true
+      Sage: true
+      SoulLinker: true
+      Swordman: true
+      Thief: true
+      Wizard: true
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 4
+    EquipLevelMin: 36
+    Refineable: true
+    Script: |
+      bonus bIgnoreDefRace,RC_DemiHuman;
+      bonus bIgnoreDefRace,RC_Player_Human;
+      bonus2 bSubRace,RC_DemiHuman,10;
+      bonus2 bSubRace,RC_Player_Human,10;
+      bonus2 bSubRace,RC_Demon,-10;
+      bonus bMaxSPrate,10;
+      bonus bSPDrainValue,3;
+      .@r = getrefine();
+      if (.@r>=9) {
+        bonus bMaxHPrate,2;
+        bonus bAspdRate,2;
+      }
+      if (.@r>=10) {
+        bonus bMaxHPrate,2;
+        bonus2 bSubEle,Ele_All,2;
+      }
+  - Id: 2843
+    AegisName: Golden_Bell
+    Name: Golden Bell
+    Type: Armor
+    Buy: 20
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 75
+    Trade:
+      Override: 100
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      bonus bMatkRate,6;
+      bonus bAllStats,1;
+      bonus bDex,1;
+      bonus2 bMagicAddEle,Ele_Earth,2;
+      bonus2 bMagicAddEle,Ele_Water,2;
+      bonus2 bMagicAddEle,Ele_Wind,2;
+      bonus2 bMagicAddEle,Ele_Fire,2;
+  - Id: 2855
+    AegisName: Whike_Black_Tail
+    Name: Whike Black Tail
+    Type: Armor
+    Buy: 20
+    Weight: 100
+    Slots: 1
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    Script: |
+      bonus2 bAddClass,Class_Boss,10;
+      bonus2 bAddSize,Size_Large,10;
+      bonus bMaxSPrate,10;
+      bonus bAllStats,1;
+      bonus bDex,1;
+      bonus bMaxHPrate,1;
+  - Id: 30082
+    AegisName: Costume_Night_Fox
+    Name: Costume Night Fox
+    Type: Armor
+    View: 2302
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30083
+    AegisName: Costume_Sheep_Hat
+    Name: Costume Sheep Hat
+    Type: Armor
+    View: 2303
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30084
+    AegisName: Costume_Winkle_Golden_Majestic
+    Name: Costume Winkle Golden Majestic
+    Type: Armor
+    View: 2304
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30085
+    AegisName: Costume_Blaz_Mystic_Helm_Blue
+    Name: Costume Blaz Mystic Helm Blue
+    Type: Armor
+    View: 2305
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30086
+    AegisName: Costume_Blue_Neko_Santa_Hat
+    Name: Costume Blue Neko Santa Hat
+    Type: Armor
+    View: 2306
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30087
+    AegisName: Costume_Wizard_Moew_Hat
+    Name: Costume Wizard Moew Hat
+    Type: Armor
+    View: 2307
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30088
+    AegisName: Costume_Helm_Of_Ra
+    Name: Costume Helm Of Ra
+    Type: Armor
+    View: 2308
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30089
+    AegisName: Costume_Hoplite_Helmet_Silver
+    Name: Costume Hoplite Helmet Silver
+    Type: Armor
+    View: 2309
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30090
+    AegisName: Costume_Puriku_Cap
+    Name: Costume Puriku Cap
+    Type: Armor
+    View: 2310
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30091
+    AegisName: Costume_Variant_Veil
+    Name: Costume Variant Veil
+    Type: Armor
+    View: 2311
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30092
+    AegisName: Costume_Greater_Dracul_Horn
+    Name: Costume Greater Dracul Horn
+    Type: Armor
+    View: 2312
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30093
+    AegisName: Costume_Guardian_Helm
+    Name: Costume Guardian Helm
+    Type: Armor
+    View: 2313
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30094
+    AegisName: Costume_Kings_Crown
+    Name: Costume Kings Crown
+    Type: Armor
+    View: 2314
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30095
+    AegisName: Costume_Luffy_Hat
+    Name: Costume Luffy Hat
+    Type: Armor
+    View: 2315
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30096
+    AegisName: Costume_Rabbit_Hopping
+    Name: Costume Rabbit Hopping
+    Type: Armor
+    View: 2316
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30097
+    AegisName: Costume_Grand_Feather
+    Name: Costume Grand Feather
+    Type: Armor
+    View: 2317
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30098
+    AegisName: Costume_Blue_Reindeer
+    Name: Costume Blue Reindeer
+    Type: Armor
+    View: 2318
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30099
+    AegisName: Costume_Basket_Ball_Cap
+    Name: Costume Basket Ball Cap
+    Type: Armor
+    View: 2319
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30100
+    AegisName: Costume_Exe_Wing_Cap
+    Name: Costume Exe Wing Cap
+    Type: Armor
+    View: 2320
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30101
+    AegisName: Costume_White_Domino_Cap
+    Name: Costume White Domino Cap
+    Type: Armor
+    View: 2321
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30102
+    AegisName: Costume_Vampire_Familiar
+    Name: Costume Vampire's Familiar
+    Type: Armor
+    View: 1548
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30103
+    AegisName: Costume_Stall_of_Angel
+    Name: Costume Stall of Angel
+    Type: Armor
+    View: 1664
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30104
+    AegisName: Costume_Little_Angel_Wing
+    Name: Costume Little Angel Wing
+    Type: Armor
+    View: 2322
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30105
+    AegisName: Costume_Falling_Snow
+    Name: Costume Falling Snow
+    Type: Armor
+    View: 2323
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30106
+    AegisName: Costume_Cat_Ear_Ribbon
+    Name: Costume Cat Ear Ribbon
+    Type: Armor
+    View: 1733
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30107
+    AegisName: Costume_Jioia
+    Name: Costume Jioia
+    Type: Armor
+    View: 1730
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30108
+    AegisName: Costume_Mask_Of_Phoenix
+    Name: Costume Mask Of Phoenix
+    Type: Armor
+    View: 1287
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30109
+    AegisName: Costume_Birds_Blessing
+    Name: Costume Birds Blessing
+    Type: Armor
+    View: 2324
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30110
+    AegisName: Costume_Purple_Snowflake_Wings
+    Name: Costume Purple Snowflake Wings
+    Type: Armor
+    View: 2325
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30111
+    AegisName: Costume_Book_Of_Magic
+    Name: Costume Book Of Magic
+    Type: Armor
+    View: 1691
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30112
+    AegisName: Costume_Star_Earrings
+    Name: Costume Star Earrings
+    Type: Armor
+    View: 2326
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30113
+    AegisName: Costume_Diamond_Earring
+    Name: Costume Diamond Earring
+    Type: Armor
+    View: 2327
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30114
+    AegisName: Costume_Floating_Ice
+    Name: Costume Floating Ice
+    Type: Armor
+    View: 1562
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30115
+    AegisName: Costume_Love_Cheeks
+    Name: Costume Love Cheeks
+    Type: Armor
+    View: 1318
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30116
+    AegisName: Costume_Cyan_Goggles
+    Name: Costume Cyan Goggles
+    Type: Armor
+    View: 2328
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30117
+    AegisName: Costume_Blinking_Eyes
+    Name: Costume Blinking Eyes
+    Type: Armor
+    View: 1658
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30118
+    AegisName: Costume_Bunny_Wand
+    Name: Costume Bunny Wand
+    Type: Armor
+    View: 2329
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30119
+    AegisName: Costume_Happy_Clown_Mask
+    Name: Costume Happy Clown Mask
+    Type: Armor
+    View: 2330
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30120
+    AegisName: Costume_Flying_Drone
+    Name: Costume Flying Drone
+    Type: Armor
+    View: 1561
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30121
+    AegisName: Costume_Falling_Rose_Petals
+    Name: Costume Falling Rose Petals
+    Type: Armor
+    View: 2331
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30122
+    AegisName: Costume_Rabit_Ear
+    Name: Costume Rabit Ear
+    Type: Armor
+    View: 2332
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30123
+    AegisName: Costume_Eremes_Scarf
+    Name: Costume Eremes Scarf
+    Type: Armor
+    View: 1416
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30124
+    AegisName: Costume_Bandage_Scarf
+    Name: Costume Bandage Scarf
+    Type: Armor
+    View: 2333
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30125
+    AegisName: Costume_Baby_Penguin
+    Name: Costume Baby Penguin
+    Type: Armor
+    View: 2334
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30126
+    AegisName: Costume_Bunny_Scarf
+    Name: Costume Bunny Scarf
+    Type: Armor
+    View: 2335
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30127
+    AegisName: Costume_Eremes_Guile's_Scarf
+    Name: Costume Eremes Guile's Scarf
+    Type: Armor
+    View: 1501
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30128
+    AegisName: Costume_White_Rabbit
+    Name: Costume White Rabbit
+    Type: Armor
+    View: 2336
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30129
+    AegisName: Costume_Clay_Poring
+    Name: Costume Clay Poring
+    Type: Armor
+    View: 1634
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30130
+    AegisName: Costume_Floating_Balloons
+    Name: Costume Floating Balloons
+    Type: Armor
+    View: 2337
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30131
+    AegisName: Costume_Warm_Cat_Muffler
+    Name: Costume Warm Cat Muffler
+    Type: Armor
+    View: 1657
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30132
+    AegisName: Costume_Leopard_Cat
+    Name: Costume Leopard Cat
+    Type: Armor
+    View: 1757
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30133
+    AegisName: Costume_Black_Cat
+    Name: Costume Black Cat
+    Type: Armor
+    View: 2338
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30134
+    AegisName: Costume_Sparkly_Winter_Scarf
+    Name: Costume Sparkly Winter Scarf
+    Type: Armor
+    View: 2339
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30135
+    AegisName: Costume_Orange_Tabby_Cat
+    Name: Costume Orange Tabby Cat
+    Type: Armor
+    View: 1741
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30136
+    AegisName: Costume_Lunatic_Muffler
+    Name: Costume Lunatic Muffler
+    Type: Armor
+    View: 1732
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30137
+    AegisName: Costume_Cat_Ears_Cape_Red
+    Name: Costume Cat Ears Cape Red
+    Type: Armor
+    View: 1591
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30138
+    AegisName: Costume_Grey_Imp_Diamond_Dust
+    Name: Costume Grey Imp Diamond Dust
+    Type: Armor
+    View: 2340
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30139
+    AegisName: Costume_White_Imp_Diamond_Dust
+    Name: Costume White Imp Diamond Dust
+    Type: Armor
+    View: 2341
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30140
+    AegisName: Costume_Flameless_Muffler_GR
+    Name: Costume Flameless Muffler GR
+    Type: Armor
+    View: 2342
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30141
+    AegisName: Costume_Eremes_Scarf_White
+    Name: Costume Eremes Scarf White
+    Type: Armor
+    View: 2343
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30142
+    AegisName: Costume_Lover_In_Mouth
+    Name: Costume Lover In Mouth
+    Type: Armor
+    View: 720
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30143
+    AegisName: Costume Archangel Wings
+    Name: Costume Archangel Wings
+    Type: Armor
+    View: 1
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30144
+    AegisName: Costume_Fallen_Angel_Wing
+    Name: Costume Fallen Angel Wing
+    Type: Armor
+    View: 3
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30145
+    AegisName: Costume_Golden_Wing
+    Name: Costume Golden Wing
+    Type: Armor
+    View: 5
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30146
+    AegisName: Costume_Rudra_Wings
+    Name: Costume Rudra Wings
+    Type: Armor
+    View: 8
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30147
+    AegisName: Costume_Rainbow_Wings
+    Name: Costume Rainbow Wings
+    Type: Armor
+    View: 9
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30148
+    AegisName: Costume_Light_Darkness_Wing
+    Name: Costume Light Darkness Wing
+    Type: Armor
+    View: 20
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30149
+    AegisName: Costume_Poring_Bag
+    Name: Costume Poring Bag
+    Type: Armor
+    View: 16
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30150
+    AegisName: Costume_Bravery_Bag
+    Name: Costume Bravery Bag
+    Type: Armor
+    View: 2
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30151
+    AegisName: Costume_Devil_Wing
+    Name: Costume Devil Wing
+    Type: Armor
+    View: 12
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30152
+    AegisName: Costume_Cupid_Wing_Pink
+    Name: Costume Cupid Wing Pink
+    Type: Armor
+    View: 14
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30153
+    AegisName: Costume_Angel_Feather
+    Name: Costume Angel feather
+    Type: Armor
+    View: 18
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30154
+    AegisName: Costume_Wings_of_Uriel
+    Name: Costume Wings of Uriel
+    Type: Armor
+    View: 17
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30155
+    AegisName: Costume_Wings_of_Michael
+    Name: Costume Wings of Michael
+    Type: Armor
+    View: 24
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30156
+    AegisName: Costume_Sword_Wing
+    Name: Costume Sword Wing
+    Type: Armor
+    View: 19
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30157
+    AegisName: Costume_Invisible_Cap
+    Name: Costume Invisible Cap
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30158
+    AegisName: Costume_Invisible_Glasses
+    Name: Costume Invisible Glasses
+    Type: Armor
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30159
+    AegisName: Costume_Invisible_Mask
+    Name: Costume Invisible Mask
+    Type: Armor
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30160
+    AegisName: Costume_Invisible_Cape
+    Name: Costume Invisible Cape
+    Type: Armor
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30161
+    AegisName: Costume_Poo_Poo_Hat
+    Name: Costume Poo Poo Hat
+    Type: Armor
+    View: 76
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30162
+    AegisName: Costume_Elven_Ears
+    Name: Costume Elven Ears
+    Type: Armor
+    View: 73
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30163
+    AegisName: Costume_Sunglasses
+    Name: Costume Sunglasses
+    Type: Armor
+    View: 12
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30164
+    AegisName: Costume_Masquerade
+    Name: Costume Masquerade
+    Type: Armor
+    View: 78
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30165
+    AegisName: Costume_Cap
+    Name: Costume Cap
+    Type: Armor
+    View: 14
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30166
+    AegisName: Costume_Helm
+    Name: Costume Helm
+    Type: Armor
+    View: 40
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30167
+    AegisName: Costume_Iron_Cain
+    Name: Costume Iron Cain
+    Type: Armor
+    View: 53
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30168
+    AegisName: Costume_Fin_Helm
+    Name: Costume Fin Helm
+    Type: Armor
+    View: 100
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30169
+    AegisName: Costume_Bone_Helm
+    Name: Costume Bone Helm
+    Type: Armor
+    View: 103
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30170
+    AegisName: Costume_Alarm_Mask
+    Name: Costume Alarm Mask
+    Type: Armor
+    View: 170
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30171
+    AegisName: Costume_Poring_Hat
+    Name: Costume Poring Hat
+    Type: Armor
+    View: 120
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30172
+    AegisName: Costume_Gigantic_Majestic_Goat
+    Name: Costume Gigantic Majestic Goat
+    Type: Armor
+    View: 380
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30173
+    AegisName: Costume_Poker_Face
+    Name: Costume Poker Face
+    Type: Armor
+    View: 171
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30174
+    AegisName: Costume_Surprised_Mask
+    Name: Costume Surprised Mask
+    Type: Armor
+    View: 172
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30175
+    AegisName: Costume_Annoyed_Mask
+    Name: Costume Annoyed Mask
+    Type: Armor
+    View: 173
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30176
+    AegisName: Costume_Joker_Jester
+    Name: Costume Joker Jester
+    Type: Armor
+    View: 89
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30177
+    AegisName: Costume_Feather_Beret
+    Name: Costume Feather Beret
+    Type: Armor
+    View: 224
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,80;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30178
+    AegisName: Costume_Drop_Helm
+    Name: Costume Drop Helm
+    Type: Armor
+    View: 2344
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus2 bDropAddRace,Rc_All,5;
+  - Id: 30179
+    AegisName: Costume_Drop_Eye
+    Name: Costume Drop Eye
+    Type: Armor
+    View: 2345
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus2 bDropAddRace,Rc_All,5;
+  - Id: 30180
+    AegisName: Costume_Drop_Low
+    Name: Costume Drop Low
+    Type: Armor
+    View: 2346
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus2 bDropAddRace,Rc_All,5;
+  - Id: 30181
+    AegisName: Costume_Drop_Acc_Left
+    Name: Costume Drop Acc Left
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus2 bDropAddRace,Rc_All,5;
+      bonus2 bAddClass,Class_Boss,5;
+      bonus bMaxSPrate,3;
+  - Id: 30182
+    AegisName: Costume_Drop_Acc_Right
+    Name: Costume Drop Acc Right
+    Type: Shadowgear
+    Locations:
+      Shadow_Right_Accessory: true
+    Script: |
+      bonus2 bDropAddRace,Rc_All,5;
+      bonus2 bAddClass,Class_Boss,5;
+      bonus bMaxSPrate,3;
+  - Id: 30183
+    AegisName: Costume_Maple_Which_Falls
+    Name: Costume Maple Which Falls
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      sc_start SC_MAPLE_FALLS,INFINITE_TICK,0;
+    UnEquipScript: |
+      sc_end SC_MAPLE_FALLS;
+  - Id: 30184
+    AegisName: Costume_Decoration_of_Music
+    Name: Costume Decoration of Music
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      sc_start SC_DECORATION_OF_MUSIC,INFINITE_TICK,0;
+    UnEquipScript: |
+      sc_end SC_DECORATION_OF_MUSIC;
+  - Id: 30185
+    AegisName: Costume_Moon_and_Stars
+    Name: Costume Moon and Stars
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      sc_start SC_MOONSTAR,INFINITE_TICK,0;
+    UnEquipScript: |
+      sc_end SC_MOONSTAR;
+  - Id: 30186
+    AegisName: Costume_Will_O_Wisp
+    Name: Costume Will O Wisp
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      sc_start SC_STRANGELIGHTS,INFINITE_TICK,0;
+    UnEquipScript: |
+      sc_end SC_STRANGELIGHTS;
+  - Id: 30187
+    AegisName: Costume_Decoration_Time
+    Name: Costume Decoration Time
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      sc_start SC_TIME_ACCESSORY,INFINITE_TICK,0;
+    UnEquipScript: |
+      sc_end SC_TIME_ACCESSORY;
+  - Id: 30188
+    AegisName: Costume_Flutter_Butterfly
+    Name: Costume Flutter Butterfly
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      hateffect HAT_EF_FLUTTER_BUTTERFLY,true;
+    UnEquipScript: |
+      hateffect HAT_EF_FLUTTER_BUTTERFLY,false;
+  - Id: 30189
+    AegisName: Costume_Angel_Fluttering
+    Name: Costume Angel Fluttering
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      hateffect HAT_EF_ANGEL_FLUTTERING,true;
+    UnEquipScript: |
+      hateffect HAT_EF_ANGEL_FLUTTERING,false;
+  - Id: 30190
+    AegisName: Costume Blowing_Scattered_Sakura
+    Name: Costume Blowing Scattered Sakura
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      hateffect HAT_EF_BLOSSOM_FLUTTERING,true;
+    UnEquipScript: |
+      hateffect HAT_EF_BLOSSOM_FLUTTERING,false;
+  - Id: 30191
+    AegisName: Costume_World_Star
+    Name: Costume World Star
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      sc_start SC_SUPER_STAR,INFINITE_TICK,0;
+    UnEquipScript: |
+      sc_end SC_SUPER_STAR;
+  - Id: 30192
+    AegisName: Costume_Blessings_Of_Soul
+    Name: Costume Blessings Of Soul
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      hateffect(HAT_EF_C_BLESSINGS_OF_SOUL,true);
+    UnEquipScript: |
+      hateffect(HAT_EF_C_BLESSINGS_OF_SOUL,false);
+  - Id: 30193
+    AegisName: Costume_Flutter_Butterfly_Blue
+    Name: Costume Flutter Butterfly Blue
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      hateffect(HAT_EF_C_FlutterButterfly_BL,true);
+    UnEquipScript: |
+      hateffect(HAT_EF_C_FlutterButterfly_BL,false);
+  - Id: 30194
+    AegisName: Costume_Full_Bloom_Cherry_Tree
+    Name: Costume Full Bloom Cherry Tree
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      hateffect(HAT_EF_FULL_BLOOMCHERRY_TREE,true);
+    UnEquipScript: |
+      hateffect(HAT_EF_FULL_BLOOMCHERRY_TREE,false);
+  - Id: 30195
+    AegisName: Costume_Electric
+    Name: Costume Electric
+    Type: Shadowgear
+    Locations:
+      Shadow_Left_Accessory: true
+    Script: |
+      bonus bMaxHP,100;
+      bonus bMaxSP,80;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+    EquipScript: |
+      hateffect(HAT_EF_Electric,true);
+    UnEquipScript: |
+      hateffect(HAT_EF_Electric,false);
+  - Id: 30196
+    AegisName: Costume_Silver_Solar_Flash
+    Name: Costume Silver Solar Flash
+    Type: Armor
+    View: 2354
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30197
+    AegisName: Costume_Black_Solar_Flash
+    Name: Costume Black Solar Flash
+    Type: Armor
+    View: 2348
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30198
+    AegisName: Costume_Red_Solar_Flash
+    Name: Costume Red Solar Flash
+    Type: Armor
+    View: 2353
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30199
+    AegisName: Costume_Blue_Solar_Flash
+    Name: Costume Blue Solar Flash
+    Type: Armor
+    View: 2349
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30200
+    AegisName: Costume_Green_Solar_Flash
+    Name: Costume Green Solar Flash
+    Type: Armor
+    View: 2350
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30201
+    AegisName: Costume_Black_Gigantic_Majestic
+    Name: Costume Black Gigantic Majestic
+    Type: Armor
+    View: 2356
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30202
+    AegisName: Costume_White_Gigantic_Majestic
+    Name: Costume White Gigantic Majestic
+    Type: Armor
+    View: 2355
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30203
+    AegisName: Costume_Winkle_Black_Majestic
+    Name: Costume Winkle Black Majestic
+    Type: Armor
+    View: 2357
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30204
+    AegisName: Costume_Winkle_Golden_MajesticV2
+    Name: Costume Winkle Golden Majestic
+    Type: Armor
+    View: 2358
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30205
+    AegisName: Costume_Astro_Circle
+    Name: Costume Astro Circle
+    Type: Armor
+    View: 1073
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30206
+    AegisName: Costume_Seraph_Wing
+    Name: Costume Seraph Wing
+    Type: Armor
+    View: 2359
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,150;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30207
+    AegisName: Costume_Abbaddon_Blue
+    Name: Costume Abbaddon Blue
+    Type: Armor
+    View: 2360
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30208
+    AegisName: Costume_Red_Square_Bag
+    Name: Costume Red Square Bag
+    Type: Armor
+    View: 1876
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30209
+    AegisName: Costume_Inforo_Red
+    Name: Costume Inforo Red
+    Type: Armor
+    View: 2361
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30210
+    AegisName: Costume_Book_Of_MagicV2
+    Name: Costume Book Of Magic
+    Type: Armor
+    View: 1691
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30211
+    AegisName: Costume_White_Bubble_Aura
+    Name: Costume White Bubble Aura
+    Type: Armor
+    View: 2362
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30212
+    AegisName: Costume_Blue_Bubble_Aura
+    Name: Costume Blue Bubble Aura
+    Type: Armor
+    View: 2363
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30213
+    AegisName: Costume_Red_Bubble_Aura
+    Name: Costume Red Bubble Aura
+    Type: Armor
+    View: 2364
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30214
+    AegisName: Costume_White_Wing
+    Name: Costume White Wing
+    Type: Armor
+    View: 2365
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30215
+    AegisName: Costume_Cons_Of_Fire
+    Name: Costume Cons Of Fire
+    Type: Armor
+    View: 1890
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30216
+    AegisName: Costume_Black_Elfs_Aura
+    Name: Costume Black Elfs Aura
+    Type: Armor
+    View: 2366
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30217
+    AegisName: Costume_White_Elfs_Aura
+    Name: Costume White Elfs Aura
+    Type: Armor
+    View: 2367
+    Locations:
+      Costume_Head_Mid: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30218
+    AegisName: Costume_Sacred_Cape
+    Name: Costume Sacred Cape
+    Type: Armor
+    View: 2368
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30219
+    AegisName: Costume_2806
+    Name: Costume 2806
+    Type: Armor
+    View: 2369
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30220
+    AegisName: Costume_22797
+    Name: Costume 22797
+    Type: Armor
+    View: 2370
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30221
+    AegisName: Costume_costume1096
+    Name: Costume costume1096
+    Type: Armor
+    View: 2371
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30222
+    AegisName: Costume_costume1140
+    Name: Costume costume1140
+    Type: Armor
+    View: 2372
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30223
+    AegisName: Costume_2611
+    Name: Costume 2611
+    Type: Armor
+    View: 2373
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30224
+    AegisName: Costume_Protect_Cloth
+    Name: Costume Protect Cloth
+    Type: Armor
+    View: 1761
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30225
+    AegisName: Costume_black_sparkly_xmas_cloak
+    Name: Costume Sparkly Xmas Cloak
+    Type: Armor
+    View: 2374
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30226
+    AegisName: Costume_Red_sparkly_xmas_cloak
+    Name: Costume Sparkly Xmas Cloak
+    Type: Armor
+    View: 2375
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30227
+    AegisName: Costume_Divergent_Scarf
+    Name: Costume Divergent Scarf
+    Type: Armor
+    View: 2376
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30228
+    AegisName: Costume_Red_Eremes_Scarf
+    Name: Costume Eremes Scarf
+    Type: Armor
+    View: 1416
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30229
+    AegisName: Costume_Black_Eremes_Scarf
+    Name: Costume Eremes Scarf
+    Type: Armor
+    View: 2377
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+  - Id: 30230
+    AegisName: Costume_Giant_Cat_Bag
+    Name: Costume Giant Cat Bag
+    Type: Armor
+    View: 25
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30231
+    AegisName: Costume_Fallen_Angel_Wing_
+    Name: Costume Fallen Angel Wing
+    Type: Armor
+    View: 3
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30232
+    AegisName: Costume_Golden_Angel_Wing
+    Name: Costume Golden Angel Wing
+    Type: Armor
+    View: 5
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30233
+    AegisName: Costume_Archangel_Wings
+    Name: Costume Archangel Wings
+    Type: Armor
+    View: 1
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30234
+    AegisName: Costume_Cupid_Wing_Skyblue
+    Name: Costume Cupid Wing Skyblue
+    Type: Armor
+    View: 15
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30235
+    AegisName: Costume_EXE_Backpack
+    Name: Costume EXE Backpack
+    Type: Armor
+    View: 22
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30236
+    AegisName: Costume_Backside_Ribbon_Bell
+    Name: Costume Backside Ribbon Bell
+    Type: Armor
+    View: 46
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30237
+    AegisName: Costume_Wing_Of_Heart
+    Name: Costume Wing Of Heart
+    Type: Armor
+    View: 50
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30238
+    AegisName: Costume_School_Bag_Black
+    Name: Costume School Bag Black
+    Type: Armor
+    View: 52
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30239
+    AegisName: Costume_Thanatos_Sword
+    Name: Costume Thanatos Sword
+    Type: Armor
+    View: 23
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+  - Id: 30240
+    AegisName: Costume_Invisible_Cape_V2
+    Name: Costume Invisible Cape V2
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    ArmorLevel: 1
+    Script: |
+      bonus bMaxHP,150;
+      bonus bMaxSP,70;
+      bonus2 bAddRace,RC_DemiHuman,1;
+      bonus2 bAddRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_DemiHuman,1;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus allstats,1;
+      bonus allstats,1;
