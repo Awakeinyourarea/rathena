@@ -41,13 +41,13 @@
 #define BOUND_ITEMS
 
 /// Uncomment to enable real-time server stats (in and out data and ram usage).
-//#define SHOW_SERVER_STATS
+#define SHOW_SERVER_STATS
 
 /// Comment to disable the job base HP/SP/AP table (job_basepoints.yml)
 #define HP_SP_TABLES
 
 /// Uncomment to enable VIP system.
-//#define VIP_ENABLE
+#define VIP_ENABLE
 
 /// Enable VIP script changes? (requires VIP_ENABLE)
 /// The primary effects of this are restrictions on non-VIP players, such as requiring

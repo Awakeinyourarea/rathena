@@ -1,17 +1,17 @@
 -	script	Rental	-1,{
 
 mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
-mes "สวัสดีท่าน : ^FF0000 "+strcharinfo(0)+" ^000000"; 
+mes "สวัสดีท่าน : ^ABC663 "+strcharinfo(0)+" ^000000"; 
 mes "ต้องการให้ฉันช่วยเหลืออะไร ?";
 next;
 menu 
-"^FF0000•^000000 เช่าเป็ด/นก/รถเข็น",Rental;
+"^ABC663•^000000 เช่าเป็ด/นก/รถเข็น",Rental;
 
 Rental:
 	mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
 	mes "เลือกสิ่งที่ต้องการเช่าค่ะ";
 	next;
-	switch (select("^FF0000•^000000 Peco Peco","^FF0000•^000000 Falcon","^FF0000•^000000 Cart")) {
+	switch (select("^ABC663•^000000 Peco Peco","^ABC663•^000000 Falcon","^ABC663•^000000 Cart")) {
 	case 1:
 		mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
 		if (checkriding()) {

@@ -1347,16 +1347,16 @@ int skill_additional_effect( struct block_list* src, struct block_list *bl, uint
 					int skill;
 
 					// Automatic trigger of Blitz Beat
-					if (pc_isfalcon(sd) && sd->status.weapon == W_BOW && (skill = pc_checkskill(sd, HT_BLITZBEAT)) > 0 && rnd() % 1000 <= sstatus->luk * 10 / 3 + 1) {
-						int rate;
-
-						if ((sd->class_ & MAPID_THIRDMASK) == MAPID_RANGER)
-							rate = 5;
-						else
-							rate = (sd->status.job_level + 9) / 10;
-
-						skill_castend_damage_id(src, bl, HT_BLITZBEAT, (skill < rate) ? skill : rate, tick, SD_LEVEL);
-					}
+					//if (pc_isfalcon(sd) && sd->status.weapon == W_BOW && (skill = pc_checkskill(sd, HT_BLITZBEAT)) > 0 && rnd() % 1000 <= sstatus->luk * 10 / 3 + 1) {
+					//	int rate;
+//
+					//	if ((sd->class_ & MAPID_THIRDMASK) == MAPID_RANGER)
+					//		rate = 5;
+					//	else
+					//		rate = (sd->status.job_level + 9) / 10;
+//
+					//	skill_castend_damage_id(src, bl, HT_BLITZBEAT, (skill < rate) ? skill : rate, tick, SD_LEVEL);
+					//}
 					// Automatic trigger of Warg Strike
 					if (pc_iswug(sd) && (skill = pc_checkskill(sd, RA_WUGSTRIKE)) > 0) {
 						int rate = sstatus->luk * 10 / 3 + 1;
@@ -2643,7 +2643,8 @@ int skill_counter_additional_effect (struct block_list* src, struct block_list *
 
 	if( sd && status_isdead(bl) ) {
 		int sp = 0, hp = 0;
-		if( (attack_type&(BF_WEAPON|BF_SHORT)) == (BF_WEAPON|BF_SHORT) ) {
+		//if( (attack_type&(BF_WEAPON|BF_SHORT)) == (BF_WEAPON|BF_SHORT) ) {
+		if( attack_type&BF_WEAPON ) {
 			sp += sd->bonus.sp_gain_value;
 			sp += sd->indexed_bonus.sp_gain_race[status_get_race(bl)] + sd->indexed_bonus.sp_gain_race[RC_ALL];
 			hp += sd->bonus.hp_gain_value;
@@ -5551,11 +5552,11 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 			else
 				y = 0;
 			// Ashura Strike still has slide effect in GVG
-			if ((mbl == src || (!map_flag_gvg2(src->m) && !map_getmapflag(src->m, MF_BATTLEGROUND))) &&
-				unit_movepos(src, mbl->x + x, mbl->y + y, 1, 1)) {
-				clif_blown(src);
-				clif_spiritball(src);
-			}
+			//if ((mbl == src || (!map_flag_gvg2(src->m) && !map_getmapflag(src->m, MF_BATTLEGROUND))) &&
+			//	unit_movepos(src, mbl->x + x, mbl->y + y, 1, 1)) {
+			//	clif_blown(src);
+			//	clif_spiritball(src);
+			//}
 		}
 		break;
 
@@ -9718,6 +9719,11 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 
 	case TF_BACKSLIDING: //This is the correct implementation as per packet logging information. [Skotlex]
 		{
+		if (tsc->getSCE(SC_ANKLE) || tsc->getSCE(SC_SPIDERWEB)) {
+			clif_skill_fail(*sd,skill_id, USESKILL_FAIL_LEVEL, 0);
+			return 0;
+			
+		}
 			short blew_count = skill_blown(src,bl,skill_get_blewcount(skill_id,skill_lv),unit_getdir(bl),(enum e_skill_blown)(BLOWN_IGNORE_NO_KNOCKBACK
 #ifdef RENEWAL
 			|BLOWN_DONT_SEND_PACKET
@@ -14089,6 +14095,10 @@ int skill_castend_pos2(struct block_list* src, int x, int y, uint16 skill_id, ui
 		return 0; // not to consume item.
 
 	case MO_BODYRELOCATION:
+		if (sc->getSCE(SC_ANKLE) || sc->getSCE(SC_SPIDERWEB)){
+		clif_skill_fail(*sd, skill_id, USESKILL_FAIL_LEVEL, 0);
+		return 0;	
+		}
 		if (unit_movepos(src, x, y, 2, 1)) {
 #if PACKETVER >= 20111005
 			clif_snap(src, src->x, src->y);
@@ -18462,6 +18472,7 @@ bool skill_check_condition_castend( map_session_data& sd, uint16 skill_id, uint1
 	struct status_data *status;
 	int i;
 	short index[MAX_SKILL_ITEM_REQUIRE];
+	status_change *sc;
 
 	if( sd.chatID )
 		return false;
@@ -18474,6 +18485,11 @@ bool skill_check_condition_castend( map_session_data& sd, uint16 skill_id, uint1
 		sd.servantball_old = sd.servantball; //Need to do Servantball check.
 		sd.abyssball_old = sd.abyssball; //Need to do Abyssball check.
 		return true;
+	}
+	if( skill_id == MO_EXTREMITYFIST && ((sd.spiritball == 0 && battle_config.asura_absorb_cast_cancel) || (!sc->getSCE(SC_EXPLOSIONSPIRITS) && battle_config.asura_dispell_cast_cancel)))
+	{
+		clif_skill_fail(sd, skill_id, USESKILL_FAIL_LEVEL, 0);
+		return 0;
 	}
 
 	switch( sd.menuskill_id ) { // Cast start or cast end??

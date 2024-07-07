@@ -504,6 +504,7 @@ struct Battle_Config
 	int quest_exp_rate;
 	int autotrade_mapflag;
 	int at_timeout;
+	int afk_timeout;
 	int homunculus_autoloot;
 	int idle_no_autoloot;
 	int max_guild_alliance;
@@ -632,6 +633,8 @@ struct Battle_Config
 	int idletime_option;
 	int spawn_direction;
 	int arrow_shower_knockback;
+	int asura_absorb_cast_cancel;
+	int asura_dispell_cast_cancel;	
 	int devotion_rdamage_skill_only;
 	int max_extended_aspd;
 	int mob_chase_refresh; //How often a monster should refresh its chase [Playtester]

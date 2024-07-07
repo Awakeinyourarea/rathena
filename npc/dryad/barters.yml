@@ -44,10 +44,22 @@
 Header:
   Type: BARTER_DB
   Version: 1
-
-Footer:
-  Imports:
-  - Path: npc/re/merchants/barters.yml
-    Mode: Renewal
-  - Path: npc/custom/barters.yml
-  - Path: npc/dryad/barters.yml
+  
+Body:
+###########################################################################
+##= Elu & Ori Package
+###########################################################################
+  - Name: Pack_Elu_Ori
+    Items:
+      - Index: 0
+        Item: Elunium_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Elunium
+            Amount: 100
+      - Index: 1
+        Item: Oridecon_Box_
+        RequiredItems:
+          - Index: 0
+            Item: Oridecon
+            Amount: 100

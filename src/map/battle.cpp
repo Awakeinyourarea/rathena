@@ -9045,8 +9045,8 @@ struct Damage battle_calc_misc_attack(struct block_list *src,struct block_list *
 				RE_LVL_MDMOD(100);
 #else
 				md.damage = (sstatus->dex / 10 + sstatus->int_ / 2 + skill * 3 + 40) * 2;
-				if(mflag > 1) //Autocasted Blitz
-					nk.set(NK_SPLASHSPLIT);
+				//if(mflag > 1) //Autocasted Blitz
+				//	nk.set(NK_SPLASHSPLIT);
 #endif
 				if (skill_id == SN_FALCONASSAULT) {
 					//Div fix of Blitzbeat
@@ -11268,6 +11268,7 @@ static const struct _battle_data {
 	{ "quest_exp_rate",                     &battle_config.quest_exp_rate,                  100,    0,      INT_MAX,        },
 	{ "at_mapflag",                         &battle_config.autotrade_mapflag,               0,      0,      1,              },
 	{ "at_timeout",                         &battle_config.at_timeout,                      0,      0,      INT_MAX,        },
+	{ "afk_timeout",                        &battle_config.afk_timeout,                     0,      0,      INT_MAX,        },
 	{ "homunculus_autoloot",                &battle_config.homunculus_autoloot,             0,      0,      1,              },
 	{ "idle_no_autoloot",                   &battle_config.idle_no_autoloot,                0,      0,      INT_MAX,        },
 	{ "max_guild_alliance",                 &battle_config.max_guild_alliance,              3,      0,      3,              },
@@ -11522,7 +11523,8 @@ static const struct _battle_data {
 	{ "feature.dynamicnpc_rangex",          &battle_config.feature_dynamicnpc_rangex,       2,      0,      INT_MAX,        },
 	{ "feature.dynamicnpc_rangey",          &battle_config.feature_dynamicnpc_rangey,       2,      0,      INT_MAX,        },
 	{ "feature.dynamicnpc_direction",       &battle_config.feature_dynamicnpc_direction,    0,      0,      1,              },
-
+	{ "asura_absorb_cast_cancel",           &battle_config.asura_absorb_cast_cancel,         1,     0,      1,              },
+	{ "asura_dispell_cast_cancel",          &battle_config.asura_dispell_cast_cancel,        1,     0,      1,              },
 	{ "mob_respawn_time",                   &battle_config.mob_respawn_time,                1000,   1000,   INT_MAX,        },
 	{ "mob_unlock_time",                    &battle_config.mob_unlock_time,                 2000,   0,      INT_MAX,        },
 	{ "map_edge_size",                      &battle_config.map_edge_size,                   15,     1,      40,             },

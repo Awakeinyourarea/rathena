@@ -15547,8 +15547,6 @@ BUILDIN_FUNC(reputationupdate)
 	
     return SCRIPT_CMD_SUCCESS;
 }
-
-
 /**
  * nude({<char_id>});
  * @author [Valaris]

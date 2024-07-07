@@ -17590,8 +17590,8 @@ void clif_parse_ViewPlayerEquip(int fd, map_session_data* sd)
 	pcb_display_menu(sd);
 
 	return; // Early return intended
-	
-	if( tsd->status.show_equip || pc_has_permission(sd, PC_PERM_VIEW_EQUIPMENT) )
+
+	if( pc_readaccountreg(tsd,add_str("#PRIVATE_VIEWEQUIP")) > 0 && tsd->status.show_equip || pc_has_permission(sd, PC_PERM_VIEW_EQUIPMENT) )
 		clif_viewequip_ack( *sd, *tsd );
 	else
 		clif_msg(sd, MSI_OPEN_EQUIPEDITEM_REFUSED);
@@ -20549,26 +20549,45 @@ void roulette_generate_bonus( map_session_data& sd ){
 
 /// Opens the roulette window
 /// 0A1A <result>.B <serial>.L <stage>.B <price index>.B <additional item id>.W <gold>.L <silver>.L <bronze>.L (ZC_ACK_OPEN_ROULETTE)
+//void clif_roulette_open( map_session_data* sd ){
+//	nullpo_retv( sd );
+//
+//	roulette_generate_bonus( *sd );
+//
+//	struct packet_roulette_open_ack p;
+//
+//	p.PacketType = 0xa1a;
+//	p.Result = 0; // result
+//	p.Serial = 0; // serial
+//	p.Step = (sd->roulette.claimPrize) ? sd->roulette.stage - 1 : 0;
+//	p.Idx = (sd->roulette.claimPrize) ? sd->roulette.prizeIdx : -1;
+//	p.AdditionItemID = sd->roulette.bonusItemID;
+//	p.GoldPoint = sd->roulette_point.gold;
+//	p.SilverPoint = sd->roulette_point.silver;
+//	p.BronzePoint = sd->roulette_point.bronze;
+//
+//	sd->state.roulette_open = true;
+//
+//	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+//}
+//
+///// Request to open the roulette window
+///// 0A19 (CZ_REQ_OPEN_ROULETTE)
+//void clif_parse_roulette_open( int fd, map_session_data* sd ){
+//	nullpo_retv(sd);
+//
+//	if (!battle_config.feature_roulette) {
+//		clif_messagecolor(&sd->bl,color_table[COLOR_RED],msg_txt(sd,1497),false,SELF); //Roulette is disabled
+//		return;
+//	}
+//
+//	clif_roulette_open(sd);
+//}
+
 void clif_roulette_open( map_session_data* sd ){
 	nullpo_retv( sd );
 
-	roulette_generate_bonus( *sd );
-
-	struct packet_roulette_open_ack p;
-
-	p.PacketType = 0xa1a;
-	p.Result = 0; // result
-	p.Serial = 0; // serial
-	p.Step = (sd->roulette.claimPrize) ? sd->roulette.stage - 1 : 0;
-	p.Idx = (sd->roulette.claimPrize) ? sd->roulette.prizeIdx : -1;
-	p.AdditionItemID = sd->roulette.bonusItemID;
-	p.GoldPoint = sd->roulette_point.gold;
-	p.SilverPoint = sd->roulette_point.silver;
-	p.BronzePoint = sd->roulette_point.bronze;
-
-	sd->state.roulette_open = true;
-
-	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+	npc_event_do_id("MENUSYS::OnMenuSystem", sd->status.account_id);
 }
 
 /// Request to open the roulette window
@@ -20581,7 +20600,8 @@ void clif_parse_roulette_open( int fd, map_session_data* sd ){
 		return;
 	}
 
-	clif_roulette_open(sd);
+	npc_event_do_id("MENUSYS::OnMenuSystem", sd->status.account_id);
+	
 }
 
 /// Sends the info about the available roulette rewards to the client

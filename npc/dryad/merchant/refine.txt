@@ -1,6 +1,6 @@
 mainlounge,52,210,3	script	อัพเกรดอุปกรณ์	813,{
 	if( getbattleflag( "feature.refineui" ) ){
-		mes "[ อัพเกรดอุปกรณ์ ]";
+		mes "[ ^ABC663อัพเกรดอุปกรณ์^000000 ]";
 		mes "มีอะไรให้ข้าช่วยท่านหรือเปล่าล่ะ ?";
 		next;
 		menu 

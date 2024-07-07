@@ -1045,6 +1045,15 @@ TIMER_FUNC(mob_delayspawn){
 			return 0;
 		}
 		md->spawn_timer = INVALID_TIMER;
+
+
+		// if monster boss -> do announce
+		if( md->spawn->state.boss ) {
+			char message[128];
+			sprintf(message, "^ABC663[Dryad Announce]: ^FF0000%s ^ABC663ได้ปรากฏขึ้นในแผนที่ ^FF0000%s ^ABC663เหล่าผู้กล้ารีบไปจัดการมันซะ!.^000000", md->name, map_mapid2mapname(md->spawn->m));
+			clif_broadcast(&md->bl, message, strlen(message) + 1, BC_DEFAULT, ALL_CLIENT);
+		}
+
 		mob_spawn(md);
 	}
 	return 0;

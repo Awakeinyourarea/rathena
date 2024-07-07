@@ -36847,7 +36847,7 @@ Body:
     Type: Petarmor
     Buy: 20
   - Id: 10016
-    AegisName: Golden_Bell
+    AegisName: Golden_Bell_1
     Name: Golden Bell
     Type: Petarmor
     Buy: 20
@@ -41354,7 +41354,7 @@ Body:
       bonus2 bSkillAtk,"AS_GRIMTOOTH",5;
       bonus bAspdRate,5;
   - Id: 30040
-    AegisName: Shaman_Ring
+    AegisName: Shaman_Ring_1
     Name: Shaman Ring
     Type: Armor
     Defense: 1
@@ -41394,7 +41394,7 @@ Body:
       bonus bFlee,15;
       bonus bHit,10;
   - Id: 30043
-    AegisName: Navel_Ring
+    AegisName: Navel_Ring_1
     Name: Navel Ring
     Type: Armor
     Defense: 1

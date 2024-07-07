@@ -1,14 +1,14 @@
 mainlounge,28,184,5	script	PVP	10366,{
     mes "[ ^3333FFสนามประลอง^000000 ]";
-	mes "สวัสดีท่าน : ^FF0000 "+strcharinfo(0)+" ^000000"; 
+	mes "สวัสดีท่าน : ^ABC663 "+strcharinfo(0)+" ^000000"; 
 	mes "ต้องการเข้าสู่สนามประลอง"; 
 	mes "เพื่อทดสอบฝีมือของคุณไหม?"; 
 	next;
 	switch (select(
-		"^FF0000•^000000 Izlude  [ "+getmapusers("pvp_y_1-2")+" ] คน.",
-		"^FF0000•^000000 Arena DM  [ "+getmapusers("hallow01")+" ] คน.",
-		"^FF0000•^000000 Champion  [ "+getmapusers("pvp_n_2-3")+" ] คน.",
-		"^FF0000•^000000 Champion & Scholar  [ "+getmapusers("pvp_n_2-5")+" ] คน."))
+		"^ABC663•^000000 Izlude  [ "+getmapusers("pvp_y_1-2")+" ] คน.",
+		"^ABC663•^000000 Arena DM  [ "+getmapusers("hallow01")+" ] คน.",
+		"^ABC663•^000000 Champion  [ "+getmapusers("pvp_n_2-3")+" ] คน.",
+		"^ABC663•^000000 Champion & Scholar  [ "+getmapusers("pvp_n_2-5")+" ] คน."))
 	{
 	case 1:
 		sc_end SC_ASSUMPTIO;
@@ -74,8 +74,8 @@ mainlounge,28,184,5	script	PVP	10366,{
 OnInit:
     while(1){
 		delwaitingroom;
-		//waitingroom "เข้าสู่ PVP ["+(getmapusers("pvp_y_1-2")+getmapusers("hallow01")+getmapusers("pvp_n_2-3")+getmapusers("pvp_n_2-5"))+"] คน",0;
-		showscript "เข้าสู่ PVP ["+(getmapusers("pvp_y_1-2")+getmapusers("hallow01")+getmapusers("pvp_n_2-3")+getmapusers("pvp_n_2-5"))+"] คน", getnpcid(0);
+		waitingroom "เข้าสู่ PVP ["+(getmapusers("pvp_y_1-2")+getmapusers("hallow01")+getmapusers("pvp_n_2-3")+getmapusers("pvp_n_2-5"))+"] คน",0;
+		//showscript "เข้าสู่ PVP ["+(getmapusers("pvp_y_1-2")+getmapusers("hallow01")+getmapusers("pvp_n_2-3")+getmapusers("pvp_n_2-5"))+"] คน", getnpcid(0);
 		sleep 500;
 	}
 end;

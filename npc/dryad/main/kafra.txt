@@ -5,20 +5,20 @@
 -	script	KafraServices::KFSV	-1,{
 
 mes "[ ^3333FFKafra Express^000000 ]";
-mes "สวัสดีท่าน : ^FF0000 "+strcharinfo(0)+" ^000000"; 
-mes "^000000Guild ID ของท่านคือ : ^FF0000"+ getcharid(2) +"^000000";
-mes "^000000Party ID ของท่านคือ : ^FF0000"+ getcharid(1) +"^000000";
+mes "สวัสดีท่าน : ^ABC663 "+strcharinfo(0)+" ^000000"; 
+mes "^000000Guild ID ของท่านคือ : ^ABC663"+ getcharid(2) +"^000000";
+mes "^000000Party ID ของท่านคือ : ^ABC663"+ getcharid(1) +"^000000";
 mes "ต้องการให้ฉันช่วยเหลืออะไร ?";
 next;
 menu 
-"^FF0000•^000000 เซฟจุดเกิด",saves,
-"^FF0000•^000000 เก็บของ",Storages,
-"^FF0000•^000000 สร้างกิลด์",CreateGuild,
-"^FF0000•^000000 เช่าเป็ด/นก/รถเข็น",Rent,
-"^FF0000•^000000 เรียนสกิลเสริม",Platinumskill,
-"^ff0000•^000000 รับสกิล Homunculus",Skill_homun,
-"^FF0000•^000000 Reset Status/Skill",Resetss,
-"^FF0000•^000000 ยกเลิก",Lkcancel;
+"^ABC663•^000000 เซฟจุดเกิด",saves,
+"^ABC663•^000000 เก็บของ",Storages,
+"^ABC663•^000000 สร้างกิลด์",CreateGuild,
+"^ABC663•^000000 เช่าเป็ด/นก/รถเข็น",Rent,
+"^ABC663•^000000 เรียนสกิลเสริม",Platinumskill,
+"^ABC663•^000000 รับสกิล Homunculus",Skill_homun,
+"^ABC663•^000000 Reset Status/Skill",Resetss,
+"^ABC663•^000000 ยกเลิก",Lkcancel;
 
 Saves:
 atcommand "@save";
@@ -48,7 +48,7 @@ Rent:
 	mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
 	mes "เลือกสิ่งที่ต้องการเช่าค่ะ";
 	next;
-	switch (select("^FF0000•^000000 Peco Peco","^FF0000•^000000 Falcon","^FF0000•^000000 Cart")) {
+	switch (select("^ABC663•^000000 Peco Peco","^ABC663•^000000 Falcon","^ABC663•^000000 Cart")) {
 	case 1:
 		mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
 		if (checkriding()) {
@@ -100,7 +100,7 @@ Platinumskill:
 	mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
 	mes "ฉันสามารถสอนสกิลพิเศษให้แก่คุณได้";
 	next;
-	if (select("^FF0000•^000000 ได้โปรดสอนฉันที","^FF0000•^000000 ไม่ล่ะ")-1)
+	if (select("^ABC663•^000000 ได้โปรดสอนฉันที","^ABC663•^000000 ไม่ล่ะ")-1)
 	{
 		mes "[ ^3333FFเช่าเป็ด/นก/รถเข็น^000000 ]";
 		mes "งั้นขอให้โชคดี บ๊าย บาย";
@@ -298,10 +298,10 @@ mes "- 2.Skill";
 mes "- 3.Status & Skill";
 next;
 menu 
-"^FF0000•^000000 Reset Stats",L_Status,
-"^FF0000•^000000 Reset Skill",L_Skill,
-"^FF0000•^000000 Reset Stats & Skill",L_StatusSkill,
-"^FF0000•^000000 ยกเลิก",Lcancel;
+"^ABC663•^000000 Reset Stats",L_Status,
+"^ABC663•^000000 Reset Skill",L_Skill,
+"^ABC663•^000000 Reset Stats & Skill",L_StatusSkill,
+"^ABC663•^000000 ยกเลิก",Lcancel;
 
 L_Status:
 mes "[ ^3333FFReset Status/Skill^000000 ]";
