@@ -48,6 +48,8 @@ enum e_regen {
 	RGN_SSP  = 0x08,
 };
 
+std::vector<int> refine_pass_locate;
+
 static struct eri *sc_data_ers; /// For sc_data entries
 static struct status_data dummy_status;
 
@@ -3788,7 +3790,7 @@ int status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		pet_delautobonus(*sd, sd->pd->autobonus2, true);
 		pet_delautobonus(*sd, sd->pd->autobonus3, true);
 	}
-
+	refine_pass_bonus(sd);
 	// Parse equipment
 	for (i = 0; i < EQI_MAX; i++) {
 		current_equip_item_index = index = sd->equip_index[i]; // We pass INDEX to current_equip_item_index - for EQUIP_SCRIPT (new cards solution) [Lupus]
@@ -16067,7 +16069,189 @@ void StatusDatabase::loadingFinished(){
 }
 
 StatusDatabase status_db;
+/**
+* Read refine_pass_locate.txt
+**/
+static bool itemdb_read_refine_pass_locate(char* fields[], size_t columns, size_t current)
+{
+	std::string eqi = fields[0];
 
+	int64 constant;
+
+	// check if equipment location exists
+	if(!script_get_constant(eqi.c_str(),&constant)){
+		ShowWarning("itemdb_read_refine_pass_locate: Non-existant equipment location %s in refine_pass_locate.txt\n", eqi.c_str());
+		return false;
+	}
+
+	if(util::vector_exists(refine_pass_locate, constant))
+		return true;
+
+	refine_pass_locate.push_back(constant);
+	return true;
+}
+
+const std::string RefinePassDatabase::getDefaultLocation() {
+	return std::string(db_path) + "/custom/refine_pass.yml";
+}
+
+/**
+ * Reads and parses an entry from the refine_bonus.
+ * @param node: YAML node containing the entry.
+ * @return count of successfully parsed rows
+ */
+uint64 RefinePassDatabase::parseBodyNode(const ryml::NodeRef &node){
+
+	if (!this->nodesExist(node, {"RefineLevel"}))
+		return 0;
+
+	int16 level;
+
+	if (!this->asInt16(node, "RefineLevel", level))
+		return 0;
+
+	std::shared_ptr<s_refine_pass> RefinePass = this->find(level);
+	bool exists = RefinePass != nullptr;
+
+	if (!exists) {
+		if (!this->nodesExist(node, {"RefineLevel"}))
+			return 0;
+
+		RefinePass = std::make_shared<s_refine_pass>();
+		RefinePass->refine = level;
+	}
+
+	if (this->nodeExists(node, "Icon")) {
+		std::string icon_name;
+
+		if (!this->asString(node, "Icon", icon_name))
+			return 0;
+
+		int64 constant;
+
+		if (!script_get_constant(icon_name.c_str(), &constant)) {
+			this->invalidWarning(node["Icon"], "Icon %s is invalid, defaulting to EFST_BLANK.\n", icon_name.c_str());
+			constant = EFST_BLANK;
+		}
+		
+		if (constant < EFST_BLANK || constant >= EFST_MAX) {
+			this->invalidWarning(node["Icon"], "Icon %s is out of bounds, defaulting to EFST_BLANK.\n", icon_name.c_str());
+			constant = EFST_BLANK;
+		}
+
+		RefinePass->icon = static_cast<efst_type>(constant);
+	} else {
+		if (!exists)
+			RefinePass->icon = EFST_BLANK;
+	}
+
+	if (this->nodeExists(node, "Script")) {
+		std::string script;
+
+		if (!this->asString(node, "Script", script))
+			return 0;
+
+		if (RefinePass->script) {
+			script_free_code(RefinePass->script);
+			RefinePass->script = nullptr;
+		}
+
+		RefinePass->script = parse_script(script.c_str(), this->getCurrentFile().c_str(), this->getLineNumber(node["Script"]), SCRIPT_IGNORE_EXTERNAL_BRACKETS);
+	} else {
+		if (!exists) 
+			RefinePass->script = nullptr;
+	}  
+
+	if (!exists){
+		this->put(RefinePass->refine, RefinePass);
+	}
+
+	return 1;
+}
+
+RefinePassDatabase refine_pass_db;
+
+void refine_pass_bonus(map_session_data* sd) {
+	nullpo_retv(sd);
+	
+	int check_refine = 0;
+	std::vector<int> refine_level = {};
+	std::vector<int> sort_level = {};
+	int bonus_level = 0;
+
+	for(const auto& entry : refine_pass_db){
+
+		sort_level.push_back(entry.second->refine);
+
+		if(entry.second->icon != EFST_BLANK)
+			clif_status_load(&sd->bl, entry.second->icon, 0);
+	}	
+
+	std::sort(sort_level.begin(), sort_level.end());	
+
+	for(int i=0;i<refine_pass_locate.size();i++){
+		if(sd->equip_index[refine_pass_locate[i]] >= 0){
+			struct item item_data = sd->inventory.u.items_inventory[sd->equip_index[refine_pass_locate[i]]];
+			if(item_data.refine >= sort_level[0]){
+				check_refine++;
+				refine_level.push_back(item_data.refine);
+			}
+		}
+	}
+
+	std::sort(refine_level.begin(), refine_level.end());
+
+	bool apply_bonus = false;
+	if(check_refine == refine_pass_locate.size()){
+
+		apply_bonus = true;
+		if(util::vector_exists(sort_level,refine_level[0])){
+			for(auto &sl : sort_level){
+				if(refine_level[0] >= sl)
+					bonus_level = sl;
+			}
+		}else
+			bonus_level = sort_level.back();
+
+	}
+
+	if(check_refine && apply_bonus){
+		std::shared_ptr<s_refine_pass> refine_bonus = refine_pass_db.find(bonus_level);
+
+		if(refine_bonus == nullptr)
+			return;
+
+		if(refine_bonus->icon != EFST_BLANK)
+			clif_status_load(&sd->bl, refine_bonus->icon, 1);
+
+		if(refine_bonus->script)
+			run_script(refine_bonus->script, 0, sd->bl.id, 0);
+
+	}
+}
+
+void status_clean_old_buff(map_session_data *sd)
+{
+	nullpo_retv(sd);
+	for(const auto& entry : refine_pass_db){
+		if(entry.second->icon != EFST_BLANK)
+			clif_status_load(&sd->bl, entry.second->icon, 0);	
+	}	
+}
+
+static void apply_custom_bonus()
+{
+	struct s_mapiterator* iter;
+	map_session_data* sd;
+
+	iter = mapit_geteachpc();
+	for (sd = (map_session_data*)mapit_first(iter); mapit_exists(iter); sd = (map_session_data*)mapit_next(iter)) {
+		status_clean_old_buff(sd);
+		status_calc_pc(sd, SCO_NONE);
+	}
+
+	mapit_free(iter);
+}
 /**
  * Sets defaults in tables and starts read db functions
  * sv_readdb reads the file, outputting the information line-by-line to
@@ -16086,6 +16270,9 @@ void status_readdb( bool reload ){
 		//add other path here
 	};
 
+	if(reload){
+		refine_pass_locate = {};
+	}
 	// read databases
 	// path,filename,separator,mincol,maxcol,maxrow,func_parsor
 	for(i=0; i<ARRAYLENGTH(dbsubpath); i++){
@@ -16104,6 +16291,7 @@ void status_readdb( bool reload ){
 		}
 
 		sv_readdb(dbsubpath1, "status_disabled.txt", ',', 2, 2, -1, &status_readdb_status_disabled, i > 0);
+		sv_readdb(dbsubpath1, "custom/refine_pass_locate.txt",',', 1, 1, -1, &itemdb_read_refine_pass_locate, i > 0);
 
 		aFree(dbsubpath1);
 		aFree(dbsubpath2);
@@ -16114,11 +16302,13 @@ void status_readdb( bool reload ){
 		refine_db.reload();
 		status_db.reload();
 		enchantgrade_db.reload();
+		refine_pass_db.reload();
 	}else{
 		size_fix_db.load();
 		refine_db.load();
 		status_db.load();
 		enchantgrade_db.load();
+		refine_pass_db.load();
 	}
 	elemental_attribute_db.load();
 }
@@ -16147,4 +16337,5 @@ void do_final_status(void) {
 	refine_db.clear();
 	status_db.clear();
 	elemental_attribute_db.clear();
+	refine_pass_db.clear();
 }
