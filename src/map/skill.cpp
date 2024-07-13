@@ -11750,12 +11750,13 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			if( !status_isdead(bl) )
 				break;
 
+			status_zap(bl, 0, tstatus->sp * 10 * skill_lv / 100);
+
 			int heal = tstatus->sp;
 
 			if( heal <= 0 )
 				heal = 1;
 			tstatus->hp = heal;
-			tstatus->sp -= tstatus->sp * ( 60 - 10 * skill_lv ) / 100;
 			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 			pc_revive((TBL_PC*)bl,heal,0);
 			clif_resurrection( *bl );
@@ -24216,8 +24217,8 @@ uint64 SkillDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 	}
 
-	if (this->nodeExists(node, "NoNearNpc")) {
-		const auto& npcNode = node["NoNearNpc"];
+	if (this->nodeExists(node, "NoNearNPC")) {
+		const auto& npcNode = node["NoNearNPC"];
 
 		if (this->nodeExists(npcNode, "AdditionalRange")) {
 			uint16 range;
