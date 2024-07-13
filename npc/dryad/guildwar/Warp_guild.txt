@@ -41,7 +41,7 @@ function	script	Warp_GuildWar_old	{
 }
 
 -	script	guild_main	FAKE_NPC,{		
-	mes "[ ^3333FFGuild War^000000 ]";
+	mes "^ABC663[ Guild War ]^000000";
 	mes "สวัสดีคุณ^ABC663 "+strcharinfo(0)+" ^000000"; 
 	mes "ต้องการเข้าสู่กิลด์วอร์ไหม";
 	mes "วาร์ปชั้นที่ 2 เปิดนาทีที่ 45";

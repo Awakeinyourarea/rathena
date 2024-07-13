@@ -11,22 +11,22 @@ set @failbatrate4,@failbatrate1+@failbatrate2+@failbatrate3; //ไม่สามารถถอดได้ แ
 //สรุปคือ โอกาสผิดพลาดเท่ากับ 15%
 
 UPGRADEROOT:
-	mes "[ ^ABC663ถอดการ์ด ^000000]";
+	mes "^ABC663[ นักถอดการ์ด ]^000000";
     mes "ข้ามีบริการที่จะถอดการ์ดออกจากอาวุธ";
     mes "และชุดเกราะของเจ้า";
     mes "การถอดการ์ดของไม่มีวันเสียหาย";
 	mes "โอกาสติด 100% ค่าบริการ [ "+ @cardbatzeny1 +" ] zeny";
 	next;
-	if(select("น่าสนใจดี ขอข้าทำหน่อย","ไม่ล่ะ ขอบใจ")-1)
+	if(select("^ABC663•^000000 น่าสนใจดี ขอข้าทำหน่อย","^ABC663•^000000 ไม่ล่ะ ขอบใจ")-1)
 	{
-		mes "[ ^ABC663ถอดการ์ด ^000000]";
+		mes "^ABC663[ นักถอดการ์ด ]^000000";
 		mes " ";
 		mes "ไม่เป็นไร ยังรอเจ้าอยู่เหมือนเดิมนะ";
 		close;
 	}
 
 REMOVEMENU:
-	mes "[ ^ABC663ถอดการ์ด ^000000]";
+	mes "^ABC663[ นักถอดการ์ด ]^000000";
 	mes " ";
 	mes "เอาล่ะ ท่านต้องการถอดการ์ดจากส่วนไหน";
 	next;
@@ -43,7 +43,7 @@ REMOVEMENU:
 		getequipname(10)))
 	{
 	case 1:
-		mes "[ ^ABC663ถอดการ์ด ^000000]";
+		mes "^ABC663[ นักถอดการ์ด ]^000000";
 		mes " ";
 		mes "ไม่เป็นไร ยังรอเจ้าอยู่เหมือนเดิมนะ";
 		close;
@@ -88,14 +88,14 @@ REMOVEMENU:
 
 	if(getequipcardcnt(@part) == 0) 
 	{
-		mes "[ ^ABC663ถอดการ์ด ^000000]";
+		mes "^ABC663[ นักถอดการ์ด ]^000000";
 		mes " ";
 		mes "ของชิ้นนี้ไม่มีการ์ดติดมา... เจ้าคิดจะทำอะไรน่ะ";
 		close;
 	}
 	set @cardcount,getequipcardcnt(@part);
 	set @cardbatzenyall, (@cardbatzeny2 * @cardcount) + @cardbatzeny1;
-	mes "[ ^ABC663ถอดการ์ด ^000000]";
+	mes "^ABC663[ นักถอดการ์ด ]^000000";
 	mes " ";
 	mes "ของชิ้นนี้มีการ์ดจำนวน [ " + @cardcount + " ] ใบ";
 	mes "รวมค่าบริการ [ "+ @cardbatzenyall +" ] zeny";
@@ -107,7 +107,7 @@ REMOVEMENU:
 		mes "ไม่เป็นไร ยังรอเจ้าอยู่เหมือนเดิมนะ";
 		close;
 	}
-	mes "[ ^ABC663ถอดการ์ด ^000000]";
+	mes "^ABC663[ นักถอดการ์ด ]^000000";
 	mes " ";
 	mes "การทำครั้งนี้ มีโอกาสพลาดด้วยคือ";
 	mes "เสียหายทั้ง การ์ดและ Item [ "+ @failbatrate1 +" ]  %";
@@ -118,12 +118,12 @@ REMOVEMENU:
 	next;
 	if(select("ข้ายืนยันที่จะทำต่อ","มีโอกาสแตกด้วยหรอ ไม่เอาแล้ว")-1)
 	{
-		mes "[ ^ABC663ถอดการ์ด ^000000]";
+		mes "^ABC663[ นักถอดการ์ด ]^000000";
 		mes " ";
 		mes "ไม่เป็นไร ยังรอเจ้าอยู่เหมือนเดิมนะ";
 		close;
 	}
-	mes "[ ^ABC663ถอดการ์ด ^000000]";
+	mes "^ABC663[ นักถอดการ์ด ]^000000";
 	mes " ";
 	mes "ต่อไปท่านต้องเลือกว่า เสียหายบางอย่าง";
 	mes "ท่านจะให้ของชิ้นไหน ไม่เสียหาย";
@@ -136,13 +136,13 @@ REMOVEMENU:
 		set @failtype,1;
 	}	
 
-	mes "[ ^ABC663ถอดการ์ด ^000000]";
+	mes "^ABC663[ นักถอดการ์ด ]^000000";
 	mes " ";
 	mes "เอาล่ะ เราจะเริ่มกันแล้วนะ";
 	next;
 	if((zeny < @cardbatzenyall) || (countitem(1000) < @cardbatzeny3) || (countitem(715) < @cardbatzeny4))
 	{
-		mes "[ ^ABC663ถอดการ์ด ^000000]";
+		mes "^ABC663[ นักถอดการ์ด ]^000000";
 		mes " ";
 		mes "เจ้ามีของไม่ครบตามที่ข้าต้องการ";
 		close;
@@ -159,7 +159,7 @@ REMOVEMENU:
 	if(@failchance < @failbatratecal1)
 	{
 		failedremovecards @part,0;
-		mes "[ ^ABC663ถอดการ์ด ^000000]";
+		mes "^ABC663[ นักถอดการ์ด ]^000000";
 		mes " ";
 		mes "โอ้...พระเจ้า การถอดการ์ดครั้งนี้ผิดพลาด";
 		mes "ท่านเสียทั้งไอเท่มและการ์ด";
@@ -169,7 +169,7 @@ REMOVEMENU:
 	if((@failchance < @failbatratecal2) && (@failtype == 1))
 	{
 		failedremovecards @part,1;
-		mes "[ ^ABC663ถอดการ์ด ^000000]";
+		mes "^ABC663[ นักถอดการ์ด ]^000000";
 		mes " ";
 		mes "โอ้...พระเจ้า การถอดการ์ดครั้งนี้ผิดพลาด";
 		mes "ท่านเสีย Card ไป แต่ Item ของท่านยังคงอยู่";
@@ -178,7 +178,7 @@ REMOVEMENU:
 	if((@failchance < @failbatratecal2) && (@failtype == 2))
 	{
 		failedremovecards @part,2;
-		mes "[ ^ABC663ถอดการ์ด ^000000]";
+		mes "^ABC663[ นักถอดการ์ด ]^000000";
 		mes " ";
 		mes "โอ้...พระเจ้า การถอดการ์ดครั้งนี้ผิดพลาด";
 		mes "ท่านเสีย Item ไป แต่ Card ของท่านยังคงอยู่";
@@ -187,7 +187,7 @@ REMOVEMENU:
 	if(@failchance < @failbatratecal3) 
 	{
 		failedremovecards @part,3;
-		mes "[ ^ABC663ถอดการ์ด ^000000]";
+		mes "^ABC663[ นักถอดการ์ด ]^000000";
 		mes " ";
 		mes "โอ้...พระเจ้า การถอดการ์ดครั้งนี้ผิดพลาด";
 		mes "โชคดีที่ Item และ Card ไม่เสียหาย";
@@ -195,7 +195,7 @@ REMOVEMENU:
 	}
 
 	successremovecards @part;
-	mes "[ ^ABC663ถอดการ์ด ^000000]";
+	mes "^ABC663[ นักถอดการ์ด ]^000000";
 	mes " ";
 	mes "วู้ว... การถอดการ์ดสำเร็จ ขอแสดงความยินดีด้วย";
 close;

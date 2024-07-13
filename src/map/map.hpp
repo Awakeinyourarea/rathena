@@ -1296,5 +1296,17 @@ extern char roulette_table[32];
 extern char guild_storage_log_table[32];
 
 void do_shutdown(void);
+// (^~_~^) Color Nicks Start
 
+struct color_data
+{
+	unsigned int text_color;
+	unsigned int shadow_color;
+};
+
+extern DBMap* color_nicks_db;
+int map_color_nicks_clear(DBKey key, DBData* data, va_list va);
+void map_color_nicks_load();
+
+// (^~_~^) Color Nicks End
 #endif /* MAP_HPP */

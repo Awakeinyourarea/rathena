@@ -50,6 +50,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "rune.hpp"
 #include "script.hpp"
 #include "storage.hpp"
 #include "trade.hpp"
@@ -11043,6 +11044,64 @@ ACMD_FUNC(afk) {
         return 0;
 }
 
+// (^~_~^) Color Nicks Start
+
+ACMD_FUNC(reload_color_db)
+{
+	map_color_nicks_load();
+
+	clif_displaymessage(fd, "Color Nicks DB reloaded.");
+
+	return 0;
+}
+
+ACMD_FUNC(colornick)
+{
+	unsigned int group_id;
+
+	nullpo_retr(-1, sd);
+
+	if (!*message || sscanf(message, "%d", &group_id) < 1)
+	{
+		clif_displaymessage(fd, "Please, enter number of color nick group (usage: @colornick <group_id>).");
+		return -1;
+	}
+
+	if (group_id == 0)
+	{
+		sd->color_nicks_group_id = 0;
+		clif_displaymessage(fd, "Color nick disabled!");
+	}
+	else
+	{
+		if (idb_exists(color_nicks_db, group_id) == 0)
+		{
+			clif_displaymessage(fd, "Group id has not found in Color Nicks DB.");
+			return 0;
+		}
+
+		sd->color_nicks_group_id = group_id;
+
+		clif_displaymessage(fd, "Color nick set.");
+	}
+
+	pc_setglobalreg(sd, add_str("CN_GROUP_ID"), sd->color_nicks_group_id);
+	
+	clif_send_colornicks(sd);
+
+	return 0;
+}
+
+// (^~_~^) Color Nicks End
+ACMD_FUNC(reloadrunedb)
+{
+	nullpo_retr(-1, sd);
+
+	rune_db_reload();
+	clif_displaymessage(fd, "Rune system has been reloaded");
+
+	return 0;
+}
 
 #include <custom/atcommand.inc>
 
@@ -11060,6 +11119,12 @@ void atcommand_basecommands(void) {
 	 * TODO: List all commands that causing crash
 	 **/
 	AtCommandInfo atcommand_base[] = {
+// (^~_~^) Color Nicks Start
+
+		ACMD_DEF(reload_color_db),
+		ACMD_DEF(colornick),
+
+// (^~_~^) Color Nicks End		
 #include <custom/atcommand_def.inc>
 		ACMD_DEF2R("warp", mapmove, ATCMD_NOCONSOLE),
 		ACMD_DEF(where),

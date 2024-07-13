@@ -18,11 +18,11 @@ Contact Us. Dollaporn Naraphan [ FB ]
 
 mainlounge,19,204,5	script	Hunting Missions	10230,{
 function Chk;
-	mes "[Hunting Missions]";
+	mes "^ABC663[ Hunting Missions ]^000000";
 	mes "สวัสดี, " + strcharinfo(0) + "!";
 	if (!#Mission_Delay) {
 		next;
-		mes "[Hunting Missions]";
+		mes "^ABC663[ Hunting Missions ]^000000";
 		mes "ฉันไม่พบบันทึกเกี่ยวกับคุณ...";
 		mes "ดังนั้น, คุณสามารถรับภารกิจใหม่ได้ที่นี่ !";
 		emotion ET_HUK;
@@ -35,15 +35,15 @@ function Chk;
 	mes "คุณมีอะไรให้ฉันช่วยหรอ ?";
 	mes " ";
 	mes "^777777~ ภารกิจที่ทำสำเร็จ " + callfunc("F_InsertPlural",Mission_Total,"ภารกิจ",0,"^0055FF%d^777777 %s") + ". ~^000000";
-	mes " ";
+//	mes " ";
 	mes "คุณมี ^0055FF" + #Mission_Points + "^000000 Mission Points.";
 	next;
 	switch(select(
-		((!Mission0) ? " - รับภารกิจ::" : ": - สถานะภารกิจ: - ยกเลิกภารกิจ") +
-		": - ข้อมูลเพิ่มเติม: - ร้านค้าภารกิจ: - อันดับผู้ล่าภารกิจ: - ^777777ยกเลิกการสนทนา^000000"
+		((!Mission0) ? " ^ABC663•^000000 รับภารกิจ::" : ": ^ABC663•^000000 สถานะภารกิจ: ^ABC663•^000000 ยกเลิกภารกิจ") +
+		": ^ABC663•^000000 ข้อมูลเพิ่มเติม: ^ABC663•^000000 ร้านค้าภารกิจ: ^ABC663•^000000 อันดับผู้ล่าภารกิจ: ^ABC663•^000000 ^777777ยกเลิกการสนทนา^000000"
 	)) {
 	case 1:
-		mes "[Hunting Missions]";
+		mes "^ABC663[ Hunting Missions ]^000000";
 		if (#Mission_Count) {
 			mes "คุณได้รับภารกิจ";
 			mes "จากตัวละครอื่นไปแล้ว.";
@@ -51,7 +51,7 @@ function Chk;
 				query_sql("SELECT 1 FROM `char_reg_num` WHERE `key` = 'Mission0' AND `char_id` IN(SELECT `char_id` FROM `char` WHERE `account_id` = " + getcharid(3) + ")", .@i);
 				if (!.@i) {
 					next;
-					mes "[Hunting Missions]";
+					mes "^ABC663[ Hunting Missions ]^000000";
 					mes "ฉันไม่สามารถค้นหาบันทึกเกี่ยวกับ";
 					mes "ตัวละครนั้นได้เลย, ดังนั้น...";
 					mes "โปรดรอ, ฉันสักครู่เดียว.";
@@ -75,18 +75,18 @@ function Chk;
 		#Mission_Count = rand(.Count[0], .Count[1]);
 		callsub Mission_Status;
 		next;
-		mes "[Hunting Missions]";
+		mes "^ABC663[ Hunting Missions ]^000000";
 		mes "โปรดกลับมาหาฉัน";
 		mes "หลังจากคุณเสร็จสิ้นการล่าแล้ว.";
 		mes "ขอให้คุณโชคดี!";
 		close;
 	case 2:
-		mes "[Hunting Missions]";
+		mes "^ABC663[ Hunting Missions ]^000000";
 		mes "สถานะภารกิจ :";
 		callsub Mission_Status;
 		close;
 	case 3:
-		mes "[Hunting Missions]";
+		mes "^ABC663[ Hunting Missions ]^000000";
 		mes "คุณแน่ใจหรือว่าที่จะต้องการ";
 		mes "ยกเลิกภารกิจ ?";
 		if (.Reset < 0 && .Delay)
@@ -98,7 +98,7 @@ function Chk;
 		case 1:
 			if (.Reset > 0) {
 				if (Zeny < .Reset) {
-					mes "[Hunting Missions]";
+					mes "^ABC663[ Hunting Missions ]^000000";
 					mes "ดูเหมือนว่า";
 					mes "คุณไม่ได้มีจำนวน เซนี เพียงพอสำหรับการยกเลิกภารกิจ.";
 					emotion ET_SORRY;
@@ -107,7 +107,7 @@ function Chk;
 				Zeny -= .Reset;
 				emotion ET_MONEY;
 			}
-			mes "[Hunting Missions]";
+			mes "^ABC663[ Hunting Missions ]^000000";
 			mes "เอาล่ะ, ฉันได้ทำการ";
 			mes "ยกเลิกภารกิจในปัจจุบันของคุณเรียบร้อยแล้ว.";
 			specialeffect2 EF_STORMKICK4;
@@ -120,7 +120,7 @@ function Chk;
 				#Mission_Delay = gettimetick(2) + (.Delay * 3600);
 			close;
 		case 2:
-			mes "[Hunting Missions]";
+			mes "^ABC663[ Hunting Missions ]^000000";
 			mes "ฉันคิดอยู่แล้วว่าคุณต้องล้อฉันเล่นแน่ๆ !";
 			mes "เอาล่ะ คุณควรกลับไปทำงานของคุณได้แล้ว โชคดี.";
 			emotion ET_SMILE;
@@ -130,21 +130,21 @@ function Chk;
 		callsub Mission_Info;
 		close;
 	case 5:
-		mes "[Hunting Missions]";
+		mes "^ABC663[ Hunting Missions ]^000000";
 		mes "คุณมี ^0055FF" + #Mission_Points + "^000000 Mission Points.";
 		mes "โปรดใช้มันอย่างชาญฉลาด !";
 		callshop "mission_shop",1;
 		npcshopattach "mission_shop";
 		end;
 	case 6:
-		mes "[Hunting Missions]";
+		mes "^ABC663[ Hunting Missions ]^000000";
 		mes "นี่คืออันดับของผู้ล่าภารกิจ :";
 		query_sql("SELECT char_id AS id, (SELECT `name` FROM `char` WHERE char_id = id),`value` FROM `char_reg_num` WHERE `key` = 'Mission_Total' ORDER BY CAST(`value` AS SIGNED) DESC LIMIT 5", .@id, .@name$, .@val);
 		for (.@i = 0; .@i < 5; .@i++)
 			mes "  [ลำดับ " + (.@i+1) + "]  " + ((.@name$[.@i] == "") ? "^ว่าง" : "^0055FF" + .@name$[.@i]+"^000000 : ^ABC663" + .@val[.@i] + " ภารกิจ.") + "^000000";
 		close;
 	case 7:
-		mes "[Hunting Missions]";
+		mes "^ABC663[ Hunting Missions ]^000000";
 		mes "ไม่มีอะไร ? โอเค...";
 		emotion ET_SCRATCH;
 		close;
@@ -169,7 +169,7 @@ Mission_Status:
 	.@Zeny = #Mission_Count * .Quests * .@j[.@i] * .Modifier[2];
 
 	next;
-	mes "[Hunting Missions]";
+	mes "^ABC663[ Hunting Missions ]^000000";
 	mes "รางวัลภารกิจ :";
 	mes " > Mission Points : ^0055FF" + .@Mission_Points + "^000000";
 //	mes " > ค่าประสบการณ์ เลเวล : ^0055FF" + callfunc("F_InsertComma",.@Base_Exp) + "^000000";
@@ -180,7 +180,7 @@ Mission_Status:
 		return;
 	}
 	next;
-	mes "[Hunting Missions]";
+	mes "^ABC663[ Hunting Missions ]^000000";
 	mes "โอ้, คุณกลับมาแล้ว !";
 	mes "ทำได้เยี่ยมมาก.";
 	mes "นี่คือผลรางวัลของการพยายาม.";
@@ -206,13 +206,13 @@ Mission_Status:
 	close;
 
 Mission_Info:
-	mes "[Hunting Missions]";
+	mes "^ABC663[ Hunting Missions ]^000000";
 	mes "ถ้าหากคุณเลือก, เลือกที่จะยอมรับถารกิจ";
 	mes "คุณจะได้รับภารกิจในการล่าแบบสุ่ม.";
 	mes "บางครั้งฉันก็บอกไม่ได้ว่ามันคืออะไร, แต่";
 	mes "ผลของรางวัลนั้นจะขึ้นอยู่กับความยาก หรือ ง่าย ในแต่ละภารกิจที่ได้รับ.";
 	next;
-	mes "[Hunting Missions]";
+	mes "^ABC663[ Hunting Missions ]^000000";
 	mes "Missions points จะสามารถ";
 	mes "ใช้ได้กับทุกตัวละครในบัญชีของคุณ.";
 	if (.Delay)
@@ -220,7 +220,7 @@ Mission_Info:
 	mes "คุณจะไม่สามารถรับภารกิจซ้ำได้";
 	mes "หากตัวละครใดตัวละครหนึ่งในบัญชีของคุณรับภารกิจไปแล้ว.";
 	next;
-	mes "[Hunting Missions]";
+	mes "^ABC663[ Hunting Missions ]^000000";
 	mes "คุณสามารถรับภารกิจได้";
 	mes (.Delay ? "ทุก " + ((.Delay == 1) ? "ชั่วโมง." : .Delay + " ชั่วโมง.") : "ทุกเมื่อตามที่คุณต้องการ.");
 	mes "นี่คือรายละเอียดคร่าวๆทั้งหมด~";
@@ -242,7 +242,7 @@ OnBuyItem:
 				set @cost, @cost + (.Shop[.@j+1] * @bought_quantity[.@i]);
 				break;
 			}
-	mes "[Hunting Missions]";
+	mes "^ABC663[ Hunting Missions ]^000000";
 	if (@cost > #Mission_Points)
 		mes "คุณมีจำนวน Mission Points ไม่เพียงพอ.";
 	else {

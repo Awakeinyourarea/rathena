@@ -21180,3 +21180,16 @@ Body:
       BuyingStore: true
     Trade:
       NoDrop: true
+  - Id: 6909
+    AegisName: Nyangvine_Fruit
+    Name: Actinidia Cat Fruit
+    Type: Etc
+    Buy: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true

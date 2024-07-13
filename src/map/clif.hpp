@@ -52,6 +52,9 @@ enum e_macro_report_status : uint8;
 enum e_hom_state2 : uint8;
 enum _sp;
 enum e_searchstore_failure : uint16;
+enum e_emotemessage_result: uint8;
+enum e_emoteaddtobuylist_result: int8;
+enum e_runedecompo_result: uint8;
 
 enum e_PacketDBVersion { // packet DB
 	MIN_PACKET_DB  = 0x064,
@@ -1339,7 +1342,11 @@ void clif_broadcast_obtain_special_item(const char *char_name, t_itemid nameid, 
 void clif_dressing_room(map_session_data *sd, int flag);
 void clif_navigateTo(map_session_data *sd, const char* mapname, uint16 x, uint16 y, uint8 flag, bool hideWindow, uint16 mob_id );
 void clif_SelectCart(map_session_data *sd);
+// (^~_~^) Color Nicks Start
 
+void clif_send_colornicks(map_session_data* sd);
+
+// (^~_~^) Color Nicks End
 /// Achievement System
 void clif_achievement_list_all(map_session_data *sd);
 void clif_achievement_update(map_session_data *sd, struct achievement *ach, int count);
@@ -1442,4 +1449,28 @@ void clif_noask_sub( map_session_data& sd, map_session_data& tsd, int type );
 
 int clif_hideview(struct block_list* bl, va_list ap);	// map_forallinmovearea callback
 
+//Emote
+void clif_parse_receive_emote( int fd, map_session_data* sd );
+void clif_receive_emote (map_session_data* sd, uint16 packId, uint16 emotionId );
+void clif_list_emote (map_session_data* sd);
+void clif_message_emote (map_session_data* sd, uint16 packId, enum e_emotemessage_result eresult );
+void clif_addtobuylist_emote (map_session_data* sd, uint16 packId, enum e_emoteaddtobuylist_result );
+int clif_addtobuylist_emote_sub(map_session_data *sd,va_list ap);
+
+// Rune UI
+void clif_rune_ui_open( map_session_data* sd );
+void clif_parse_asktag_rune( int fd, map_session_data* sd );
+void clif_bookinfo_rune( map_session_data* sd, uint16 tagID );
+void clif_setinfo_rune( map_session_data* sd, uint16 tagID );
+void clif_parse_result_rune_ui_open( int fd, map_session_data* sd );
+void clif_parse_bookactivate_rune( int fd, map_session_data* sd );
+void clif_parse_setactivate_rune( int fd, map_session_data* sd );
+void clif_setactivate_rune (map_session_data* sd, uint16 tagID, uint32 runesetid );
+void clif_parse_setupgrade_rune( int fd, map_session_data* sd );
+void clif_setupgrade_rune (map_session_data* sd, uint16 tagID, uint32 runesetid );
+void clif_enablerefresh_rune (map_session_data* sd, uint16 tagID, uint32 runesetid );
+void clif_enablerefresh_rune2 (map_session_data* sd, uint16 tagID, uint32 runesetid );
+void clif_onlogenable_rune (map_session_data* sd);
+void clif_parse_decompo_rune( int fd, map_session_data* sd );
+void clif_runedecompowindow_result (map_session_data* sd, enum e_runedecompo_result result, std::unordered_map<t_itemid, uint32> material_item_list);
 #endif /* CLIF_HPP */

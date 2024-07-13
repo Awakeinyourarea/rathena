@@ -374,6 +374,25 @@ struct s_qi_display {
 	e_questinfo_markcolor color;
 };
 
+struct s_emote_data {
+	uint32 id;
+	uint32 expire_time;
+	uint8 type; 
+};
+
+struct s_runebook_data {
+	uint16 tagId;
+	uint32 bookId;
+};
+
+struct s_runeset_data {
+	uint16 tagId;
+	uint32 setId;
+	uint8 selected;
+	uint16 upgrade;
+	uint16 failcount;
+};
+
 class map_session_data {
 public:
 	struct block_list bl;
@@ -459,6 +478,8 @@ public:
 		bool roulette_open;
 		t_itemid item_reform;
 		uint64 item_enchant_index;
+		bool craft_barter;
+		bool runeui_open;
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -680,6 +701,12 @@ public:
 	} bonus;
 	// zeroed vars end here.
 
+	// (^~_~^) Color Nicks Start
+
+	unsigned int color_nicks_group_id;
+
+	// (^~_~^) Color Nicks End
+	
 	int castrate,hprate,sprate,aprate,dsprate;
 	int hprecov_rate,sprecov_rate;
 	int matk_rate;
@@ -831,6 +858,18 @@ public:
 	// Battlegrounds queue system [MasterOfMuppets]
 	int bg_id, bg_queue_id;
 	int tid_queue_active; ///< Timer ID associated with players joining an active BG
+	std::vector<s_emote_data> emotes;
+
+	std::vector<s_runeset_data> runeSets;
+	std::vector<s_runebook_data> runeBooks;
+
+	struct s_runeactivated_data {
+		uint16 tagID;
+		uint32 runesetid;
+		uint16 upgrade;
+		uint8 bookNumber;
+		bool loaded;
+	} runeactivated_data;
 
 #ifdef SECURE_NPCTIMEOUT
 	/**

@@ -4,7 +4,7 @@
 
 -	script	KafraServices::KFSV	-1,{
 
-mes "[ ^3333FFKafra Express^000000 ]";
+mes "^ABC663[ Kafra Express ]^000000";
 mes "สวัสดีท่าน : ^ABC663 "+strcharinfo(0)+" ^000000"; 
 mes "^000000Guild ID ของท่านคือ : ^ABC663"+ getcharid(2) +"^000000";
 mes "^000000Party ID ของท่านคือ : ^ABC663"+ getcharid(1) +"^000000";

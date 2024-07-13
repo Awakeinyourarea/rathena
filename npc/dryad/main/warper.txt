@@ -4,7 +4,7 @@ function Go; function Disp; function Pick; function Restrict;
 // --------------------------------------------------
 //	Main Menu:
 // --------------------------------------------------
-	mes "[ Warper ]";
+	mes "^ABC663[ Warper ]^000000";
 	mes "วันนี้วันที่ :^ABC663 "+ gettimestr("%d/%m/%y",19) +"^000000";
 	mes "เวลา :^ABC663 "+ gettimestr("%H:%M",19) +"^000000";
 	mes "สวัสดีค่ะ ยินดีต้อนรับค่ะ";

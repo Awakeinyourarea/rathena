@@ -36,6 +36,7 @@
 #include "clan.hpp"
 #include "clif.hpp"
 #include "elemental.hpp"
+#include "emote.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
 #include "instance.hpp"
@@ -53,6 +54,7 @@
 #include "pc_battle_stats.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "rune.hpp"
 #include "script.hpp"
 #include "skill.hpp"
 #include "status.hpp"
@@ -76,7 +78,59 @@ static inline int32 client_exp(t_exp exp) {
 	return (int32)u64min(exp, MAX_EXP);
 }
 #endif
+// (^~_~^) Color Nicks Start
 
+void clif_send_colornicks_single(int fd, map_session_data * sd)
+{
+	struct color_data* cn_data = (struct color_data*)idb_get(color_nicks_db, sd->color_nicks_group_id);
+
+	if (cn_data == 0)
+	{
+		return;
+	}
+
+	WFIFOHEAD(fd, 0x12);
+	WFIFOW(fd,0) = 0x8D;
+	WFIFOW(fd,2) = 0x12;
+	WFIFOL(fd,4) = sd->bl.id;
+	WFIFOW(fd,8) = 2;
+	WFIFOL(fd,10) = cn_data->text_color;
+	WFIFOL(fd,14) = cn_data->shadow_color;
+
+	WFIFOSET(fd, 0x12);
+}
+
+void clif_send_colornicks(map_session_data * sd)
+{
+	uint8 buf[18];
+
+	if (sd->color_nicks_group_id != 0)
+	{
+		struct color_data * cn_data = (struct color_data*)idb_get(color_nicks_db, sd->color_nicks_group_id);
+
+		if (cn_data == 0)
+		{
+			return;
+		}
+
+		WBUFL(buf, 10) = cn_data->text_color;
+		WBUFL(buf, 14) = cn_data->shadow_color;
+	}
+	else
+	{
+		WBUFL(buf, 10) = 0;
+		WBUFL(buf, 14) = 0;
+	}
+
+	WBUFW(buf, 0) = 0x8D;
+	WBUFW(buf, 2) = 0x12;
+	WBUFL(buf, 4) = sd->bl.id;
+	WBUFW(buf, 8) = 2;
+
+	clif_send(buf, 0x12, &sd->bl, AREA);
+}
+
+// (^~_~^) Color Nicks End
 /* for clif_clearunit_delayed */
 static struct eri *delay_clearunit_ers;
 
@@ -1826,7 +1880,11 @@ int clif_spawn( struct block_list *bl, bool walking ){
 	case BL_PC:
 		{
 			TBL_PC *sd = ((TBL_PC*)bl);
+			// (^~_~^) Color Nicks Start
 
+			clif_send_colornicks(sd);
+
+			// (^~_~^) Color Nicks End
 			if (sd->spiritball > 0)
 				clif_spiritball(&sd->bl);
 			if (sd->sc.getSCE(SC_MILLENNIUMSHIELD))
@@ -5145,6 +5203,14 @@ void clif_getareachar_unit( map_session_data* sd,struct block_list *bl ){
 			TBL_PC* tsd = (TBL_PC*)bl;
 
 			clif_getareachar_pc(sd, tsd);
+			// (^~_~^) Color Nicks Start
+
+			if (tsd->color_nicks_group_id != 0)
+			{
+				clif_send_colornicks_single(sd->fd, tsd);	
+			}
+
+			// (^~_~^) Color Nicks End
 			if(tsd->state.size==SZ_BIG) // tiny/big players [Valaris]
 				clif_specialeffect_single(bl,EF_GIANTBODY2,sd->fd);
 			else if(tsd->state.size==SZ_MEDIUM)
@@ -9972,7 +10038,12 @@ void clif_refresh(map_session_data *sd)
 	if (sd->state.buyingstore)
 		buyingstore_close(sd);
 
+	// (^~_~^) Color Nicks Start
 
+	clif_send_colornicks_single(sd->fd, sd);
+
+	// (^~_~^) Color Nicks End
+	
 	mail_clear(sd);
 
 	clif_loadConfirm( sd );
@@ -25391,7 +25462,659 @@ int clif_vend(struct map_session_data *sd, int skill_lv) {
 	}
 	return 1;
 }
+void clif_parse_receive_emote( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_SEND_EMOTE* p = (struct PACKET_CZ_SEND_EMOTE*)RFIFOP( fd, 0 );
 
+	//ShowError("clif_parse_receive_emote packId %d emotionId %d \n",p->packId, p->emotionId);
+	
+	clif_receive_emote(sd, p->packId, p->emotionId);
+#endif
+}
+
+void clif_receive_emote (map_session_data* sd, uint16 packId, uint16 emotionId ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_RECEIVE_EMOTE p = {};
+
+	p.packetType = HEADER_ZC_RECEIVE_EMOTE;
+	p.AID = sd->bl.id;
+
+	if(p.packId > 0){
+		auto it_emote_data = std::find_if(sd->emotes.begin(), sd->emotes.end(), [p](const s_emote_data& emote) {
+			return emote.id == p.packId;
+		});
+
+		if (it_emote_data == sd->emotes.end()) {
+			clif_addtobuylist_emote(sd, 0, ZC_EMOTE_BUYLIST_CANTUSENOTPURCHASED);
+			return;
+		}
+		
+		if(it_emote_data->expire_time && it_emote_data->expire_time < time(NULL)){
+			clif_addtobuylist_emote(sd, p.packId, ZC_EMOTE_BUYLIST_SALESENDED);
+			sd->emotes.erase(std::remove_if(sd->emotes.begin(), sd->emotes.end(),
+				[p](const s_emote_data& emote) {
+					return emote.id == p.packId;
+				}),
+            sd->emotes.end());
+		}
+	}
+
+	if (battle_config.basic_skill_check == 0 || pc_checkskill(sd, NV_BASIC) >= 2 || pc_checkskill(sd, SU_BASIC_SKILL) >= 1) {
+		if (p.emotionId == 1000) {// prevent use of the mute emote [Valaris]
+			clif_addtobuylist_emote(sd, 0, ZC_EMOTE_BUYLIST_UNKNOWNERROR);
+			return;
+		}
+		// fix flood of emotion icon (ro-proxy): flood only the hacker player
+		if (sd->emotionlasttime + 1 >= time(NULL)) { // not more than 1 per second
+			sd->emotionlasttime = time(NULL);
+			clif_addtobuylist_emote(sd, 0, ZC_EMOTE_BUYLIST_UNKNOWNERROR);
+			return;
+		}
+		sd->emotionlasttime = time(NULL);
+
+		if (battle_config.idletime_option&IDLE_EMOTION)
+			sd->idletime = last_tick;
+		if (battle_config.hom_idle_no_share && sd->hd && battle_config.idletime_hom_option&IDLE_EMOTION)
+			sd->idletime_hom = last_tick;
+		if (battle_config.mer_idle_no_share && sd->md && battle_config.idletime_mer_option&IDLE_EMOTION)
+			sd->idletime_mer = last_tick;
+
+		if (sd->state.block_action & PCBLOCK_EMOTION) {
+			clif_addtobuylist_emote(sd, 0, ZC_EMOTE_BUYLIST_UNKNOWNERROR);
+			return;
+		}
+
+		if(battle_config.client_reshuffle_dice && p.emotionId>=57 && p.emotionId<=62) {// re-roll dice
+			p.emotionId = rnd()%6+57;
+		}
+
+		p.packId = packId;
+		p.emotionId = emotionId;
+
+		clif_send( &p, sizeof( p ), &sd->bl, AREA );
+	} else
+		clif_addtobuylist_emote(sd, 0, ZC_EMOTE_BUYLIST_CANTUSENOBASIC);
+
+#endif
+}
+
+int clif_addtobuylist_emote_sub(map_session_data *sd,va_list ap)
+{
+	//ShowError("clif_addtobuylist_emote_sub \n");
+	uint16 packId;
+	packId = static_cast<uint16>(va_arg(ap, int));
+
+	clif_addtobuylist_emote(sd, packId, ZC_EMOTE_BUYLIST_SALESENDED); // TODO no choice of it
+	return 0;
+}
+
+void clif_addtobuylist_emote (map_session_data* sd, uint16 packId, enum e_emoteaddtobuylist_result result ){
+#if PACKETVER >= 20230802
+
+	auto it_emote_data = std::find_if(sd->emotes.begin(), sd->emotes.end(), [packId](const s_emote_data& emote) {
+		return emote.id == packId;
+	});
+
+	if (it_emote_data != sd->emotes.end()) { //found already have it
+		return;
+	}
+
+	struct PACKET_ZC_ADDTOBUYLIST_EMOTE p = {};
+
+	p.packetType = HEADER_ZC_ADDTOBUYLIST_EMOTE;
+	p.packId = packId;
+	p.result = result;
+	p.unknown = 0;
+
+	clif_send( &p, sizeof( p ), &sd->bl, AREA );
+#endif
+}
+
+void clif_parse_buypack_emote( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_BUY_PACK_EMOTE* p = (struct PACKET_CZ_BUY_PACK_EMOTE*)RFIFOP( fd, 0 );
+
+	auto it_emote_data = std::find_if(sd->emotes.begin(), sd->emotes.end(), [p](const s_emote_data& emote) {
+		return emote.id == p->packId;
+	});
+
+	if (it_emote_data != sd->emotes.end()) { //found, already bought
+		clif_message_emote(sd, p->packId, ZC_EMOTE_ALRDYPURCHASE);
+		return;
+	}
+
+	// Check if emote exist in db
+	std::shared_ptr<s_emote_db> emote_data = emote_db.find(p->packId);
+
+	if( emote_data == nullptr ){
+		clif_message_emote(sd, p->packId, ZC_EMOTE_PURCHASEFAILED);
+		return;
+	}
+
+	if(emote_data->startTime && emote_data->startTime > time(NULL)){
+		clif_message_emote(sd, p->packId, ZC_EMOTE_CANTPURCHASEYET);
+		return;
+	}
+
+	if(emote_data->endTime && emote_data->endTime < time(NULL) && !emote_data->keepinshop){
+		clif_message_emote(sd, p->packId, ZC_EMOTE_SALESENDED);
+		return;
+	}
+
+	if(emote_data->materials.size() > 0){
+		// Check material to buy the emote pack
+		std::unordered_map<t_itemid, uint16> materials;
+
+		for( const auto& entry : emote_data->materials ){
+			int16 idx = pc_search_inventory( sd, entry.first );
+
+			if( idx < 0 ){
+				clif_message_emote(sd, p->packId, ZC_EMOTE_NOMONEY);
+				return;
+			}
+
+			if( sd->inventory.u.items_inventory[idx].amount < entry.second ){
+				clif_message_emote(sd, p->packId, ZC_EMOTE_NOMONEY);
+				return;
+			}
+
+			materials[idx] = entry.second;
+		}
+
+		// Delete items
+		for( const auto& entry : materials ){
+			if( pc_delitem( sd, entry.first, entry.second, 0, 0, LOG_TYPE_ENCHANT )  != 0 ){
+				clif_message_emote(sd, p->packId, ZC_EMOTE_PURCHASEFAILED);
+				return;
+			}
+		}
+	}
+
+	struct s_emote_data emote;
+	emote.id = p->packId;
+	if(emote_data->rentalHours){
+				emote.expire_time = static_cast<uint32>(time(NULL) + (emote_data->rentalHours * 3600));
+	} else
+		emote.expire_time = 0;
+	emote.type = emote_data->type;
+
+	sd->emotes.push_back(emote);
+
+	clif_displaymessage(sd->fd, "Thank you for your purchase, close and open the emote UI to see it in you buy tab.");
+	clif_list_emote(sd);
+#endif
+}
+
+void clif_list_emote (map_session_data* sd){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_LIST_EMOTE* p = (struct PACKET_ZC_LIST_EMOTE*)packet_buffer;
+
+	p->packetType = HEADER_ZC_LIST_EMOTE;
+	int pack_amount = 0;
+	p->synchroTime = static_cast<uint32>(time(NULL));
+
+	struct PACKET_ZC_LIST_EMOTE_sub* sublist_emote_basic = &p->sublist_emote[pack_amount];
+	sublist_emote_basic->packId = 0;
+	sublist_emote_basic->type = 0;
+	sublist_emote_basic->endTime = 0;
+	pack_amount++;
+
+	for (const auto &it : emote_db) {
+		std::shared_ptr<s_emote_db> it_data = it.second;
+
+		time_t currentTime = time(NULL);
+		//ShowError("Emote list pack %d, startTime %ld, endTime %ld , rentalHours %u type %d current time %ld \n",it_data->id, it_data->startTime, it_data->endTime, it_data->rentalHours, it_data->type, currentTime);
+
+		bool isEmoteExist = false;
+		auto it_emote_data = std::find_if(sd->emotes.begin(), sd->emotes.end(), [it_data](const s_emote_data& emote) {
+			return emote.id == it_data->id;
+		});
+
+		if (it_emote_data != sd->emotes.end()) { //found so in buy list
+			//ShowError("Pack bought \n");
+			isEmoteExist = true;
+		} else { // not found so check if available in other list
+			// Sell didn't start
+			if(it_data->startTime && it_data->startTime > time(NULL))
+				continue;
+
+			// Sell finished and no keep in shop
+			if(it_data->endTime && it_data->endTime < time(NULL) && !it_data->keepinshop)
+				continue;
+		}
+
+		struct PACKET_ZC_LIST_EMOTE_sub* sublist_emote = &p->sublist_emote[pack_amount];
+		sublist_emote->packId = it_data->id;
+		if(isEmoteExist){  // If bought the pack 
+			if(it_emote_data->expire_time == 0){ // Doesn't have expire time
+				sublist_emote->type = 0;
+				sublist_emote->endTime = static_cast<uint32>(time(NULL) - 60); // even if type is 0, official send endTime on it
+			} else { // Have expire time
+				sublist_emote->type = 1;
+				sublist_emote->endTime = it_emote_data->expire_time;
+			}
+		} else if(!isEmoteExist){ // If not bought the pack
+			sublist_emote->type = 1; // in bought list in any case
+			if(it_data->endTime && it_data->endTime < time(NULL) && it_data->keepinshop) // End time sale gone but keep in shop - OK
+				sublist_emote->endTime = static_cast<uint32>(it_data->endTime); // Show the date on client
+			else if(!it_data->endTime) // No endtime so we put an arbitrary one
+				sublist_emote->endTime = static_cast<uint32>(time(NULL) - 60); // Show the date on client
+			else if(it_data->endTime && it_data->endTime > time(NULL)) // End Time not expired but we must show it in bought list so we put that start time
+				sublist_emote->endTime = static_cast<uint32>(it_data->startTime); // Show the date on client
+		}
+
+		//ShowError("Pack showed %d type %d endTime %ld \n",it_data->id, sublist_emote->type, sublist_emote->endTime);
+		pack_amount++;
+	}
+
+	p->packetLength = static_cast<int16>(sizeof( struct PACKET_ZC_LIST_EMOTE ) + ( sizeof( struct PACKET_ZC_LIST_EMOTE_sub ) * pack_amount ));
+	//ShowError("p->packetType %d synchroTime %ld p->packetLength %d \n",p->packetType,p->synchroTime,p->packetLength);
+
+	clif_send( p, p->packetLength, &sd->bl, SELF );
+#endif
+}
+
+void clif_message_emote (map_session_data* sd, uint16 packId, enum e_emotemessage_result eresult ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_MESSAGE_EMOTE p = {};
+
+	p.packetType = HEADER_ZC_MESSAGE_EMOTE;
+	p.packId = packId;
+	p.result = eresult;
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_rune_ui_open( map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_OPEN_RUNE_UI p = {};
+
+	p.packetType = HEADER_ZC_OPEN_RUNE_UI;
+	p.state = 1;
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_parse_result_rune_ui_open( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_RESULT_OPEN_RUNE_UI* p = (struct PACKET_CZ_RESULT_OPEN_RUNE_UI*)RFIFOP( fd, 0 );
+
+	//ShowError("clif_parse_result_rune_ui_open result ui open state %d\n",p->state);
+	
+	sd->state.runeui_open = p->state;
+#endif
+}
+
+void clif_parse_asktag_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_ASK_TAG_LOAD_RUNE* p = (struct PACKET_CZ_ASK_TAG_LOAD_RUNE*)RFIFOP( fd, 0 );
+
+	//ShowError("clif_parse_asktab_rune tagID %d\n",p->tagID);
+	
+	clif_bookinfo_rune(sd, p->tagID);
+	clif_setinfo_rune(sd, p->tagID);
+#endif
+}
+
+void clif_bookinfo_rune( map_session_data* sd, uint16 tagID ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_BOOK_INFO_RUNE* p = (struct PACKET_ZC_BOOK_INFO_RUNE*)packet_buffer;;
+
+	p->packetType = HEADER_ZC_BOOK_INFO_RUNE;
+	p->book_amount = 0;
+
+    for (const s_runebook_data& runebook_data : sd->runeBooks) {
+        if (runebook_data.tagId == tagID) {
+			struct PACKET_BOOK_LIST_RUNE_sub* booklist_rune = &p->booklist_rune[p->book_amount];
+			booklist_rune->runebookid = static_cast<uint32>(runebook_data.bookId);
+
+			p->book_amount++;
+        }
+    }
+
+	p->packetLength = sizeof( struct PACKET_ZC_BOOK_INFO_RUNE ) + ( sizeof( struct PACKET_BOOK_LIST_RUNE_sub ) * p->book_amount );
+	p->unknown = 0;
+	p->tagID = tagID;
+
+	//ShowError("clif_setinfo_rune tagID %d \n", p->tagID);
+	clif_send( p, p->packetLength, &sd->bl, SELF );
+#endif
+}
+
+void clif_setinfo_rune( map_session_data* sd, uint16 tagID ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_SET_INFO_RUNE* p = (struct PACKET_ZC_SET_INFO_RUNE*)packet_buffer;
+
+	p->packetType = HEADER_ZC_SET_INFO_RUNE;
+	p->set_amount = 0;
+
+	for (const s_runeset_data& set_data : sd->runeSets) {
+		if(set_data.tagId == tagID){
+			struct PACKET_SET_LIST_RUNE_sub* setlist_rune = &p->setlist_rune[p->set_amount];
+			setlist_rune->runesetid = static_cast<uint32>(set_data.setId);
+			setlist_rune->upgrade = set_data.upgrade;
+			setlist_rune->failcount = set_data.failcount;
+		}
+
+		p->set_amount++;
+	}
+
+	p->packetLength = sizeof( struct PACKET_ZC_BOOK_INFO_RUNE ) + ( sizeof( struct PACKET_SET_LIST_RUNE_sub ) * p->set_amount );
+	p->unknown = 0;
+	p->tagID = tagID;
+
+	//ShowError("clif_setinfo_rune tagID %d \n", p->tagID);
+	clif_send( p, p->packetLength, &sd->bl, SELF );
+
+	if(sd->runeactivated_data.tagID && !sd->runeactivated_data.loaded){
+		clif_enablerefresh_rune2(sd,0,0);
+		clif_enablerefresh_rune2(sd,sd->runeactivated_data.tagID,sd->runeactivated_data.runesetid);
+		sd->runeactivated_data.loaded = true;
+	}
+#endif
+}
+
+void clif_parse_bookactivate_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_BOOK_ACTIVATE_RUNE* p = (struct PACKET_CZ_BOOK_ACTIVATE_RUNE*)RFIFOP( fd, 0 );
+	
+	struct PACKET_ZC_BOOK_RESULT_RUNE pm = {};
+
+	pm.packetType = HEADER_ZC_BOOK_RESULT_RUNE;
+	pm.tagID = p->tagID;
+	pm.runebookid = p->runebookid;
+	pm.result = rune_bookactivate(sd,p->tagID,p->runebookid);
+
+	//ShowError("clif_parse_bookactivate_rune tagID %d runebookid %d result %d\n",p->tagID, p->runebookid, pm.result);
+	clif_send( &pm, sizeof( pm ), &sd->bl, SELF );
+
+	if(sd->runeactivated_data.tagID && sd->runeactivated_data.tagID == pm.tagID){
+		clif_enablerefresh_rune2(sd,0,0);
+		clif_enablerefresh_rune2(sd,sd->runeactivated_data.tagID,sd->runeactivated_data.runesetid);
+	}
+#endif
+}
+
+void clif_parse_setactivate_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_SET_ACTIVATE_RUNE* p = (struct PACKET_CZ_SET_ACTIVATE_RUNE*)RFIFOP( fd, 0 );
+
+	//ShowError("clif_parse_setactivate_rune tagID %d runesetid %d \n",p->tagID, p->runesetid);
+	
+	clif_setactivate_rune(sd, p->tagID, p->runesetid);
+#endif
+}
+
+void clif_setactivate_rune (map_session_data* sd, uint16 tagID, uint32 runesetid ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_SET_RESULT_RUNE p = {};
+
+	p.packetType = HEADER_ZC_SET_RESULT_RUNE;
+	p.tagID = tagID;
+	p.runesetid = runesetid;
+
+	p.result = rune_setactivate(sd,tagID,runesetid);
+	p.upgrade = 0;
+	p.failcount = 0;
+	
+	//ShowError("clif_setactivate_rune result %d upgrade : %d failcount %d \n",p.result, p.upgrade, p.failcount);
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_parse_setupgrade_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_SET_UPGRADE_RUNE* p = (struct PACKET_CZ_SET_UPGRADE_RUNE*)RFIFOP( fd, 0 );
+	//ShowError("clif_parse_setupgrade_rune tagID %d runesetid %d \n",p->tagID, p->runesetid);
+	
+	clif_setupgrade_rune(sd, p->tagID, p->runesetid);
+#endif
+}
+
+void clif_setupgrade_rune (map_session_data* sd, uint16 tagID, uint32 runesetid ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_SET_RESULT_RUNE2 p = {};
+
+	p.packetType = HEADER_ZC_SET_RESULT_RUNE2;
+	p.tagID = tagID;
+	p.runesetid = runesetid;
+	
+	std::tuple<uint8, uint16, uint16>  rune_setupgrade_result = rune_setupgrade(sd, tagID, runesetid);
+	p.result = std::get<0>(rune_setupgrade_result);
+	p.upgrade = std::get<1>(rune_setupgrade_result);
+	p.failcount = std::get<2>(rune_setupgrade_result);
+
+	//ShowError("clif_setupgrade_rune result %d upgrade : %d failcount %d \n",p.result, p.upgrade, p.failcount);
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+
+	if(sd->runeactivated_data.tagID && sd->runeactivated_data.tagID == tagID && sd->runeactivated_data.runesetid == runesetid){
+		clif_enablerefresh_rune2(sd,0,0);
+		clif_enablerefresh_rune2(sd,sd->runeactivated_data.tagID,sd->runeactivated_data.runesetid);
+	}
+#endif
+}
+
+void clif_parse_enable_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	struct PACKET_CZ_ENABLE_RUNE* p = (struct PACKET_CZ_ENABLE_RUNE*)RFIFOP( fd, 0 );
+
+	//ShowError("clif_parse_enable_rune tagID %d runesetid %d \n",p->tagID, p->runesetid);
+	
+	clif_enablerefresh_rune(sd, p->tagID, p->runesetid);
+#endif
+}
+
+void clif_enablerefresh_rune (map_session_data* sd, uint16 tagID, uint32 runesetid ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_REFRESH_ENABLE_RUNE p = {};
+
+	p.packetType = HEADER_ZC_REFRESH_ENABLE_RUNE;
+	p.tagID = tagID;
+	
+	if(rune_changestate(sd, tagID, runesetid))
+		p.runesetid = runesetid;
+	else
+		p.runesetid = 0;
+
+	//ShowError("clif_enablerefresh_rune tagID %d runesetid %d \n",p.tagID, p.runesetid);
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_enablerefresh_rune2 (map_session_data* sd, uint16 tagID, uint32 runesetid ){
+#if PACKETVER >= 20230802
+	struct PACKET_ZC_REFRESH_ENABLE_RUNE2 p = {};
+
+	p.packetType = HEADER_ZC_REFRESH_ENABLE_RUNE2;
+	p.tagID = tagID;
+	p.runesetid = runesetid;
+
+	//ShowError("clif_enablerefresh_rune2 tagID %d runesetid %d \n",p.tagID, p.runesetid);
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_onlogenable_rune (map_session_data* sd){
+#if PACKETVER >= 20230802
+	//ShowError("clif_onlogenable_rune \n");
+	struct PACKET_ZC_ONLOG_ENABLE_RUNE p = {};
+	bool isSelectedSet = false;
+
+	for (auto& set_data : sd->runeSets) {
+		if(set_data.selected){
+			isSelectedSet = true;
+			p.tagID = sd->runeactivated_data.tagID = static_cast<uint16>(set_data.tagId);
+			p.runesetid = sd->runeactivated_data.runesetid = static_cast<uint32>(set_data.setId);
+			p.upgrade = sd->runeactivated_data.upgrade = static_cast<uint8>(set_data.upgrade);
+			p.failcount = set_data.failcount;
+			rune_count_bookactivated(sd, p.tagID, p.runesetid);
+				
+			break;
+		}
+		if(isSelectedSet)
+			break;
+	}
+	
+	if(!isSelectedSet)
+		return;
+
+	p.packetType = HEADER_ZC_ONLOG_ENABLE_RUNE;
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
+
+void clif_parse_decompo_rune( int fd, map_session_data* sd ){
+#if PACKETVER >= 20230802
+	std::unordered_map<t_itemid, uint32> material_item_list;
+
+	struct PACKET_CZ_RUNE_DECOMPO* p = (struct PACKET_CZ_RUNE_DECOMPO*)RFIFOP( fd, 0 );
+
+	if( !sd->state.runeui_open ){
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_UINOTOPENED, material_item_list);
+		return;
+	}
+
+	uint16 index = server_index( p->index );
+
+	if( index >= MAX_INVENTORY ){
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVENTORYSPACE, material_item_list);
+		return;
+	}
+
+	if( sd->inventory_data[index] == nullptr ){
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_NOCARD, material_item_list);
+		return;
+	}
+
+	struct item& selected_item = sd->inventory.u.items_inventory[index];
+
+    if (selected_item.nameid != p->itemId) {
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_UNKNOWN, material_item_list);
+		return;
+    }
+
+	struct item_data* id = itemdb_search(selected_item.nameid);
+
+    // Checking if decompoRune is empty
+    if (id->decompoRune.empty()) {
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVALID, material_item_list);
+		return;
+    }
+
+	uint32 amount;
+	if(p->type == 1)
+		amount = 1;
+	else
+		amount = 100;
+
+	uint8 runeEntryit = 0;
+	for (const auto& runeEntry : id->decompoRune) {
+		runeEntryit++;
+
+		//ShowError("runeEntryit %d runeEntry.Second %d p->type %d \n",runeEntryit,runeEntry.second, p->type);
+
+		if(runeEntryit != p->type)
+			continue;
+
+		std::shared_ptr<s_runedecompo_db> runedecompo_data = runedecompo_db.find( runeEntry.second );
+		if(runedecompo_data == nullptr){
+			//ShowError("runedecompo_data not found in db \n");
+			clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVALID, material_item_list);
+			return;
+		}
+
+		std::unordered_map<uint16, uint16> materials;
+
+		if( sd->inventory.u.items_inventory[index].amount < amount ){
+			clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_NOTENOUGHITEMS, material_item_list);
+			return;
+		}
+
+		uint32 material_weight = 0;
+
+		//ShowError("runedecompo_data size %d \n",runedecompo_data->materials.size());
+		for( const auto &materialEntry : runedecompo_data->materials ){
+			struct s_runedecompo_material_data material_data = materialEntry.second;
+			//ShowError("Material list itemid %d, amountmin %d amountmax %d \n",material_data.material,material_data.amountmin,material_data.amountmax);
+
+			uint32 chance = material_data.chance;
+			if( chance == 0 ){
+				clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVALID, material_item_list);
+				return;
+			}
+			if( chance < 100000 && rnd_value( 0, 100000 ) > chance )
+				continue;
+
+			std::shared_ptr<item_data> item = item_db.find(material_data.material);
+			material_weight += item->weight;
+
+			uint32 random_amount = rnd_value( material_data.amountmin, material_data.amountmax );
+			material_item_list[material_data.material] = random_amount;
+			//ShowError("random_amount %d \n", random_amount);
+		}
+		
+		if(sd->weight + material_weight > sd->max_weight){
+			clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_WEIGHT, material_item_list);
+			return;
+		}
+
+		for( const auto& materialEntry : materials ){
+			if( pc_delitem( sd, materialEntry.first, materialEntry.second, 0, 0, LOG_TYPE_OTHER )  != 0 ){
+				clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_UNKNOWN, material_item_list);
+				return;
+			}
+		}
+
+		for( const auto& materialEntry : material_item_list ){
+			struct item item_material = {};
+
+			item_material.nameid = materialEntry.first;
+			item_material.identify = 1;
+
+			pc_additem( sd, &item_material, materialEntry.second, LOG_TYPE_OTHER );
+		}
+	}
+
+	if (pc_delitem(sd, index, amount, 0, 0, LOG_TYPE_OTHER) != 0){
+		clif_runedecompowindow_result(sd, ZC_RUNEDECOMPO_INVALID, material_item_list);
+		return;
+	}
+
+	clif_runedecompowindow_result( sd, ZC_RUNEDECOMPO_SUCCESS, material_item_list );
+#endif
+}
+
+void clif_runedecompowindow_result (map_session_data* sd, enum e_runedecompo_result result, std::unordered_map<t_itemid, uint32> material_item_list){
+#if PACKETVER >= 20230802
+	//ShowError("clif_runedecompowindow_result : %d \n", result);
+	struct PACKET_ZC_RESULT_RUNE_DECOMPO p = {};
+
+	p.packetType = HEADER_ZC_RESULT_RUNE_DECOMPO;
+	p.result = result;
+
+	uint8 material_number = 0;
+	if(result == ZC_RUNEDECOMPO_SUCCESS){
+		for (const auto& materialEntry : material_item_list) {
+            p.itemlistdecompo_rune[material_number] = materialEntry.first;
+            p.amountlistdecompo_rune[material_number] = materialEntry.second;
+
+			material_number++;
+			if (material_number > MAX_RUNEDECOMPO)
+				break;
+		}
+	}
+
+	for(int i = material_number; i < MAX_RUNEDECOMPO; i++){
+		p.itemlistdecompo_rune[material_number] = 0;
+		p.amountlistdecompo_rune[material_number] = 0;
+	}
+
+	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+#endif
+}
 /*==========================================
  * Main client packet processing function
  *------------------------------------------*/

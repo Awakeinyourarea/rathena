@@ -5,7 +5,7 @@
 
 mainlounge,25,187,5	script	Party VS Party	10366,{
 
-	mes "[ "+strnpcinfo(1)+" ]";
+	mes "^ABC663[ "+strnpcinfo(1)+" ]^000000";
 	if ( $@PVP7_EVENT == 0 ) { // รอรับสมัคร
 		mes "เจ้าต้องการลงแข่งขันไหมล่ะ ?";
 		mes "เพียงแค่เจ้ามี Party จำนวน "+$@PVP7_SET[3]+" คน";
@@ -15,7 +15,7 @@ mainlounge,25,187,5	script	Party VS Party	10366,{
 			mes "และ "+getitemname($@PVP7_SET[1])+"  "+$@PVP7_SET[2]+" ea";
 		next;
 		if ( select ( "• ข้าขอสมัครเข้าแข่งขัน:• ไม่ล่ะ ขอเตรียม Party ก่อน" ) == 1 ) {
-			mes "[ "+strnpcinfo(1)+" ]";
+			mes "^ABC663[ "+strnpcinfo(1)+" ]^000000";
 			if ( getcharid(1) ) {
 				if ( getpartyleader(getcharid(1),2) == getcharid(0) ) {
 					if ( ( $@PVP7_SET[0] > 0 && Zeny > $@PVP7_SET[0] ) || $@PVP7_SET[0] <= 0 ) {

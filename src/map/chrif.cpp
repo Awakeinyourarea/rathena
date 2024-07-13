@@ -19,6 +19,7 @@
 #include "clan.hpp"
 #include "clif.hpp"
 #include "elemental.hpp"
+#include "emote.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
 #include "instance.hpp"
@@ -30,6 +31,7 @@
 #include "pc.hpp"
 #include "pc_groups.hpp"
 #include "pet.hpp"
+#include "rune.hpp"
 #include "script.hpp" // script_config
 #include "storage.hpp"
 
@@ -339,6 +341,10 @@ int chrif_save(map_session_data *sd, int flag) {
 		intif_quest_save(sd);
 	if (sd->achievement_data.save)
 		intif_achievement_save(sd);
+
+	//chrif_aa_save(sd);
+	emote_save(sd);
+	rune_save(sd);
 
 	return 0;
 }

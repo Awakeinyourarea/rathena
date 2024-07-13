@@ -2,7 +2,7 @@
 
 -	script	MENUSYS	-1,{
 OnMenuSystem:
-    mes "[ Setting System ]";
+    mes "^ABC663[ Setting System ]^000000";
     mes "สวัสดีท่าน : ^ABC663 "+strcharinfo(0)+" ^000000"; 
     mes "^000000Guild ID ของท่านคือ : ^ABC663"+ getcharid(2) +"^000000";
     mes "^000000Party ID ของท่านคือ : ^ABC663"+ getcharid(1) +"^000000";
@@ -12,7 +12,7 @@ OnMenuSystem:
     "^ABC663•^000000 อำนวยความสะดวก",Helpplayer;
 
 Helpplayer:
-    mes "[ Setting System ]";
+    mes "^ABC663[ Setting System ]^000000";
     mes "สวัสดีท่าน : ^ABC663 "+strcharinfo(0)+" ^000000"; 
     mes "ต้องการให้ฉันช่วยเหลืออะไร ?";
     next;

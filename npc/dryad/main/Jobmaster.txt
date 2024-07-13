@@ -1,5 +1,5 @@
 -	script	jobmaster	-1,{
-mes "[ ^3333FFเปลี่ยนอาชีพ^000000 ]";
+mes "^ABC663[ เปลี่ยนอาชีพ ]^000000";
 mes "กรุณาเลือกอาชีพที่คุณต้องการเปลี่ยน";
 next;
 menu "^ABC663•^000000 เปลี่ยน Class Novice",classnovice,"^ABC663•^000000 เปลี่ยน Class 1",class1,"^ABC663•^000000 เปลี่ยน Class 2",class2,"^ABC663•^000000 เปลี่ยน Hi-Class",hicass,"^ABC663•^000000 เปลี่ยน Class Baby",classbaby,"^ABC663•^000000 เปลี่ยน Class New",classnew;
@@ -227,7 +227,7 @@ resetstatus;
 close;
 
 cancelwa:
-mes "[ ^3333FFเปลี่ยนอาชีพ^000000 ]";
+mes "^ABC663[ เปลี่ยนอาชีพ ]^000000";
 mes "ไม่สามารถเปลี่ยนได้อีก";
 close;
 

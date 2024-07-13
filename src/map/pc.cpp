@@ -42,6 +42,7 @@
 #include "date.hpp" // is_day_of_*()
 #include "duel.hpp"
 #include "elemental.hpp"
+#include "emote.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
 #include "instance.hpp"
@@ -56,6 +57,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp" // pet_unlocktarget()
 #include "quest.hpp"
+#include "rune.hpp"
 #include "skill.hpp" // skill_isCopyable()
 #include "script.hpp" // struct script_reg, struct script_regstr
 #include "searchstore.hpp"  // struct s_search_store_info
@@ -2239,7 +2241,9 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 		sd->status.job_exp = MAX_LEVEL_JOB_EXP;
 		clif_updatestatus(*sd, SP_JOBEXP);
 	}
-
+	
+	emote_load(sd);
+	rune_load(sd);
 	// Request all registries (auth is considered completed whence they arrive)
 	intif_request_registry(sd,7);
 	return true;
@@ -2305,6 +2309,12 @@ void pc_reg_received(map_session_data *sd)
 	sd->langtype = static_cast<int>(pc_readaccountreg(sd, add_str(LANGTYPE_VAR)));
 	if (msg_checklangtype(sd->langtype,true) < 0)
 		sd->langtype = 0; //invalid langtype reset to default
+
+// (^~_~^) Color Nicks Start
+
+	sd->color_nicks_group_id = static_cast<unsigned int>(pc_readglobalreg(sd, add_str("CN_GROUP_ID")));
+
+// (^~_~^) Color Nicks End
 
 	// Cash shop
 	sd->cashPoints = static_cast<int>(pc_readaccountreg(sd, add_str(CASHPOINT_VAR)));

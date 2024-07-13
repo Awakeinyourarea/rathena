@@ -146,6 +146,9 @@ enum e_enchantgrade : uint16{
 #define MIN_STAR 0
 #define MAX_STAR 3
 
+#define MAX_RUNESLOT 5
+#define MAX_RUNEDECOMPO 8
+
 const t_itemid WEDDING_RING_M = 2634;
 const t_itemid WEDDING_RING_F = 2635;
 
