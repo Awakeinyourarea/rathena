@@ -11540,6 +11540,14 @@ static const struct _battle_data {
 	{ "synchronize_damage",                 &battle_config.synchronize_damage,              0,      0,      1,              },
 	{ "item_stacking",                      &battle_config.item_stacking,                   1,      0,      1,              },
 
+	{ "refine_announce_success",      		&battle_config.refine_announce_success,   		0,      0,      MAX_REFINE,		},
+	{ "refine_announce_broken",      		&battle_config.refine_announce_broken,   		0,      0,      MAX_REFINE,		},
+	{ "refine_option_announce",      		&battle_config.refine_option_announce,   		0,      0,      1,              },
+	{ "refine_option_color",      			&battle_config.refine_option_color,		 0xABC663,      0,      INT_MAX,		},
+	{ "refine_option_color_self",			&battle_config.refine_option_color_self, 0xABC663,      0,      INT_MAX,		},
+	{ "refine_broken_color",				&battle_config.refine_broken_color, 	 0xFF0000,      0,      INT_MAX,		},
+	{ "refine_normal_color",				&battle_config.refine_normal_color, 	 0xC1E1C1,      0,      INT_MAX,		},
+
 #include <custom/battle_config_init.inc>
 };
 

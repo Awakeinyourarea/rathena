@@ -2936,6 +2936,7 @@ struct s_random_opt_data
 {
 	uint16 id;
 	std::string name;
+	uint16 msg_id;
 	script_code *script;
 
 	~s_random_opt_data() {
@@ -2950,6 +2951,7 @@ struct s_random_opt_group_entry {
 	int16 min_value, max_value;
 	int8 param;
 	uint16 chance;
+	bool is_rare_announce;
 };
 
 /// Struct for Random Option Group
@@ -2962,6 +2964,7 @@ struct s_random_opt_group {
 
 public:
 	void apply( struct item& item );
+	void apply_refine(map_session_data* sd, struct item& item, bool announce );
 };
 
 class RandomOptionDatabase : public TypesafeYamlDatabase<uint16, s_random_opt_data> {
@@ -2994,6 +2997,7 @@ public:
 	bool add_option(const ryml::NodeRef& node, std::shared_ptr<s_random_opt_group_entry> &entry);
 	bool option_exists(std::string name);
 	bool option_get_id(std::string name, uint16 &id);
+	int get_random_option_id(std::string name);
 };
 
 extern RandomOptionGroupDatabase random_option_group;
@@ -3465,6 +3469,29 @@ bool itemdb_parse_roulette_db(void);
 
 void itemdb_gen_itemmoveinfo();
 
+struct s_refineopt_group {
+	std::string groupname;
+	std::shared_ptr<s_random_opt_group> option_group;
+	std::vector<t_itemid> items;
+};
+
+struct s_refineopt {
+	uint16 refine;
+	std::shared_ptr<s_random_opt_group> default_group;
+	std::vector<std::shared_ptr<s_refineopt_group>> groups;
+};
+
+class RefineRandomOptDatabase : public TypesafeYamlDatabase<uint16, s_refineopt> {
+public:
+	RefineRandomOptDatabase() : TypesafeYamlDatabase( "REFINE_RANDOMOPT_DB", 1 ){
+
+	}
+
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const ryml::NodeRef& node);
+};
+
+extern RefineRandomOptDatabase refine_randomopt_db;
 void itemdb_reload(void);
 
 void do_final_itemdb(void);

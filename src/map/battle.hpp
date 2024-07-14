@@ -773,6 +773,14 @@ struct Battle_Config
 	int synchronize_damage;
 	int item_stacking;
 
+	int refine_announce_success;
+	int refine_announce_broken;
+	int refine_option_announce;
+	int refine_option_color;
+	int refine_option_color_self;
+	int refine_broken_color;
+	int refine_normal_color;
+	
 #include <custom/battle_config_struct.inc>
 };
 
