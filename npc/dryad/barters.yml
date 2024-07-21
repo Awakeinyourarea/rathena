@@ -46,20 +46,31 @@ Header:
   Version: 1
   
 Body:
-###########################################################################
-##= Elu & Ori Package
-###########################################################################
-  - Name: Pack_Elu_Ori
+  - Name: Test Craft
+    Map: morocc
+    X: 159
+    Y: 93
+    Direction: South
+    Sprite: 4_F_PINKWOMAN
+    CraftBarter: true
+    WaitingRoom: Test Craft
     Items:
       - Index: 0
         Item: Elunium_Box_
+        Rate: 5000
+        Announce: true
+        Effect: 722
+        FailEffect: 155
+        ProtectItem: Red_Potion
+ #       Stock: 50
+        Inherit:
+          - Index: 0
+            Refine: true
+            Card: true
+            Grade: true
+            Randomopt: true
         RequiredItems:
           - Index: 0
-            Item: Elunium
-            Amount: 100
-      - Index: 1
-        Item: Oridecon_Box_
-        RequiredItems:
-          - Index: 0
-            Item: Oridecon
-            Amount: 100
+            Item: Blade_
+            Amount: 1
+            Protect: true

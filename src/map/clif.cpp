@@ -23485,6 +23485,45 @@ void clif_barter_extended_open( map_session_data& sd, struct npc_data& nd ){
 
 	sd.state.barter_extended_open = true;
 
+	// re-init
+	sd.state.craft_barter = false;
+
+	if(barter->is_craft){
+		sd.state.craft_barter = true;
+		char output[CHAT_SIZE_MAX];
+		memset(output, '\0', sizeof(output));
+		sprintf(output, msg_txt(NULL, 2001));
+		clif_broadcast(&sd.bl, output, strlen(output) + 1, BC_BLUE, SELF);
+		clif_messagecolor(&sd.bl, color_table[COLOR_DEFAULT], msg_txt(NULL, 2002), false, SELF);
+		clif_messagecolor(&sd.bl, color_table[COLOR_DEFAULT], msg_txt(NULL, 2003), false, SELF);
+
+		char carft_msg[CHAT_SIZE_MAX];
+
+		for( const auto& itemPair : barter->items ){
+			std::shared_ptr<item_data> id = item_db.find(itemPair.second->nameid);
+
+			memset(carft_msg, '\0', sizeof(carft_msg));
+
+			if (itemPair.second->protectitem){
+				std::shared_ptr<item_data> id2 = item_db.find(itemPair.second->protectitem);
+
+				if(!itemPair.second->inherit_str.length())
+					sprintf(carft_msg, msg_txt(NULL, 2006),item_db.create_item_link(id).c_str(),(float)itemPair.second->craft_rate/100,item_db.create_item_link(id2).c_str(),itemPair.second->protect_str.c_str());
+				else
+					sprintf(carft_msg, msg_txt(NULL, 2007),item_db.create_item_link(id).c_str(),(float)itemPair.second->craft_rate/100,itemPair.second->inherit_str.c_str(),item_db.create_item_link(id2).c_str(),itemPair.second->protect_str.c_str());
+			}else{
+
+				if(!itemPair.second->inherit_str.length())
+					sprintf(carft_msg, msg_txt(NULL, 2004),item_db.create_item_link(id).c_str(),(float)itemPair.second->craft_rate/100);
+				else
+					sprintf(carft_msg, msg_txt(NULL, 2005),item_db.create_item_link(id).c_str(),(float)itemPair.second->craft_rate/100,itemPair.second->inherit_str.c_str());
+			}
+
+			clif_messagecolor(&sd.bl, color_table[COLOR_DEFAULT], carft_msg, false, SELF);
+		}
+		clif_messagecolor(&sd.bl, color_table[COLOR_DEFAULT], msg_txt(NULL, 2008), false, SELF);
+	}
+	
 	PACKET_ZC_NPC_EXPANDED_BARTER_MARKET_ITEMINFO* p = reinterpret_cast<PACKET_ZC_NPC_EXPANDED_BARTER_MARKET_ITEMINFO*>( packet_buffer );
 
 	p->packetType = HEADER_ZC_NPC_EXPANDED_BARTER_MARKET_ITEMINFO;
@@ -23492,14 +23531,9 @@ void clif_barter_extended_open( map_session_data& sd, struct npc_data& nd ){
 	p->items_count = 0;
 
 	for( const auto& itemPair : barter->items ){
-		std::shared_ptr<item_data> id = item_db.find(itemPair.second->nameid);
-
-		if( id == nullptr ){
-			continue;
-		}
-
 		// Needs dynamic calculation, because of variable currencies
 		PACKET_ZC_NPC_EXPANDED_BARTER_MARKET_ITEMINFO_sub* item = reinterpret_cast<PACKET_ZC_NPC_EXPANDED_BARTER_MARKET_ITEMINFO_sub*>( WBUFP( p, p->packetLength ) );
+		std::shared_ptr<item_data> id = item_db.find(itemPair.second->nameid);
 
 		item->nameid = client_nameid( id->nameid );
 		item->type = itemtype( id->nameid );
@@ -23550,6 +23584,7 @@ void clif_parse_barter_extended_close( int fd, map_session_data* sd ){
 	if( sd->state.barter_extended_open ){
 		sd->npc_shopid = 0;
 		sd->state.barter_extended_open = false;
+		sd->state.craft_barter = false;
 	}
 #endif
 }
@@ -23593,6 +23628,18 @@ void clif_parse_barter_extended_buy( int fd, map_session_data* sd ){
 		return;
 	}
 
+	if(barter->is_craft && entries > 1){
+		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], msg_txt(NULL, 2009), false, SELF);
+		return;
+	}
+
+	if(barter->is_craft && p->list[0].amount > 1){
+		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], msg_txt(NULL, 2013), false, SELF);
+		return;
+	}
+
+	int16 bindex = -1;
+
 	std::vector<s_barter_purchase> purchases;
 
 	purchases.reserve( entries );
@@ -23605,6 +23652,8 @@ void clif_parse_barter_extended_buy( int fd, map_session_data* sd ){
 		if( item == nullptr ){
 			return;
 		}
+
+		bindex = item->index;
 
 		for( int j = i + 1; j < entries; j++ ){
 			// Same shop index
@@ -23633,7 +23682,7 @@ void clif_parse_barter_extended_buy( int fd, map_session_data* sd ){
 		purchases.push_back( purchase );
 	}
 
-	clif_npc_buy_result( sd, npc_barter_purchase( *sd, barter, purchases )  );
+	clif_npc_buy_result( sd, npc_barter_purchase( *sd, barter, purchases, bindex )  );
 #endif
 }
 
