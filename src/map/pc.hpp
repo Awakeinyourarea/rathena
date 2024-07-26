@@ -480,6 +480,7 @@ public:
 		uint64 item_enchant_index;
 		bool craft_barter;
 		bool runeui_open;
+		bool recal_vip_time;
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -700,12 +701,6 @@ public:
 		short weapon_atk_rate, weapon_matk_rate;
 	} bonus;
 	// zeroed vars end here.
-
-	// (^~_~^) Color Nicks Start
-
-	unsigned int color_nicks_group_id;
-
-	// (^~_~^) Color Nicks End
 	
 	int castrate,hprate,sprate,aprate,dsprate;
 	int hprecov_rate,sprecov_rate;
@@ -978,6 +973,11 @@ public:
 		uint16 level;
 		int target;
 	} skill_keep_using;
+	
+	struct{
+		int tid;
+		int step;
+	} skill_animation;
 
 	struct {
 		std::shared_ptr<s_captcha_data> cd;
@@ -987,6 +987,8 @@ public:
 	s_macro_detect macro_detect;
 
 	std::vector<uint32> party_booking_requests;
+
+	int vip_timer_tid;
 };
 
 extern struct eri *pc_sc_display_ers; /// Player's SC display table
@@ -1797,5 +1799,10 @@ void pc_macro_reporter_process(map_session_data &sd, int32 reporter_account_id =
 #ifdef MAP_GENERATOR
 void pc_reputation_generate();
 #endif
+
+void vip_bonus(map_session_data *sd);
+void clean_vip_bonus(map_session_data *sd);
+TIMER_FUNC(vip_bonus_timer);
+TIMER_FUNC(vip_delete_timer);
 
 #endif /* PC_HPP */

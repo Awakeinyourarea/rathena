@@ -22372,3 +22372,10 @@ Body:
     UnEquipScript: |
       if (ismounting())
          setmounting();
+  - Id: 30249
+    AegisName: VIP
+    Name: VIP
+    Type: Usable
+    Weight: 10
+    Script: |
+      useatcmd "@vip +3mn "+strcharinfo(0);

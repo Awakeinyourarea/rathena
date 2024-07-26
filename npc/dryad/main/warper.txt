@@ -534,3 +534,4 @@ OnInit:
 //	Duplicates:
 // --------------------------------------------------
 mainlounge,43,184,3	duplicate(Warper)	วาปไปสถานที่ต่างๆ#mor	10458
+new_1-1,93,114,3	duplicate(Warper)	วาปไปสถานที่ต่างๆ#mor	811

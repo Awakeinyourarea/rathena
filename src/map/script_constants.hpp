@@ -1915,6 +1915,7 @@
 	export_constant(SC_POWERUP);
 	export_constant(SC_AGIUP);
 	export_constant(SC_PROTECTION);
+	export_constant(SC_VIPSTATUS);
 
 	/* status icons */
 	export_deprecated_constant2("SI_BLANK",-1);
@@ -4173,6 +4174,7 @@
 	export_constant(EFST_RESIST_PLUS);
 	export_constant(EFST_PVP_DUN_BUFF);
 	export_constant(EFST_PNEUMA);
+	export_constant(EFST_VIP_STATUS);
 	export_constant(EFST_REFINE_PASS_LVL_1);
 	export_constant(EFST_REFINE_PASS_LVL_2);
 	export_constant(EFST_REFINE_PASS_LVL_3);

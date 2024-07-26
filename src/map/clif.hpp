@@ -1361,11 +1361,7 @@ void clif_broadcast_obtain_special_item(const char *char_name, t_itemid nameid, 
 void clif_dressing_room(map_session_data *sd, int flag);
 void clif_navigateTo(map_session_data *sd, const char* mapname, uint16 x, uint16 y, uint8 flag, bool hideWindow, uint16 mob_id );
 void clif_SelectCart(map_session_data *sd);
-// (^~_~^) Color Nicks Start
 
-void clif_send_colornicks(map_session_data* sd);
-
-// (^~_~^) Color Nicks End
 /// Achievement System
 void clif_achievement_list_all(map_session_data *sd);
 void clif_achievement_update(map_session_data *sd, struct achievement *ach, int count);
@@ -1465,6 +1461,9 @@ void clif_set_npc_window_pos(map_session_data& sd, int x, int y);
 void clif_set_npc_window_pos_percent(map_session_data& sd, int x, int y);
 
 void clif_noask_sub( map_session_data& sd, map_session_data& tsd, int type );
+
+void clif_send_animation_motion(struct block_list* bl, int target_id, int motion_speed);
+void clif_send_animation_dir(struct block_list* src, int target_id, int dir);
 
 int clif_hideview(struct block_list* bl, va_list ap);	// map_forallinmovearea callback
 

@@ -71,6 +71,8 @@ AbraDatabase abra_db;
 ReadingSpellbookDatabase reading_spellbook_db;
 SkillArrowDatabase skill_arrow_db;
 
+std::vector<s_animation_data> animation_lists;
+
 #define MAX_SKILL_CHANGEMATERIAL_DB 75
 #define MAX_SKILL_CHANGEMATERIAL_SET 3
 struct s_skill_changematerial_db {
@@ -2341,13 +2343,11 @@ int skill_additional_effect( struct block_list* src, struct block_list *bl, uint
 			if (battle_config.autospell_check_range &&
 				!battle_check_range(bl, tbl, skill_get_range2(src, skill, autospl_skill_lv, true)))
 				continue;
-
-			if (skill == PF_SPIDERWEB) //Special case, due to its nature of coding.
-				type = CAST_GROUND;
-#ifndef RENEWAL
-			else if (skill == AS_SONICBLOW)
+				
+			if (skill == AS_SONICBLOW)
 				pc_stop_attack(sd); //Special case, Sonic Blow autospell should stop the player attacking.
-#endif
+			else if (skill == PF_SPIDERWEB) //Special case, due to its nature of coding.
+				type = CAST_GROUND;
 
 			sd->state.autocast = 1;
 			skill_consume_requirement(sd,skill,autospl_skill_lv,1);
@@ -25345,6 +25345,106 @@ static bool skill_parse_row_skilldamage( char* split[], size_t columns, size_t c
 	return true;
 }
 
+int skill_calc_dir_counter_clockwise(int dir)
+{
+	dir += 2;
+	if (dir >= DIR_MAX)
+		dir = dir - DIR_MAX;
+	return dir;
+}
+
+/**
+ */
+static bool skill_parse_skill_animation( char* split[], size_t columns, size_t current ){
+
+	std::string skill_name = split[0];
+	int start = atoi(split[1]);
+	int interval = atoi(split[2]);
+	int speed = atoi(split[3]);
+	int count = atoi(split[4]);
+	std::string spin = split[5];
+
+	util::tolower(spin);
+
+	uint16 skill_id = skill_name2id(skill_name.c_str());
+
+	if(!skill_id){
+		ShowWarning("skill_parse_skill_animation: skill \"%s\" is invalid\n", skill_name.c_str());
+		return false;
+	}
+
+	if(strncmp(spin.c_str(), "true", 4) == 0 || strncmp(spin.c_str(), "false", 5) == 0){
+		ShowWarning("skill_parse_skill_animation: skill \"%s\" , spin setting is in valid\n", skill_name.c_str());
+		return false;
+	}
+
+	bool is_spin = false;
+
+	if(strncmp(spin.c_str(), "true", 4) == 0)
+		is_spin = true;
+
+	struct s_animation_data entry = {};
+	entry.skill_id = skill_id;
+	entry.start = start;
+	entry.interval = interval;
+	entry.motion_speed = speed;
+	entry.motion_count = count;
+	entry.spin = is_spin;
+
+	animation_lists.push_back(entry);
+	return true;
+}
+
+struct s_animation_data skill_animation_info(int skill_id)
+{
+	for(const auto &it : animation_lists){
+		if(it.skill_id == skill_id){
+			return it;
+		}
+	}
+
+	return {};
+}
+
+TIMER_FUNC(skill_play_animation)
+{
+	struct block_list* bl = map_id2bl(id);
+
+	if (bl == NULL)
+		return 0;
+
+	struct s_environment_data* skill_env = (struct s_environment_data*)data;
+	struct s_animation_data animation = skill_animation_info(skill_env->skill_id);
+
+	if(BL_CAST(BL_PC,bl)->skill_animation.step < animation.motion_count){
+		clif_send_animation_motion(bl, skill_env->target_id, animation.motion_speed);
+		BL_CAST(BL_PC,bl)->skill_animation.step++;
+
+		if (animation.spin && skill_env->dir != -1)
+			clif_send_animation_dir(bl, skill_env->target_id, skill_env->dir);
+
+		BL_CAST(BL_PC,bl)->skill_animation.tid = add_timer(tick + animation.start + animation.interval, skill_play_animation, bl->id, (intptr_t)skill_env);
+	}
+
+	return 0;
+}
+
+void skill_clear_animation(struct block_list* bl)
+{
+	if (bl == NULL || bl->type != BL_PC)
+		return;
+
+	map_session_data* sd = BL_CAST(BL_PC, bl);
+
+	if (sd->skill_animation.tid == INVALID_TIMER)
+		return;
+
+	if(sd->skill_animation.tid){
+		delete_timer(sd->skill_animation.tid, skill_play_animation);
+		sd->skill_animation.tid = INVALID_TIMER;
+	}
+}
+
 /** Reads skill database files */
 static void skill_readdb(void) {
 	int i;
@@ -25379,6 +25479,7 @@ static void skill_readdb(void) {
 		sv_readdb(dbsubpath2, "produce_db.txt"        , ',',   5,  5+2*MAX_PRODUCE_RESOURCE, MAX_SKILL_PRODUCE_DB, skill_parse_row_producedb, i > 0);
 		sv_readdb(dbsubpath1, "skill_changematerial_db.txt" , ',',   5,  5+2*MAX_SKILL_CHANGEMATERIAL_SET, MAX_SKILL_CHANGEMATERIAL_DB, skill_parse_row_changematerialdb, i > 0);
 		sv_readdb(dbsubpath1, "skill_damage_db.txt"         , ',',   4,  3+SKILLDMG_MAX, -1, skill_parse_row_skilldamage, i > 0);
+		sv_readdb(dbsubpath1, "skill_animation.txt"         , ',',   6,  6, -1, skill_parse_skill_animation, i > 0);
 
 		aFree(dbsubpath1);
 		aFree(dbsubpath2);
@@ -25399,6 +25500,7 @@ void skill_reload (void) {
 	magic_mushroom_db.clear();
 	reading_spellbook_db.clear();
 	skill_arrow_db.clear();
+	animation_lists.clear();
 
 	skill_readdb();
 
@@ -25443,6 +25545,7 @@ void do_final_skill(void)
 	magic_mushroom_db.clear();
 	reading_spellbook_db.clear();
 	skill_arrow_db.clear();
+	animation_lists.clear();
 
 	db_destroy(skillunit_db);
 	db_destroy(skillusave_db);

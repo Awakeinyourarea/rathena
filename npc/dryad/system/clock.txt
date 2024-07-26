@@ -1,0 +1,10 @@
+new_1-1,66,114,0	script	Server Time	111,{
+end;
+
+OnInit:
+while(1) {
+	showscript "เวลา " + gettimestr("%H:%M:%S",19)+ " วินาที",getnpcid(0);
+	sleep 1000;
+}
+end;
+}

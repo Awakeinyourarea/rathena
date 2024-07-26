@@ -23478,6 +23478,8 @@ BUILDIN_FUNC(vip_time) {
 		return SCRIPT_CMD_FAILURE;
 
 	chrif_req_login_operation(sd->status.account_id, sd->status.name, CHRIF_OP_LOGIN_VIP, viptime, 7, 0); 
+	sd->state.recal_vip_time = true;
+	add_timer(gettick() + 300,vip_bonus_timer,sd->bl.id,0);
 #endif
 	return SCRIPT_CMD_SUCCESS;
 }
@@ -27443,60 +27445,6 @@ BUILDIN_FUNC(preg_match) {
 #endif
 }
 
-// (^~_~^) Color Nicks Start
-
-BUILDIN_FUNC(set_color_nick)
-{
-	map_session_data* sd;
-	unsigned int group_id = script_getnum(st, 2);
-
-	if (!script_rid2sd(sd))
-	{
-		return SCRIPT_CMD_FAILURE;
-	}
-
-	if (group_id == 0)
-	{
-		sd->color_nicks_group_id = 0;
-	}
-	else
-	{
-		if (idb_exists(color_nicks_db, group_id) == 0)
-		{
-			script_pushint(st, -1);
-			return SCRIPT_CMD_FAILURE;
-		}
-
-		sd->color_nicks_group_id = group_id;
-	}
-
-	pc_setglobalreg(sd, add_str("CN_GROUP_ID"), sd->color_nicks_group_id);
-
-	clif_send_colornicks(sd);
-
-	script_pushint(st, 0);
-
-	return SCRIPT_CMD_SUCCESS;
-}
-
-BUILDIN_FUNC(get_color_nick)
-{
-	map_session_data* sd;
-
-	if (!script_rid2sd(sd))
-	{
-		script_pushint(st, -1);
-
-		return SCRIPT_CMD_FAILURE;
-	}
-
-	script_pushint(st, sd->color_nicks_group_id);
-
-	return SCRIPT_CMD_SUCCESS;
-}
-
-// (^~_~^) Color Nicks End
-
 BUILDIN_FUNC( runeui ){
 #if PACKETVER_MAIN_NUM >= 20200916 || PACKETVER_RE_NUM >= 20200724
 	map_session_data* sd;
@@ -27530,13 +27478,6 @@ BUILDIN_FUNC( getupgrade_rune ){
 /// script command definitions
 /// for an explanation on args, see add_buildin_func
 struct script_function buildin_func[] = {
-
-// (^~_~^) Color Nicks Start
-
-	BUILDIN_DEF(set_color_nick,"i"),
-	BUILDIN_DEF(get_color_nick,""),
-
-// (^~_~^) Color Nicks End
 
 	// NPC interaction
 	BUILDIN_DEF(mes,"s*"),

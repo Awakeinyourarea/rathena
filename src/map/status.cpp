@@ -3791,6 +3791,8 @@ int status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		pet_delautobonus(*sd, sd->pd->autobonus3, true);
 	}
 	refine_pass_bonus(sd);
+	vip_bonus(sd);
+	
 	// Parse equipment
 	for (i = 0; i < EQI_MAX; i++) {
 		current_equip_item_index = index = sd->equip_index[i]; // We pass INDEX to current_equip_item_index - for EQUIP_SCRIPT (new cards solution) [Lupus]
@@ -16231,6 +16233,61 @@ void refine_pass_bonus(map_session_data* sd) {
 	}
 }
 
+const std::string VipBonusDatabase::getDefaultLocation() {
+	return std::string(db_path) + "/custom/vip_bonus.yml";
+}
+
+/**
+ * Reads and parses an entry from the rank_title
+ * @param node: YAML node containing the entry.
+ * @return count of successfully parsed rows
+ */
+uint64 VipBonusDatabase::parseBodyNode(const ryml::NodeRef& node) {
+
+	if (!this->nodesExist(node, { "Id" }))
+		return 0;
+
+		uint16 Id;
+
+	if (!this->asUInt16(node, "Id", Id))
+		return 0;
+
+	std::shared_ptr<s_vip_bonus> VipBonus = this->find(Id);
+	bool exists = VipBonus != nullptr;
+
+	if (!exists) {
+		if (!this->nodesExist(node, { "Id" }))
+			return 0;
+
+		VipBonus = std::make_shared<s_vip_bonus>();
+		VipBonus->id = Id;
+	}
+
+    if (this->nodeExists(node, "Script")) {
+		std::string script;
+
+		if (!this->asString(node, "Script", script))
+			return 0;
+
+		if (exists && VipBonus->script) {
+			script_free_code(VipBonus->script);
+			VipBonus->script = nullptr;
+		}
+
+		VipBonus->script = parse_script(script.c_str(), this->getCurrentFile().c_str(), this->getLineNumber(node["Script"]), SCRIPT_IGNORE_EXTERNAL_BRACKETS);
+	} else {
+		if (!exists)
+			VipBonus->script = nullptr;
+	}
+
+	if( !exists ){
+		this->put( VipBonus->id , VipBonus );
+	}
+	return 1;
+}
+
+VipBonusDatabase vip_bonus_db;
+
 void status_clean_old_buff(map_session_data *sd)
 {
 	nullpo_retv(sd);
@@ -16304,12 +16361,14 @@ void status_readdb( bool reload ){
 		status_db.reload();
 		enchantgrade_db.reload();
 		refine_pass_db.reload();
+		vip_bonus_db.reload();
 	}else{
 		size_fix_db.load();
 		refine_db.load();
 		status_db.load();
 		enchantgrade_db.load();
 		refine_pass_db.load();
+		vip_bonus_db.load();
 	}
 	elemental_attribute_db.load();
 }
@@ -16339,4 +16398,5 @@ void do_final_status(void) {
 	status_db.clear();
 	elemental_attribute_db.clear();
 	refine_pass_db.clear();
+	vip_bonus_db.clear();
 }

@@ -78,59 +78,7 @@ static inline int32 client_exp(t_exp exp) {
 	return (int32)u64min(exp, MAX_EXP);
 }
 #endif
-// (^~_~^) Color Nicks Start
 
-void clif_send_colornicks_single(int fd, map_session_data * sd)
-{
-	struct color_data* cn_data = (struct color_data*)idb_get(color_nicks_db, sd->color_nicks_group_id);
-
-	if (cn_data == 0)
-	{
-		return;
-	}
-
-	WFIFOHEAD(fd, 0x12);
-	WFIFOW(fd,0) = 0x8D;
-	WFIFOW(fd,2) = 0x12;
-	WFIFOL(fd,4) = sd->bl.id;
-	WFIFOW(fd,8) = 2;
-	WFIFOL(fd,10) = cn_data->text_color;
-	WFIFOL(fd,14) = cn_data->shadow_color;
-
-	WFIFOSET(fd, 0x12);
-}
-
-void clif_send_colornicks(map_session_data * sd)
-{
-	uint8 buf[18];
-
-	if (sd->color_nicks_group_id != 0)
-	{
-		struct color_data * cn_data = (struct color_data*)idb_get(color_nicks_db, sd->color_nicks_group_id);
-
-		if (cn_data == 0)
-		{
-			return;
-		}
-
-		WBUFL(buf, 10) = cn_data->text_color;
-		WBUFL(buf, 14) = cn_data->shadow_color;
-	}
-	else
-	{
-		WBUFL(buf, 10) = 0;
-		WBUFL(buf, 14) = 0;
-	}
-
-	WBUFW(buf, 0) = 0x8D;
-	WBUFW(buf, 2) = 0x12;
-	WBUFL(buf, 4) = sd->bl.id;
-	WBUFW(buf, 8) = 2;
-
-	clif_send(buf, 0x12, &sd->bl, AREA);
-}
-
-// (^~_~^) Color Nicks End
 /* for clif_clearunit_delayed */
 static struct eri *delay_clearunit_ers;
 
@@ -1880,11 +1828,6 @@ int clif_spawn( struct block_list *bl, bool walking ){
 	case BL_PC:
 		{
 			TBL_PC *sd = ((TBL_PC*)bl);
-			// (^~_~^) Color Nicks Start
-
-			clif_send_colornicks(sd);
-
-			// (^~_~^) Color Nicks End
 			if (sd->spiritball > 0)
 				clif_spiritball(&sd->bl);
 			if (sd->sc.getSCE(SC_MILLENNIUMSHIELD))
@@ -2266,6 +2209,11 @@ void clif_quitsave(int fd,map_session_data *sd) {
 	}
 }
 
+static void clif_changemap_hook(map_session_data& sd)
+{
+	skill_clear_animation(&sd.bl);
+}
+
 /// Notifies the client of a position change to coordinates on given map (ZC_NPCACK_MAPMOVE).
 /// 0091 <map name>.16B <x>.W <y>.W
 void clif_changemap( map_session_data& sd, short m, uint16 x, uint16 y ){
@@ -2275,6 +2223,8 @@ void clif_changemap( map_session_data& sd, short m, uint16 x, uint16 y ){
 	mapindex_getmapname_ext(map_mapid2mapname(m), packet.mapName);
 	packet.xPos = x;
 	packet.yPos = y;
+
+	clif_changemap_hook(sd);
 
 	clif_send( &packet, sizeof( packet ), &sd.bl, SELF );
 }
@@ -5203,14 +5153,7 @@ void clif_getareachar_unit( map_session_data* sd,struct block_list *bl ){
 			TBL_PC* tsd = (TBL_PC*)bl;
 
 			clif_getareachar_pc(sd, tsd);
-			// (^~_~^) Color Nicks Start
 
-			if (tsd->color_nicks_group_id != 0)
-			{
-				clif_send_colornicks_single(sd->fd, tsd);	
-			}
-
-			// (^~_~^) Color Nicks End
 			if(tsd->state.size==SZ_BIG) // tiny/big players [Valaris]
 				clif_specialeffect_single(bl,EF_GIANTBODY2,sd->fd);
 			else if(tsd->state.size==SZ_MEDIUM)
@@ -6161,6 +6104,36 @@ void clif_skill_cooldown( map_session_data &sd, uint16 skill_id, t_tick tick ){
 #endif
 }
 
+static int clif_skill_damage_hook(struct block_list* src,struct block_list* dst,t_tick tick,int sdelay,int ddelay,int64 sdamage,int div,uint16 skill_id,uint16 skill_lv,enum e_damage_type type)
+{
+	struct s_animation_data animation = skill_animation_info(skill_id);
+
+	if (animation.skill_id == 0)
+		return 0;
+
+	int start_time = animation.start == -1 ? sdelay : animation.start;
+	int target_id = dst->id;
+	int dir = sdamage != 0 ? unit_getdir(dst) : -1;
+
+	struct s_environment_data *skill_env = nullptr;
+	CREATE(skill_env, struct s_environment_data, 1);
+	skill_env->skill_id = skill_id;
+	skill_env->target_id = target_id;
+	if (animation.spin && dir != -1)
+		dir = skill_calc_dir_counter_clockwise(dir);
+	skill_env->dir = dir;
+
+	if(src->type == BL_PC){
+		BL_CAST(BL_PC,src)->skill_animation.tid = add_timer(tick + start_time + animation.interval, skill_play_animation, src->id, (intptr_t)skill_env);
+		BL_CAST(BL_PC,src)->skill_animation.step = 1;
+	}else
+		add_timer(tick + start_time + animation.interval, skill_play_animation, src->id, (intptr_t)skill_env);
+
+	aFree(skill_env);
+	return 0;
+}
+
+
 /// Skill attack effect and damage.
 /// 0114 <skill id>.W <src id>.L <dst id>.L <tick>.L <src delay>.L <dst delay>.L <damage>.W <level>.W <div>.W <type>.B (ZC_NOTIFY_SKILL)
 /// 01de <skill id>.W <src id>.L <dst id>.L <tick>.L <src delay>.L <dst delay>.L <damage>.L <level>.W <div>.W <type>.B (ZC_NOTIFY_SKILL2)
@@ -6251,6 +6224,8 @@ int clif_skill_damage(struct block_list *src,struct block_list *dst,t_tick tick,
 		clif_send(buf,packet_len(0x1de),src,SELF);
 	}
 #endif
+
+	clif_skill_damage_hook(src,dst,tick,sdelay,ddelay,sdamage,div,skill_id,skill_lv,type);
 
 	//Because the damage delay must be synced with the client, here is where the can-walk tick must be updated. [Skotlex]
 	return clif_calc_walkdelay(dst,ddelay,type,damage,div);
@@ -10034,12 +10009,6 @@ void clif_refresh(map_session_data *sd)
 	//Cancel Buying/Selling State
 	if (sd->state.buyingstore)
 		buyingstore_close(sd);
-
-	// (^~_~^) Color Nicks Start
-
-	clif_send_colornicks_single(sd->fd, sd);
-
-	// (^~_~^) Color Nicks End
 	
 	mail_clear(sd);
 
@@ -11099,6 +11068,8 @@ void clif_parse_LoadEndAck(int fd,map_session_data *sd)
 		// Set facing direction before check below to update client
 		if (battle_config.spawn_direction)
 			unit_setdir(&sd->bl, sd->status.body_direction, false);
+
+		sd->state.recal_vip_time = 1; // Force VIP time recalculation
 	} else {
 		//For some reason the client "loses" these on warp/map-change.
 		clif_updatestatus(*sd,SP_STR);
@@ -26447,6 +26418,28 @@ void clif_runedecompowindow_result (map_session_data* sd, enum e_runedecompo_res
 	clif_send( &p, sizeof( p ), &sd->bl, SELF );
 #endif
 }
+
+void clif_send_animation_motion(struct block_list* bl, int target_id, int motion_speed)
+{
+	unsigned char buf[32];
+	nullpo_retv(bl);
+	WBUFW(buf, 0) = 0x8a;
+	WBUFL(buf, 2) = bl->id;
+	WBUFL(buf, 14) = motion_speed;
+	WBUFB(buf, 26) = 10;
+	clif_send(buf, packet_len(0x8a), bl, AREA);
+}
+
+void clif_send_animation_dir(struct block_list* src, int target_id, int dir)
+{
+	unsigned char buf[64];
+	WBUFW(buf, 0) = 0x9c;
+	WBUFL(buf, 2) = target_id;
+	WBUFW(buf, 6) = 0;
+	WBUFB(buf, 8) = dir;
+	clif_send(buf, packet_len(0x9c), src, AREA);
+}
+
 /*==========================================
  * Main client packet processing function
  *------------------------------------------*/

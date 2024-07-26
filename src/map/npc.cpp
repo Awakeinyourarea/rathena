@@ -1045,6 +1045,10 @@ void BarterDatabase::loadingFinished(){
 					clif_spawn( &nd->bl );
 				}
 			}
+
+			if(barter->waitingroom.length())
+				chat_createnpcchat(nd, barter->waitingroom.c_str(), 0, 1, 0, "", 0, 1, MAX_LEVEL);
+				
 		}else{
 			map_addiddb( &nd->bl );
 		}

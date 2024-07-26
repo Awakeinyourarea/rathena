@@ -2066,6 +2066,9 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 	sd->skill_keep_using.skill_id = 0;
 	sd->skill_keep_using.level = 0;
 	sd->skill_keep_using.target = 0;
+	
+	sd->skill_animation.tid = INVALID_TIMER;
+	sd->skill_animation.step = 0;
 
 #ifdef SECURE_NPCTIMEOUT
 	// Initialize to defaults/expected
@@ -2309,12 +2312,6 @@ void pc_reg_received(map_session_data *sd)
 	sd->langtype = static_cast<int>(pc_readaccountreg(sd, add_str(LANGTYPE_VAR)));
 	if (msg_checklangtype(sd->langtype,true) < 0)
 		sd->langtype = 0; //invalid langtype reset to default
-
-// (^~_~^) Color Nicks Start
-
-	sd->color_nicks_group_id = static_cast<unsigned int>(pc_readglobalreg(sd, add_str("CN_GROUP_ID")));
-
-// (^~_~^) Color Nicks End
 
 	// Cash shop
 	sd->cashPoints = static_cast<int>(pc_readaccountreg(sd, add_str(CASHPOINT_VAR)));
@@ -9737,6 +9734,11 @@ int pc_dead(map_session_data *sd,struct block_list *src)
 		sd->skill_keep_using.tid = INVALID_TIMER;
 	}
 
+	if( sd->skill_animation.tid != INVALID_TIMER ){
+		delete_timer( sd->skill_animation.tid, skill_play_animation );
+		sd->skill_animation.tid = INVALID_TIMER;
+	}
+
 	pc_close_npc(sd,2); //close npc if we were using one
 
 	/* e.g. not killed thru pc_damage */
@@ -15871,6 +15873,87 @@ uint64 CaptchaDatabase::parseBodyNode(const ryml::NodeRef &node) {
 		captcha_db.put(index, cd);
 
 	return 1;
+}
+
+static time_t vip_remain_time(map_session_data *sd)
+{
+	int64 remain_time = 0;
+
+	SqlStmt *check;
+	check = SqlStmt_Malloc(mmysql_handle);
+	int64 result = 0;
+
+	if (SQL_ERROR == SqlStmt_Prepare(check, "SELECT `vip_time` FROM `login` WHERE `account_id`= %d", sd->status.account_id) || SqlStmt_Execute(check)) {
+		SqlStmt_ShowDebug(check);
+		SqlStmt_Free(check);
+		return 0;
+	}
+
+	SqlStmt_BindColumn(check, 0, SQLDT_INT64, &result, 0, NULL, NULL);
+
+	while( SQL_SUCCESS == SqlStmt_NextRow(check) ) {
+		remain_time = result;
+	}
+
+	SqlStmt_Free(check);
+
+	return remain_time;
+}
+
+void vip_bonus(map_session_data *sd)
+{
+	if(sd == nullptr)
+		return;
+
+	time_t remain_time = vip_remain_time(sd);
+	time_t current_time = time(NULL);
+
+	if (pc_isvip(sd)) {
+		if(remain_time > current_time && sd->state.recal_vip_time){
+
+			time_t new_tick = (remain_time - current_time)*1000 + 2000;
+			time_t timer_tick = gettick() + new_tick;
+			status_change_start(NULL, &sd->bl, SC_VIPSTATUS, 10000, 1, 0, 0, 0, new_tick, SCSTART_NOAVOID);
+
+			if(sd->vip_timer_tid != INVALID_TIMER)
+				delete_timer(sd->vip_timer_tid, vip_delete_timer);
+
+			sd->vip_timer_tid = add_timer(timer_tick, vip_delete_timer, sd->bl.id, 0);
+			sd->state.recal_vip_time = false;
+		}
+
+		// clean VIP buff
+		if(remain_time < current_time){
+			status_change_end(&sd->bl, SC_VIPSTATUS);
+			return;
+		}
+
+		std::shared_ptr<s_vip_bonus> vip_bonus = vip_bonus_db.find(1);
+		if (vip_bonus != nullptr && vip_bonus->script != nullptr)
+			run_script(vip_bonus->script, 0, sd->bl.id, 0);
+	}else{
+		status_change_end(&sd->bl, SC_VIPSTATUS);
+		sd->vip_timer_tid = INVALID_TIMER;
+	}
+}
+
+TIMER_FUNC(vip_bonus_timer){
+	map_session_data *sd = map_id2sd(id);
+	if( sd == NULL )
+		return 1;
+
+	status_calc_pc(sd, SCO_NONE);
+	return 0;
+}
+
+TIMER_FUNC(vip_delete_timer){
+	map_session_data *sd = map_id2sd(id);
+	if( sd == NULL )
+		return 1;
+
+	status_calc_pc(sd, SCO_NONE);
+	sd->vip_timer_tid = INVALID_TIMER;
+	return 0;
 }
 
 /*==========================================

@@ -1311,6 +1311,7 @@ enum sc_type : int16 {
 	SC_POWERUP = 951,
 	SC_AGIUP,
 	SC_PROTECTION,
+	SC_VIPSTATUS = 1701,
 	SC_MAX, //Automatically updated max, used in for's to check we are within bounds.
 };
 
@@ -2736,6 +2737,7 @@ enum efst_type : short{
 	EFST_RESIST_PLUS,
 	EFST_PVP_DUN_BUFF,
 	EFST_PNEUMA = 1451,
+	EFST_VIP_STATUS = 1701,
 	EFST_REFINE_PASS_LVL_1 = 1901,
 	EFST_REFINE_PASS_LVL_2 = 1902,
 	EFST_REFINE_PASS_LVL_3 = 1903,
@@ -3563,6 +3565,30 @@ extern RefinePassDatabase refine_pass_db;
 
 void refine_pass_bonus(map_session_data* sd);
 void refine_pass_remove_bonus(map_session_data* sd);
+
+struct s_vip_bonus {
+	uint16 id;
+	struct script_code *script;	//Default script for everything.
+
+	~s_vip_bonus() {
+		if (this->script){
+			script_free_code(this->script);
+			this->script = nullptr;
+		}
+	}
+};
+
+class VipBonusDatabase : public TypesafeYamlDatabase<uint16, s_vip_bonus> {
+public:
+	VipBonusDatabase() : TypesafeYamlDatabase( "VIP_BONUS_DB", 1 ){
+
+	}
+
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const ryml::NodeRef& node);
+};
+
+extern VipBonusDatabase vip_bonus_db;
 
 void status_clean_old_buff(map_session_data *sd);
 void status_readdb( bool reload = false );
