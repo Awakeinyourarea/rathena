@@ -12414,6 +12414,9 @@ Body:
   - Id: 21173
     Title: Trust of the Village
     TimeLimit: 4h
+  - Id: 30048
+    Title: OGH Challenge Mode
+    TimeLimit: +24h
   - Id: 50000
     Title: Pirate Dagger materials
   - Id: 50001

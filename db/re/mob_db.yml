@@ -103769,24 +103769,420 @@ Body:
 #    AegisName: SAECOM
 #  - Id: 20571
 #    AegisName: ORK_HERO2
-#  - Id: 20572
-#    AegisName: MD_C_HEMEL
-#  - Id: 20573
-#    AegisName: MD_C_AMDARAIS
-#  - Id: 20574
-#    AegisName: MD_C_WHITEKNIGHT
-#  - Id: 20575
-#    AegisName: MD_C_CORRUPTION_ROOT
-#  - Id: 20576
-#    AegisName: MD_C_KHALITZBURG
-#  - Id: 20577
-#    AegisName: MD_C_RAYDRIC
-#  - Id: 20578
-#    AegisName: MD_C_RAYDRIC_ARCHER
-#  - Id: 20579
-#    AegisName: MD_C_ZOMBIE
-#  - Id: 20580
-#    AegisName: MD_C_GHOUL
+  - Id: 20572
+    AegisName: MD_C_HEMEL
+    Name: Phantom Himmelmez
+    Level: 195
+    Hp: 40353051
+    BaseExp: 1206920
+    JobExp: 967200
+    MvpExp: 353460
+    Attack: 6620
+    Attack2: 441
+    Defense: 514
+    MagicDefense: 92
+    Str: 194
+    Agi: 164
+    Vit: 107
+    Int: 142
+    Dex: 288
+    Luk: 86
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 4
+    WalkSpeed: 150
+    AttackDelay: 1678
+    AttackMotion: 780
+    DamageMotion: 648
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Ball_Of_RasenHuuma
+        Rate: 45
+      - Item: C_Himel_Card
+        Rate: 2
+        StealProtected: true
+  - Id: 20573
+    AegisName: MD_C_AMDARAIS
+    Name: Phantom Amdarais
+    Level: 192
+    Hp: 142900000
+    BaseExp: 5291324
+    JobExp: 5197024
+    MvpExp: 2286769
+    Attack: 8899
+    Attack2: 13131
+    Defense: 446
+    MagicDefense: 82
+    Str: 290
+    Agi: 78
+    Vit: 180
+    Int: 228
+    Dex: 226
+    Luk: 80
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Undead
+    Element: Undead
+    ElementLevel: 4
+    WalkSpeed: 120
+    AttackDelay: 312
+    AttackMotion: 1200
+    DamageMotion: 432
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Old_Card_Album
+        Rate: 5000
+      - Item: Old_Violet_Box
+        Rate: 10000
+      - Item: Ball_Of_RasenHuuma
+        Rate: 12
+      - Item: C_Amdarais_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20574
+    AegisName: MD_C_WHITEKNIGHT
+    Name: Mutated White Knight
+    Level: 188
+    Hp: 2450483
+    BaseExp: 7233431
+    JobExp: 5056320
+    Attack: 6734
+    Attack2: 445
+    Defense: 802
+    MagicDefense: 77
+    Str: 220
+    Agi: 148
+    Vit: 99
+    Int: 129
+    Dex: 329
+    Luk: 62
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 4
+    WalkSpeed: 300
+    AttackDelay: 1500
+    AttackMotion: 500
+    DamageMotion: 288
+    Ai: 04
+    Modes:
+      CanMove: true
+      Aggressive: true
+      CastSensorIdle: true
+      CastSensorChase: true
+      ChangeChase: true
+      ChangeTargetMelee: true
+      ChangeTargetChase: true
+    Drops:
+      - Item: Reins
+        Rate: 1000
+      - Item: Glast_Horrendous_Mouth
+        Rate: 500
+      - Item: Glast_Decayed_Nail
+        Rate: 500
+      - Item: Fragment_Of_Time
+        Rate: 500
+  - Id: 20575
+    AegisName: MD_C_CORRUPTION_ROOT
+    Name: Prime Corruption Root
+    Level: 190
+    Hp: 20250000
+    BaseExp: 2503406
+    JobExp: 2340423
+    MvpExp: 103460
+    Attack: 9774
+    Attack2: 6988
+    Defense: 667
+    MagicDefense: 98
+    Str: 211
+    Agi: 40
+    Vit: 99
+    Int: 209
+    Dex: 208
+    Luk: 29
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    Element: Earth
+    ElementLevel: 3
+    WalkSpeed: 1000
+    AttackDelay: 576
+    AttackMotion: 672
+    DamageMotion: 480
+    Ai: 10
+    Class: Boss
+    Modes:
+      Mvp: true
+    Drops:
+      - Item: Old_Card_Album
+        Rate: 5000
+      - Item: Old_Violet_Box
+        Rate: 10000
+      - Item: Temporal_Crystal
+        Rate: 5000
+      - Item: Yggdrasilberry
+        Rate: 10000
+      - Item: Alchemy_Glove
+        Rate: 1000
+      - Item: Will_Of_Darkness_
+        Rate: 10000
+      - Item: Polluted_Spell
+        Rate: 1000
+      - Item: C_CorruptionRoot_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20576
+    AegisName: MD_C_KHALITZBURG
+    Name: Mutated Khalitzburg
+    Level: 185
+    Hp: 2401538
+    BaseExp: 7053431
+    JobExp: 4979881
+    Attack: 3143
+    Attack2: 375
+    Defense: 671
+    MagicDefense: 85
+    Str: 290
+    Agi: 69
+    Vit: 70
+    Int: 65
+    Dex: 281
+    Luk: 61
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 10
+    Size: Medium
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 250
+    AttackDelay: 528
+    AttackMotion: 700
+    DamageMotion: 288
+    Ai: 04
+    Modes:
+      CanMove: true
+      Aggressive: true
+      CastSensorIdle: true
+      CastSensorChase: true
+      ChangeChase: true
+      ChangeTargetMelee: true
+      ChangeTargetChase: true
+    Drops:
+      - Item: Glast_Horrendous_Mouth
+        Rate: 500
+      - Item: Glast_Decayed_Nail
+        Rate: 500
+      - Item: Fragment_Of_Time
+        Rate: 500
+  - Id: 20577
+    AegisName: MD_C_RAYDRIC
+    Name: Mutated Raydric
+    Level: 182
+    Hp: 2362144
+    BaseExp: 6953000
+    JobExp: 4867100
+    Attack: 5720
+    Attack2: 6680
+    Defense: 665
+    MagicDefense: 77
+    Str: 259
+    Agi: 180
+    Vit: 108
+    Int: 62
+    Dex: 156
+    Luk: 50
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 824
+    AttackMotion: 780
+    DamageMotion: 420
+    Ai: 09
+    Drops:
+      - Item: Glast_Horrendous_Mouth
+        Rate: 500
+      - Item: Glast_Decayed_Nail
+        Rate: 500
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: Brigan
+        Rate: 505
+      - Item: C_Raydric_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20578
+    AegisName: MD_C_RAYDRIC_ARCHER
+    Name: Mutated Raydric Archer
+    Level: 183
+    Hp: 2378354
+    BaseExp: 6983210
+    JobExp: 4878150
+    Attack: 1081
+    Attack2: 96
+    Defense: 686
+    MagicDefense: 83
+    Str: 106
+    Agi: 48
+    Vit: 80
+    Int: 30
+    Dex: 224
+    Luk: 60
+    AttackRange: 9
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 1152
+    AttackMotion: 1152
+    DamageMotion: 480
+    Ai: 09
+    Drops:
+      - Item: Incisive_Arrow
+        Rate: 500
+      - Item: Glast_Horrendous_Mouth
+        Rate: 500
+      - Item: Glast_Decayed_Nail
+        Rate: 500
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: Brigan
+        Rate: 505
+      - Item: C_Raydric_Archer_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20579
+    AegisName: MD_C_ZOMBIE
+    Name:  Mutated Zombie
+    Level: 180
+    Hp: 542400
+    BaseExp: 106664
+    JobExp: 111996
+    Attack: 3986
+    Attack2: 587
+    Defense: 30
+    MagicDefense: 30
+    Str: 88
+    Agi: 44
+    Vit: 154
+    Int: 50
+    Dex: 176
+    Luk: 44
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 2
+    WalkSpeed: 400
+    AttackDelay: 2612
+    AttackMotion: 912
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Glast_Decayed_Nail
+        Rate: 1000
+      - Item: Glast_Horrendous_Mouth
+        Rate: 1000
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: Sticky_Mucus
+        Rate: 1000
+  - Id: 20580
+    AegisName: MD_C_GHOUL
+    Name:  Mutated Ghoul
+    Level: 180
+    Hp: 542400
+    BaseExp: 106664
+    JobExp: 111996
+    Attack: 3986
+    Attack2: 587
+    Defense: 30
+    MagicDefense: 30
+    Str: 88
+    Agi: 44
+    Vit: 154
+    Int: 50
+    Dex: 176
+    Luk: 44
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 2
+    WalkSpeed: 400
+    AttackDelay: 2612
+    AttackMotion: 912
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Glast_Decayed_Nail
+        Rate: 1000
+      - Item: Glast_Horrendous_Mouth
+        Rate: 1000
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: Sticky_Mucus
+        Rate: 1000
+  - Id: 20581
+    AegisName: MD_C_THORN
+    Name: Mutated Thorn
+    Level: 185
+    Hp: 54000000
+    Attack: 3244
+    Attack2: 680
+    Defense: 320
+    MagicDefense: 78
+    Agi: 70
+    Vit: 66
+    Int: 260
+    Dex: 250
+    Luk: 60
+    AttackRange: 12
+    SkillRange: 14
+    ChaseRange: 16
+    Size: Small
+    Race: Demon
+    Element: Dark
+    ElementLevel: 4
+    AttackDelay: 1024
+    AttackMotion: 288
+    DamageMotion: 576
+    Ai: 10
+    Class: Boss
+    Drops:
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: Sticky_Mucus
+        Rate: 1000
 #  - Id: 20581
 #    AegisName: MD_C_THORN
 #  - Id: 20582

@@ -17,3 +17,12 @@
 //	script_pushint(st,1);
 //	return 0;
 //}
+
+BUILDIN_FUNC(mobremove)
+{
+        struct block_list *bl = NULL;
+        bl = map_id2bl( script_getnum(st,2) );
+        if ( bl && bl->type == BL_MOB )
+                unit_free(bl,CLR_OUTSIGHT);
+        return SCRIPT_CMD_SUCCESS;
+}

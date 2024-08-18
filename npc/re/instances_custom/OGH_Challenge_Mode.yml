@@ -303,7 +303,7 @@ Body:
             Item: Spell_Of_Time
             Amount: 10
       - Index: 21
-        Item: G_Knight_Axe
+        Item: Guardian_Knight_Axe
         RequiredItems:
           - Index: 0
             Item: Spell_Of_Time
@@ -315,7 +315,7 @@ Body:
             Item: Spell_Of_Time
             Amount: 10
       - Index: 23
-        Item: R_Magician_Staff
+        Item: Royal_Magician_Staff
         RequiredItems:
           - Index: 0
             Item: Spell_Of_Time
